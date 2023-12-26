@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+// package healthcheck;
+
+service HealthCheck {
+  rpc Check(CheckRequest) returns (CheckResponse) {}
+}
+
+message CheckRequest {
+  string hi = 1;
+}
+
+message CheckResponse {
+  string bye = 1;
+}
+
+option go_package = "./proto/health_check;proto";
