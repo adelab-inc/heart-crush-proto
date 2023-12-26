@@ -1,0 +1,66 @@
+syntax = "proto3";
+
+// package user;
+option go_package = "telepathy-server/proto";
+
+service UserService {
+    rpc SMSAuth (SMSAuthRequest) returns (SMSAuthResponse){}
+    rpc SMSCode (SMSCodeRequest) returns (SMSCodeResponse){}
+    rpc SignUp (SignUpRequest) returns (SignUpResponse){}
+}
+
+message User {
+    string uid = 1;
+    string name = 2;
+    bool gender = 3; // false is male / true is female 
+    string birth = 4; // 20030407
+    string phoneNumber = 6; // 010-4194-8536
+    int64 createdAt = 7; // UnixTime -> change to localtime (ex. kst)
+    int64 updatedAt = 8; // UnixTime
+}
+
+message AuthUser {
+    string uid = 1;
+    PhoneNumber phone = 2;
+    string password = 3;
+    int64 createdAt = 4; // UnixTime -> change to localtime (ex. kst)
+    int64 phoneNumberUpdatedAt = 5; // UnixTime
+    int64 passwordUpdatedAt = 6;
+}
+
+message PhoneNumber {
+    int32 num = 1; // 전화번호
+    int32 country = 2; // 국가 번호 ex) 82
+}
+
+message Term {
+    string uid = 1;
+    bool agree = 2;
+    int64 createdAt = 3; // UnixTime -> change to localtime (ex. kst)
+    int64 updatedAt = 4; // UnixTime
+}
+
+message SMSAuthRequest {
+    PhoneNumber phone = 1;
+}
+
+message SMSAuthResponse {
+    bool success = 1;
+}
+
+message SMSCodeRequest {
+    PhoneNumber phone = 1;
+    int32 code = 2;
+}
+
+message SMSCodeResponse {
+    bool success = 1;
+}
+
+message SignUpRequest {
+    User user = 1;
+}
+
+message SignUpResponse {
+    bool success = 1;
+}
