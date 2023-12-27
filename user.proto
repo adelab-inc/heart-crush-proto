@@ -29,8 +29,8 @@ message AuthUser {
 }
 
 message PhoneNumber {
-    int32 num = 1; // 전화번호
-    int32 country = 2; // 국가 번호 ex) 82
+    string num = 1; // 전화번호
+    string country = 2; // 국가 번호 ex) 82
 }
 
 message Term {
