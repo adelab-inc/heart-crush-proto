@@ -7,6 +7,7 @@ service UserService {
     rpc SMSAuth (SMSAuthRequest) returns (SMSAuthResponse){}
     rpc SMSCode (SMSCodeRequest) returns (SMSCodeResponse){}
     rpc SignUp (SignUpRequest) returns (SignUpResponse){}
+    rpc LoginWithPassword (LoginWithPasswordRequest) returns (LoginWithPasswordResponse){}
 }
 
 message User {
@@ -50,7 +51,7 @@ message SMSAuthResponse {
 
 message SMSCodeRequest {
     PhoneNumber phone = 1;
-    int32 code = 2;
+    string code = 2;
 }
 
 message SMSCodeResponse {
@@ -62,5 +63,14 @@ message SignUpRequest {
 }
 
 message SignUpResponse {
+    bool success = 1;
+}
+
+message LoginWithPasswordRequest {
+    PhoneNumber phone = 1;
+    string password = 2;
+}
+
+message LoginWithPasswordResponse {
     bool success = 1;
 }
