@@ -60,6 +60,7 @@ message SMSCodeResponse {
 
 message SignUpRequest {
     User user = 1;
+    PhoneNumber phone = 2;
 }
 
 message SignUpResponse {
