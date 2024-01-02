@@ -10,7 +10,14 @@ message Status {
 enum Error {
     NO_ERROR = 0;
 
-    ALREADY_EXISTED = 100;
+    USER_ALREADY_REGISTERED = 101; // 이미 유저가 등록되어 있는 경우 -> Login 유도 필요
+    USER_NOT_REGISTERED = 102;
     
+    AUTHENTICATE_FAILED = 300; // 인증 실패
+    ABNORMAL_APPROACH = 301; // 비정상적인 접근
+    
+    REQUIREDFIELD_MISSING = 400; // 필수적인 데이터가 누락되어 전달된 경우
+
     UNEXPECTED_ERROR = 500; // 만약 해당 error가 발생하면 꼭! 백엔드 쪽에 알려주세요!
+    SMS_SEND_ERROR = 501; // SMS 인증코드가 어떠한 이유로 보내지지 않았을 경우
 }
