@@ -3,6 +3,8 @@ syntax = "proto3";
 // package user;
 option go_package = "telepathy-server/proto";
 
+import "error.proto";
+
 service UserService {
     rpc SMSAuth (SMSAuthRequest) returns (SMSAuthResponse){}
     rpc SMSCode (SMSCodeRequest) returns (SMSCodeResponse){}
@@ -47,7 +49,7 @@ message SMSAuthRequest {
 }
 
 message SMSAuthResponse {
-    bool success = 1;
+    Status status = 1;
 }
 
 message SMSCodeRequest {
@@ -56,7 +58,7 @@ message SMSCodeRequest {
 }
 
 message SMSCodeResponse {
-    bool success = 1;
+    Status status = 1;
 }
 
 message SignUpRequest {
@@ -66,7 +68,7 @@ message SignUpRequest {
 }
 
 message SignUpResponse {
-    bool success = 1;
+    Status status = 1;
 }
 
 message LoginWithCodeRequest {
@@ -80,5 +82,5 @@ message LoginWithPasswordRequest {
 }
 
 message LoginResponse {
-    bool success = 1;
+    Status status = 1;
 }

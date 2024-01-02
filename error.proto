@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+option go_package = "telepathy-server/proto";
+
+message Status {
+    bool success = 1;
+    Error errCode = 2;
+}
+
+enum Error {
+    NO_ERROR = 0;
+
+    ALREADY_EXISTED = 100;
+    
+    UNEXPECTED_ERROR = 500; // 만약 해당 error가 발생하면 꼭! 백엔드 쪽에 알려주세요!
+}
