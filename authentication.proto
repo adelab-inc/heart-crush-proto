@@ -5,9 +5,9 @@ option go_package = "telepathy-server/proto";
 
 import "error.proto";
 
-service UserService {
-    rpc SMSAuth (SMSAuthRequest) returns (SMSAuthResponse){}
-    rpc SMSCode (SMSCodeRequest) returns (SMSCodeResponse){}
+service AuthService {
+    rpc CreateAuthCode (CreateAuthCodeRequest) returns (CreateAuthCodeResponse){}
+    rpc ValidateAuthCode (ValidateAuthCodeRequest) returns (ValidateAuthCodeResponse){}
     rpc SignUp (SignUpRequest) returns (SignUpResponse){}
     rpc LoginWithCode (LoginWithCodeRequest) returns (LoginResponse){}
     rpc LoginWithPassword (LoginWithPasswordRequest) returns (LoginResponse){}
@@ -44,20 +44,20 @@ message Term {
     int64 updatedAt = 4; // UnixTime
 }
 
-message SMSAuthRequest {
+message CreateAuthCodeRequest {
     PhoneNumber phone = 1;
 }
 
-message SMSAuthResponse {
+message CreateAuthCodeResponse {
     Status status = 1;
 }
 
-message SMSCodeRequest {
+message ValidateAuthCodeRequest {
     PhoneNumber phone = 1;
     string code = 2;
 }
 
-message SMSCodeResponse {
+message ValidateAuthCodeResponse {
     Status status = 1;
 }
 
