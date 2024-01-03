@@ -61,7 +61,25 @@ message ValidateAuthCodeResponse {
     Status status = 1;
 }
 
-message SignUpRequest {
+/*
+SignUpRequest : {
+    user: {
+        uid: "",
+        name: "윤민우",
+        gender: false,
+        birth: "20030407"
+        phoneNumber: "01041948536"
+        createdAt: 	0,
+        updatedAt: 	0,
+    },
+    phone: {
+        num: "01041948536",
+        country: "82"
+    }
+    password: "testPassword"
+}
+*/
+message SignUpRequest { // user.uid / user.createdAt / user.updatedAt not needed in this request
     User user = 1;
     PhoneNumber phone = 2;
     string password = 3;
@@ -71,12 +89,12 @@ message SignUpResponse {
     Status status = 1;
 }
 
-message LoginWithCodeRequest {
+message LoginWithCodeRequest { // all fields required
     PhoneNumber phone = 1;
     string code = 2;
 }
 
-message LoginWithPasswordRequest {
+message LoginWithPasswordRequest { // all fields required
     PhoneNumber phone = 1;
     string password = 2;
 }
