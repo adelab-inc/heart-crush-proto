@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+option go_package = "telepathy-server/proto";
+
+import "google/protobuf/empty.proto";
+import "error.proto";
+import "userStruct.proto";
+
+service UserService {
+  rpc UpdateProfile(UpdateProfileRequest) returns (UpdateProfileResponse) {}
+  rpc UpdateConfig(UpdateConfigRequest) returns (UpdateConfigResponse) {}
+}
+
+message UpdateProfileRequest {
+  string uid = 1;
+  string name = 2;
+  string description = 3;
+  string birth = 4;
+  // chip
+  repeated bytes profileImg = 6;
+}
+
+message UpdateProfileResponse { Status status = 1; }
+
+message UpdateConfigRequest {
+  string uid = 1;
+  bool heartLock = 2;
+  bool questionAlarm = 3;
+  bool bluetoothAlarm = 4;
+  bool likeAlarm = 5;
+}
+
+message UpdateConfigResponse { Status status = 1; }
