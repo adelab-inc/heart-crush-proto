@@ -4,6 +4,7 @@ syntax = "proto3";
 option go_package = "telepathy-server/proto";
 
 import "error.proto";
+import "user.proto";
 
 service AuthService {
     rpc CreateAuthCode (CreateAuthCodeRequest) returns (CreateAuthCodeResponse){}
@@ -11,16 +12,6 @@ service AuthService {
     rpc SignUp (SignUpRequest) returns (SignUpResponse){}
     rpc LoginWithCode (LoginWithCodeRequest) returns (LoginResponse){}
     rpc LoginWithPassword (LoginWithPasswordRequest) returns (LoginResponse){}
-}
-
-message User {
-    string uid = 1;
-    string name = 2;
-    bool gender = 3; // false is male / true is female 
-    string birth = 4; // 20030407
-    string phoneNumber = 6; // 010-4194-8536
-    int64 createdAt = 7; // UnixTime -> change to localtime (ex. kst)
-    int64 updatedAt = 8; // UnixTime
 }
 
 message AuthUser {
@@ -44,6 +35,8 @@ message Term {
     int64 updatedAt = 4; // UnixTime
 }
 
+/* CreateAuthCode */
+
 message CreateAuthCodeRequest {
     PhoneNumber phone = 1;
 }
@@ -51,6 +44,9 @@ message CreateAuthCodeRequest {
 message CreateAuthCodeResponse {
     Status status = 1;
 }
+
+/* CreateAuthCode */
+/* ValidateAuthCode */
 
 message ValidateAuthCodeRequest {
     PhoneNumber phone = 1;
@@ -60,6 +56,9 @@ message ValidateAuthCodeRequest {
 message ValidateAuthCodeResponse {
     Status status = 1;
 }
+
+/* ValidateAuthCode */
+/* SignUpRequest */
 
 /*
 SignUpRequest : {
@@ -89,6 +88,9 @@ message SignUpResponse {
     Status status = 1;
 }
 
+/* SignUpRequest */
+/* LoginWithCode & LoginWithPassword */
+
 message LoginWithCodeRequest { // all fields required
     PhoneNumber phone = 1;
     string code = 2;
@@ -102,3 +104,5 @@ message LoginWithPasswordRequest { // all fields required
 message LoginResponse {
     Status status = 1;
 }
+
+/* LoginWithCode & LoginWithPassword */
