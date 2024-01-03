@@ -4,7 +4,7 @@ syntax = "proto3";
 option go_package = "telepathy-server/proto";
 
 import "error.proto";
-import "user.proto";
+import "userStruct.proto";
 
 service AuthService {
     rpc CreateAuthCode (CreateAuthCodeRequest) returns (CreateAuthCodeResponse){}
