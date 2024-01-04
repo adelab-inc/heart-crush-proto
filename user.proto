@@ -24,10 +24,11 @@ message UpdateProfileResponse { Status status = 1; }
 
 message UpdateConfigRequest {
   string uid = 1;
-  bool heartLock = 2;
-  bool questionAlarm = 3;
-  bool bluetoothAlarm = 4;
-  bool likeAlarm = 5;
+  google.protobuf.BoolValue heartLock = 2;
+  google.protobuf.BoolValue systemAlarm = 3;
+  google.protobuf.BoolValue questionAlarm = 4;
+  google.protobuf.BoolValue bluetoothAlarm = 5;
+  google.protobuf.BoolValue likeAlarm = 6;
 }
 
 message UpdateConfigResponse { Status status = 1; }
