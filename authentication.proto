@@ -17,15 +17,15 @@ service AuthService {
 
 message AuthUser {
     string uid = 1;
-    PhoneNumber phone = 2;
+    Phone phone = 2;
     string password = 3;
     int64 createdAt = 4; // UnixTime -> change to localtime (ex. kst)
-    int64 phoneNumberUpdatedAt = 5; // UnixTime
+    int64 phoneUpdatedAt = 5; // UnixTime
     int64 passwordUpdatedAt = 6;
 }
 
-message PhoneNumber {
-    string num = 1; // 전화번호
+message Phone {
+    string phoneNumber = 1; // 전화번호
     string country = 2; // 국가 번호 ex) 82
 }
 
@@ -39,7 +39,7 @@ message Term {
 /* CreateAuthCode */
 
 message CreateAuthCodeRequest {
-    PhoneNumber phone = 1;
+    Phone phone = 1;
 }
 
 message CreateAuthCodeResponse {
@@ -50,7 +50,7 @@ message CreateAuthCodeResponse {
 /* ValidateAuthCode */
 
 message ValidateAuthCodeRequest {
-    PhoneNumber phone = 1;
+    Phone phone = 1;
     string code = 2;
 }
 
@@ -68,7 +68,7 @@ SignUpRequest : {
         name: "윤민우",
         gender: false,
         birth: "20030407"
-        phoneNumber: "01041948536"
+        Phone: "01041948536"
         createdAt: 	0,
         updatedAt: 	0,
     },
@@ -81,7 +81,7 @@ SignUpRequest : {
 */
 message SignUpRequest { // user.uid / user.createdAt / user.updatedAt not needed in this request
     User user = 1;
-    PhoneNumber phone = 2;
+    Phone phone = 2;
     string password = 3;
 }
 
@@ -93,12 +93,12 @@ message SignUpResponse {
 /* LoginWithCode & LoginWithPassword */
 
 message LoginWithCodeRequest { // all fields required
-    PhoneNumber phone = 1;
+    Phone phone = 1;
     string code = 2;
 }
 
 message LoginWithPasswordRequest { // all fields required
-    PhoneNumber phone = 1;
+    Phone phone = 1;
     string password = 2;
 }
 
@@ -110,7 +110,7 @@ message LoginResponse {
 /* LockUser */
 
 message LockUserRequest { // all fields required
-    PhoneNumber phoneNumber = 1;
+    Phone phone = 1;
     int32 tick = 2; // unit is second
 }
 

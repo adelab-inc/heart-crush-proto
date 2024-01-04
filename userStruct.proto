@@ -7,7 +7,7 @@ message User {
     string name = 2;
     bool gender = 3; // false is male / true is female 
     string birth = 4; // 20030407
-    string phoneNumber = 6; // 010-4194-8536
+    string phoneNumber = 6; // 01041948536
     int64 createdAt = 7; // UnixTime -> change to localtime (ex. kst)
     int64 updatedAt = 8; // UnixTime
 }
