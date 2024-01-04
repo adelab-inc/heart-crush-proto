@@ -2,22 +2,30 @@ syntax = "proto3";
 
 option go_package = "telepathy-server/proto";
 
-import "google/protobuf/empty.proto";
+import "google/protobuf/wrappers.proto";
+
 import "error.proto";
-import "userStruct.proto";
 
 service UserService {
   rpc UpdateProfile(UpdateProfileRequest) returns (UpdateProfileResponse) {}
   rpc UpdateConfig(UpdateConfigRequest) returns (UpdateConfigResponse) {}
 }
 
+message Chip {
+  string schoolName = 1;
+  string grade = 2;
+  string instaAccount = 3;
+  string tiktokAccount = 4;
+  string mbti = 5;
+  repeated string others = 6;
+}
+
 message UpdateProfileRequest {
   string uid = 1;
-  string name = 2;
-  string description = 3;
-  string birth = 4;
-  // chip
-  repeated bytes profileImg = 6;
+  google.protobuf.StringValue name = 2;
+  Chip chip = 3;
+  bytes profileImg = 4;
+  google.protobuf.StringValue description = 5;
 }
 
 message UpdateProfileResponse { Status status = 1; }
