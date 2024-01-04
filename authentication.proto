@@ -42,8 +42,10 @@ message CreateAuthCodeRequest {
     Phone phone = 1;
 }
 
-message CreateAuthCodeResponse {
+message CreateAuthCodeResponse { // info: user가 lock이 된 경우, status는 false
     Status status = 1;
+    bool isLocked  = 2; // user가 lock이 됐는지 확인
+    int32 lockedRemainedTick = 3; // unit is second, 남은 시간
 }
 
 /* CreateAuthCode */

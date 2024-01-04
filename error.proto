@@ -12,6 +12,7 @@ enum Error {
 
     USER_ALREADY_REGISTERED = 101; // 이미 유저가 등록되어 있는 경우 -> Login 유도 필요
     USER_NOT_REGISTERED = 102; // 유저가 등록되어 있지 않은 경우 -> register 유도 필요
+    USER_LOCKED = 103;
     
     AUTHENTICATE_FAILED = 300; // 인증 실패
     ABNORMAL_APPROACH = 301; // 비정상적인 접근
