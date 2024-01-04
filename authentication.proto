@@ -12,6 +12,7 @@ service AuthService {
     rpc SignUp (SignUpRequest) returns (SignUpResponse){}
     rpc LoginWithCode (LoginWithCodeRequest) returns (LoginResponse){}
     rpc LoginWithPassword (LoginWithPasswordRequest) returns (LoginResponse){}
+    rpc LockUser (LockUserRequest) returns (LockUserResponse) {}
 }
 
 message AuthUser {
@@ -106,3 +107,15 @@ message LoginResponse {
 }
 
 /* LoginWithCode & LoginWithPassword */
+/* LockUser */
+
+message LockUserRequest { // all fields required
+    PhoneNumber phoneNumber = 1;
+    int32 tick = 2; // unit is second
+}
+
+message LockUserResponse {
+    Status status = 1;
+}
+
+/* LockUser */
