@@ -7,58 +7,55 @@ import "error.proto";
 import "userStruct.proto";
 
 service AuthService {
-    rpc CreateAuthCode (CreateAuthCodeRequest) returns (CreateAuthCodeResponse){}
-    rpc ValidateAuthCode (ValidateAuthCodeRequest) returns (ValidateAuthCodeResponse){}
-    rpc SignUp (SignUpRequest) returns (SignUpResponse){}
-    rpc LoginWithCode (LoginWithCodeRequest) returns (LoginResponse){}
-    rpc LoginWithPassword (LoginWithPasswordRequest) returns (LoginResponse){}
-    rpc LockUser (LockUserRequest) returns (LockUserResponse) {}
+  rpc CreateAuthCode(CreateAuthCodeRequest) returns (CreateAuthCodeResponse) {}
+  rpc ValidateAuthCode(ValidateAuthCodeRequest)
+      returns (ValidateAuthCodeResponse) {}
+  rpc SignUp(SignUpRequest) returns (SignUpResponse) {}
+  rpc LoginWithCode(LoginWithCodeRequest) returns (LoginResponse) {}
+  rpc LoginWithPassword(LoginWithPasswordRequest) returns (LoginResponse) {}
+  rpc LockUser(LockUserRequest) returns (LockUserResponse) {}
 }
 
 message AuthUser {
-    string uid = 1;
-    Phone phone = 2;
-    string password = 3;
-    int64 createdAt = 4; // UnixTime -> change to localtime (ex. kst)
-    int64 phoneUpdatedAt = 5; // UnixTime
-    int64 passwordUpdatedAt = 6;
+  string uid = 1;
+  Phone phone = 2;
+  string password = 3;
+  int64 createdAt = 4;      // UnixTime -> change to localtime (ex. kst)
+  int64 phoneUpdatedAt = 5; // UnixTime
+  int64 passwordUpdatedAt = 6;
 }
 
 message Phone {
-    string phoneNumber = 1; // 전화번호
-    string countryNumber = 2; // 국가 번호 ex) 82
+  string phoneNumber = 1;   // 전화번호
+  string countryNumber = 2; // 국가 번호 ex) 82
 }
 
 message Term {
-    string uid = 1;
-    bool agree = 2;
-    int64 createdAt = 3; // UnixTime -> change to localtime (ex. kst)
-    int64 updatedAt = 4; // UnixTime
+  string uid = 1;
+  bool agree = 2;
+  int64 createdAt = 3; // UnixTime -> change to localtime (ex. kst)
+  int64 updatedAt = 4; // UnixTime
 }
 
 /* CreateAuthCode */
 
-message CreateAuthCodeRequest {
-    Phone phone = 1;
-}
+message CreateAuthCodeRequest { Phone phone = 1; }
 
 message CreateAuthCodeResponse { // info: user가 lock이 된 경우, status는 false
-    Status status = 1;
-    bool isLocked  = 2; // user가 lock이 됐는지 확인
-    int32 lockedRemainedTick = 3; // unit is second, 남은 시간
+  Status status = 1;
+  bool isLocked = 2;            // user가 lock이 됐는지 확인
+  int32 lockedRemainedTick = 3; // unit is second, 남은 시간
 }
 
 /* CreateAuthCode */
 /* ValidateAuthCode */
 
 message ValidateAuthCodeRequest {
-    Phone phone = 1;
-    string code = 2;
+  Phone phone = 1;
+  string code = 2;
 }
 
-message ValidateAuthCodeResponse {
-    Status status = 1;
-}
+message ValidateAuthCodeResponse { Status status = 1; }
 
 /* ValidateAuthCode */
 /* SignUpRequest */
@@ -81,43 +78,44 @@ SignUpRequest : {
     password: "testPassword"
 }
 */
-message SignUpRequest { // user.uid / user.createdAt / user.updatedAt not needed in this request
-    User user = 1;
-    Phone phone = 2;
-    string password = 3;
+message SignUpRequest { // user.uid / user.createdAt / user.updatedAt not needed
+                        // in this request
+  User user = 1;
+  Phone phone = 2;
+  string password = 3;
 }
 
 message SignUpResponse {
-    Status status = 1;
+  Status status = 1;
+  string uid = 2;
 }
 
 /* SignUpRequest */
 /* LoginWithCode & LoginWithPassword */
 
 message LoginWithCodeRequest { // all fields required
-    Phone phone = 1;
-    string code = 2;
+  Phone phone = 1;
+  string code = 2;
 }
 
 message LoginWithPasswordRequest { // all fields required
-    Phone phone = 1;
-    string password = 2;
+  Phone phone = 1;
+  string password = 2;
 }
 
 message LoginResponse {
-    Status status = 1;
+  Status status = 1;
+  string uid = 2;
 }
 
 /* LoginWithCode & LoginWithPassword */
 /* LockUser */
 
 message LockUserRequest { // all fields required
-    Phone phone = 1;
-    int32 tick = 2; // unit is second
+  Phone phone = 1;
+  int32 tick = 2; // unit is second
 }
 
-message LockUserResponse {
-    Status status = 1;
-}
+message LockUserResponse { Status status = 1; }
 
 /* LockUser */
