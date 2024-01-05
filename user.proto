@@ -9,6 +9,7 @@ import "error.proto";
 service UserService {
   rpc UpdateProfile(UpdateProfileRequest) returns (UpdateProfileResponse) {}
   rpc UpdateConfig(UpdateConfigRequest) returns (UpdateConfigResponse) {}
+  rpc GetMyPage(GetMyPageRequest) returns (GetMyPageResponse) {}
 }
 
 message Chip {
@@ -18,6 +19,14 @@ message Chip {
   string tiktokAccount = 4;
   string mbti = 5;
   repeated string others = 6;
+}
+
+message Config {
+  google.protobuf.BoolValue heartLock = 2;
+  google.protobuf.BoolValue systemAlarm = 3;
+  google.protobuf.BoolValue questionAlarm = 4;
+  google.protobuf.BoolValue bluetoothAlarm = 5;
+  google.protobuf.BoolValue likeAlarm = 6;
 }
 
 message UpdateProfileRequest {
@@ -32,11 +41,18 @@ message UpdateProfileResponse { Status status = 1; }
 
 message UpdateConfigRequest {
   string uid = 1;
-  google.protobuf.BoolValue heartLock = 2;
-  google.protobuf.BoolValue systemAlarm = 3;
-  google.protobuf.BoolValue questionAlarm = 4;
-  google.protobuf.BoolValue bluetoothAlarm = 5;
-  google.protobuf.BoolValue likeAlarm = 6;
+  Config config = 2;
 }
 
 message UpdateConfigResponse { Status status = 1; }
+
+message GetMyPageRequest { string uid = 1; }
+
+message GetMyPageResponse {
+  string name = 1;
+  string description = 2;
+  string birth = 3;
+  Chip chip = 4;
+  Config config = 5;
+  int32 bestFriends = 6;
+}

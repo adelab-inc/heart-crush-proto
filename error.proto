@@ -3,22 +3,26 @@ syntax = "proto3";
 option go_package = "telepathy-server/proto";
 
 message Status {
-    bool success = 1;
-    Error errCode = 2;
+  bool success = 1;
+  Error errCode = 2;
 }
 
 enum Error {
-    NO_ERROR = 0; // 에러 없음
+  NO_ERROR = 0; // 에러 없음
 
-    USER_ALREADY_REGISTERED = 101; // 이미 유저가 등록되어 있는 경우 -> Login 유도 필요
-    USER_NOT_REGISTERED = 102; // 유저가 등록되어 있지 않은 경우 -> register 유도 필요
-    USER_LOCKED = 103;
-    
-    AUTHENTICATE_FAILED = 300; // 인증 실패
-    ABNORMAL_APPROACH = 301; // 비정상적인 접근
-    
-    REQUIREDFIELD_MISSING = 400; // 필수적인 데이터가 누락되어 전달된 경우
+  USER_ALREADY_REGISTERED =
+      101; // 이미 유저가 등록되어 있는 경우 -> Login 유도 필요
+  USER_NOT_REGISTERED =
+      102; // 유저가 등록되어 있지 않은 경우 -> register 유도 필요
+  USER_LOCKED = 103;
 
-    UNEXPECTED_ERROR = 500; // 만약 해당 error가 발생하면 꼭! 백엔드 쪽에 알려주세요!
-    SMS_SEND_ERROR = 501; // SMS 인증코드가 어떠한 이유로 보내지지 않았을 경우
+  AUTHENTICATE_FAILED = 300; // 인증 실패
+  ABNORMAL_APPROACH = 301;   // 비정상적인 접근
+
+  REQUIREDFIELD_MISSING = 400; // 필수적인 데이터가 누락되어 전달된 경우
+  INVALID_UID = 401; // hex값인 uid를 ObjectId 타입으로 변환하지 못하는 경우
+
+  UNEXPECTED_ERROR =
+      500; // 만약 해당 error가 발생하면 꼭! 백엔드 쪽에 알려주세요!
+  SMS_SEND_ERROR = 501; // SMS 인증코드가 어떠한 이유로 보내지지 않았을 경우
 }
