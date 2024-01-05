@@ -51,8 +51,9 @@ message UpdateProfileRequest {
 message UpdateProfileResponse { Status status = 1; }
 
 message UpdateConfigRequest {
-  string uid = 1;
-  Config config = 2;
+  Status status = 1;
+  string uid = 2;
+  Config config = 3;
 }
 
 message UpdateConfigResponse { Status status = 1; }
@@ -60,10 +61,11 @@ message UpdateConfigResponse { Status status = 1; }
 message GetMyPageRequest { string uid = 1; }
 
 message GetMyPageResponse {
-  string name = 1;
-  string description = 2;
-  string birth = 3;
-  Chip chip = 4;
-  Config config = 5;
-  int32 bestFriends = 6;
+  Status status = 1;
+  string name = 2;
+  string description = 3;
+  string birth = 4;
+  Chip chip = 5;
+  Config config = 6;
+  int32 bestFriends = 7;
 }
