@@ -7,9 +7,10 @@ import "google/protobuf/wrappers.proto";
 import "error.proto";
 
 service UserService {
+  rpc GetMyProfile(GetMyProfileRequest) returns (GetMyProfileResponse) {}
   rpc UpdateProfile(UpdateProfileRequest) returns (UpdateProfileResponse) {}
-  rpc UpdateConfig(UpdateConfigRequest) returns (UpdateConfigResponse) {}
   rpc GetMyPage(GetMyPageRequest) returns (GetMyPageResponse) {}
+  rpc UpdateConfig(UpdateConfigRequest) returns (UpdateConfigResponse) {}
 }
 
 message Chip {
@@ -27,6 +28,16 @@ message Config {
   google.protobuf.BoolValue questionAlarm = 4;
   google.protobuf.BoolValue bluetoothAlarm = 5;
   google.protobuf.BoolValue likeAlarm = 6;
+}
+
+message GetMyProfileRequest { string uid = 1; }
+
+message GetMyProfileResponse {
+  Status status = 1;
+  string name = 2;
+  Chip chip = 3;
+  bytes profileImg = 4;
+  string description = 5;
 }
 
 message UpdateProfileRequest {
