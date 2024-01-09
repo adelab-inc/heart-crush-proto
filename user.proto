@@ -12,6 +12,8 @@ service UserService {
   rpc GetMyPage(GetMyPageRequest) returns (GetMyPageResponse) {}
   rpc UpdateConfig(UpdateConfigRequest) returns (UpdateConfigResponse) {}
   rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse) {}
+  rpc CreateInquiry(CretaeInquiryRequest) returns (CretaeInquiryResponse) {}
+  rpc CreateReport(CreateReportRequest) returns (CreateReportResponse) {}
 }
 
 message Chip {
@@ -77,3 +79,24 @@ message DeleteUserRequest {
 }
 
 message DeleteUserResponse { Status status = 1; }
+
+message CretaeInquiryRequest {
+  string uid = 1;
+  string kind = 2;
+  string title = 3;
+  string content = 4;
+  string replyEmail = 5;
+  repeated bytes image = 6;
+  bool agreement = 7;
+}
+
+message CretaeInquiryResponse { Status status = 1; }
+
+message CreateReportRequest {
+  string uid = 1;
+  string kind = 2;   // 이용자 or 질문카드
+  string target = 3; // 이용자 or 질문카드
+  string problemType = 4;
+  string problemDetail = 5;
+}
+message CreateReportResponse { Status status = 1; }
