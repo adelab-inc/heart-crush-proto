@@ -12,7 +12,7 @@ service UserService {
   rpc GetMyPage(GetMyPageRequest) returns (GetMyPageResponse) {}
   rpc UpdateConfig(UpdateConfigRequest) returns (UpdateConfigResponse) {}
   rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse) {}
-  rpc CreateInquiry(CretaeInquiryRequest) returns (CretaeInquiryResponse) {}
+  rpc CreateInquiry(CreateInquiryRequest) returns (CreateInquiryResponse) {}
   rpc CreateReport(CreateReportRequest) returns (CreateReportResponse) {}
 }
 
@@ -80,17 +80,17 @@ message DeleteUserRequest {
 
 message DeleteUserResponse { Status status = 1; }
 
-message CretaeInquiryRequest {
+message CreateInquiryRequest {
   string uid = 1;
   string kind = 2;
   string title = 3;
   string content = 4;
   string replyEmail = 5;
-  repeated bytes image = 6;
+  repeated bytes images = 6;
   bool agreement = 7;
 }
 
-message CretaeInquiryResponse { Status status = 1; }
+message CreateInquiryResponse { Status status = 1; }
 
 message CreateReportRequest {
   string uid = 1;
