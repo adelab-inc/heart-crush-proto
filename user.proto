@@ -11,6 +11,7 @@ service UserService {
   rpc UpdateProfile(UpdateProfileRequest) returns (UpdateProfileResponse) {}
   rpc GetMyPage(GetMyPageRequest) returns (GetMyPageResponse) {}
   rpc UpdateConfig(UpdateConfigRequest) returns (UpdateConfigResponse) {}
+  rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse) {}
 }
 
 message Chip {
@@ -69,3 +70,10 @@ message GetMyPageResponse {
   Config config = 6;
   int32 bestFriends = 7;
 }
+
+message DeleteUserRequest {
+  string uid = 1;
+  string reason = 2;
+}
+
+message DeleteUserResponse { Status status = 1; }
