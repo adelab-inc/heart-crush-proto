@@ -42,7 +42,7 @@ message Term {
 message CreateAuthCodeRequest { Phone phone = 1; }
 
 message CreateAuthCodeResponse { // info: user가 lock이 된 경우, status는 false
-  Status status = 1;
+  Status status = 1;            // REQUIREDFIELD_MISSING, UNEXPECTED_ERROR, USER_LOCKED, SMS_SEND_ERROR, UNEXPECTED_ERROR, NO_ERROR
   bool isLocked = 2;            // user가 lock이 됐는지 확인
   int32 lockedRemainedTick = 3; // unit is second, 남은 시간
 }
@@ -55,7 +55,9 @@ message ValidateAuthCodeRequest {
   string code = 2;
 }
 
-message ValidateAuthCodeResponse { Status status = 1; }
+message ValidateAuthCodeResponse { 
+  Status status = 1; // ABNORMAL_APPROACH, UNEXPECTED_ERROR, AUTHENTICATE_FAILED, NO_ERROR
+} 
 
 /* ValidateAuthCode */
 /* SignUpRequest */
@@ -86,7 +88,7 @@ message SignUpRequest { // user.uid / user.createdAt / user.updatedAt not needed
 }
 
 message SignUpResponse {
-  Status status = 1;
+  Status status = 1; // USER_ALREADY_REGISTERED, UNEXPECTED_ERROR, NO_ERROR
   string uid = 2;
 }
 
@@ -104,7 +106,7 @@ message LoginWithPasswordRequest { // all fields required
 }
 
 message LoginResponse {
-  Status status = 1;
+  Status status = 1; // USER_NOT_REGISTERED, UNEXPECTED_ERROR, AUTHENTICATE_FAILED, NO_ERROR
   string uid = 2;
 }
 
@@ -116,6 +118,8 @@ message LockUserRequest { // all fields required
   int32 tick = 2; // unit is second
 }
 
-message LockUserResponse { Status status = 1; }
+message LockUserResponse { 
+  Status status = 1; // UNEXPECTED_ERROR, NO_ERROR
+}
 
 /* LockUser */
