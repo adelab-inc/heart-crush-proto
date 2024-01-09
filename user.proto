@@ -51,7 +51,10 @@ message UpdateProfileRequest {
   google.protobuf.StringValue description = 5;
 }
 
-message UpdateProfileResponse { Status status = 1; }
+message UpdateProfileResponse {
+  Status status = 1; // Error_INVALID_UID, Error_FILE_UPLOAD_ERROR,
+                     // MONGO_UPDATE, Error_NO_ERROR
+}
 
 message UpdateConfigRequest {
   Status status = 1;
@@ -59,11 +62,14 @@ message UpdateConfigRequest {
   Config config = 3;
 }
 
-message UpdateConfigResponse { Status status = 1; }
+message UpdateConfigResponse {
+  Status status = 1; // Error_INVALID_UID, MONGO_UPDATE, Error_NO_ERROR
+}
 
 message GetMyPageRequest { string uid = 1; }
 
 message GetMyPageResponse {
+  // Error_INVALID_UID, Error_USER_NOT_REGISTERED, Error_NO_ERROR
   Status status = 1;
   string name = 2;
   string description = 3;
@@ -78,7 +84,10 @@ message DeleteUserRequest {
   string reason = 2;
 }
 
-message DeleteUserResponse { Status status = 1; }
+message DeleteUserResponse {
+  // Error_INVALID_UID,Error_MONGO_DELETE, Error_MONGO_INSERT, Error_NO_ERROR
+  Status status = 1;
+}
 
 message CreateInquiryRequest {
   string uid = 1;
@@ -90,7 +99,10 @@ message CreateInquiryRequest {
   bool agreement = 7;
 }
 
-message CreateInquiryResponse { Status status = 1; }
+message CreateInquiryResponse {
+  // Error_KST_FAILED, Error_MONGO_INSERT, Error_NO_ERROR
+  Status status = 1;
+}
 
 message CreateReportRequest {
   string uid = 1;
@@ -99,4 +111,7 @@ message CreateReportRequest {
   string problemType = 4;
   string problemDetail = 5;
 }
-message CreateReportResponse { Status status = 1; }
+message CreateReportResponse {
+  // Error_KST_FAILED, Error_MONGO_INSERT, Error_NO_ERROR
+  Status status = 1;
+}
