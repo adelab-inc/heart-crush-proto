@@ -12,7 +12,7 @@ service UserService {
   rpc GetMyPage(GetMyPageRequest) returns (GetMyPageResponse) {}
   rpc UpdateConfig(UpdateConfigRequest) returns (UpdateConfigResponse) {}
   rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse) {}
-  rpc CreateInquiry(CretaeInquiryRequest) returns (CretaeInquiryResponse) {}
+  rpc CreateInquiry(CreateInquiryRequest) returns (CreateInquiryResponse) {}
   rpc CreateReport(CreateReportRequest) returns (CreateReportResponse) {}
 }
 
@@ -51,7 +51,10 @@ message UpdateProfileRequest {
   google.protobuf.StringValue description = 5;
 }
 
-message UpdateProfileResponse { Status status = 1; }
+message UpdateProfileResponse {
+  Status status = 1; // Error_INVALID_UID, Error_FILE_UPLOAD_ERROR,
+                     // MONGO_UPDATE, Error_NO_ERROR
+}
 
 message UpdateConfigRequest {
   Status status = 1;
@@ -59,11 +62,14 @@ message UpdateConfigRequest {
   Config config = 3;
 }
 
-message UpdateConfigResponse { Status status = 1; }
+message UpdateConfigResponse {
+  Status status = 1; // Error_INVALID_UID, MONGO_UPDATE, Error_NO_ERROR
+}
 
 message GetMyPageRequest { string uid = 1; }
 
 message GetMyPageResponse {
+  // Error_INVALID_UID, Error_USER_NOT_REGISTERED, Error_NO_ERROR
   Status status = 1;
   string name = 2;
   string description = 3;
@@ -78,25 +84,34 @@ message DeleteUserRequest {
   string reason = 2;
 }
 
-message DeleteUserResponse { Status status = 1; }
+message DeleteUserResponse {
+  // Error_INVALID_UID,Error_MONGO_DELETE, Error_MONGO_INSERT, Error_NO_ERROR
+  Status status = 1;
+}
 
-message CretaeInquiryRequest {
+message CreateInquiryRequest {
   string uid = 1;
   string kind = 2;
   string title = 3;
   string content = 4;
   string replyEmail = 5;
-  repeated bytes image = 6;
+  repeated bytes images = 6;
   bool agreement = 7;
 }
 
-message CretaeInquiryResponse { Status status = 1; }
+message CreateInquiryResponse {
+  // Error_KST_FAILED, Error_MONGO_INSERT, Error_NO_ERROR
+  Status status = 1;
+}
 
 message CreateReportRequest {
   string uid = 1;
-  string kind = 2;   // 이용자 or 질문카드
-  string target = 3; // 이용자 or 질문카드
+  string kind = 2;
+  string target = 3;
   string problemType = 4;
   string problemDetail = 5;
 }
-message CreateReportResponse { Status status = 1; }
+message CreateReportResponse {
+  // Error_KST_FAILED, Error_MONGO_INSERT, Error_NO_ERROR
+  Status status = 1;
+}

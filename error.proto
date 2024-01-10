@@ -27,4 +27,10 @@ enum Error {
   // SMS 인증코드가 어떠한 이유로 보내지지 않았을 경우
   SMS_SEND_ERROR = 501;
   FILE_UPLOAD_ERROR = 502;
+  KST_FAILED = 503;
+
+  MONGO_INSERT = 600;
+  MONGO_READ = 601;
+  MONGO_UPDATE = 602;
+  MONGO_DELETE = 603;
 }
