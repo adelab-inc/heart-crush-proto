@@ -17,7 +17,7 @@ service UserService {
 }
 
 message Chip {
-  string schoolName = 1;
+  string schoolCode = 1;
   string grade = 2;
   string instaAccount = 3;
   string tiktokAccount = 4;
