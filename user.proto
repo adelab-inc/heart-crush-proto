@@ -15,17 +15,19 @@ service UserService {
   rpc CreateInquiry(CreateInquiryRequest) returns (CreateInquiryResponse) {}
   rpc CreateReport(CreateReportRequest) returns (CreateReportResponse) {}
   rpc GetSchoolUsers(GetSchoolUsersRequest) returns (GetSchoolUsersResponse) {}
+  rpc GetSchools(GetSchoolsRequest) returns (GetSchoolsResponse) {}
   rpc DeleteProfileImage(DeleteProfileImageRequest)
       returns (DeleteProfileImageResponse) {}
 }
 
 message Chip {
-  string schoolCode = 1;
-  int32 grade = 2;
-  string instaAccount = 3;
-  string tiktokAccount = 4;
-  string mbti = 5;
-  repeated string others = 6;
+  string schoolName = 1;
+  string schoolShortName = 2;
+  int32 grade = 3;
+  string instaAccount = 4;
+  string tiktokAccount = 5;
+  string mbti = 6;
+  repeated string others = 7;
 }
 
 message Config {
@@ -147,4 +149,17 @@ message GetSchoolUsersResponse {
   string schoolCode = 3;
   string schoolName = 4;
   string shortSchoolName = 5;
+}
+
+message School {
+  string code = 1;
+  string name = 2;
+  string address = 3;
+}
+
+message GetSchoolsRequest { string schoolCode = 1; }
+
+message GetSchoolsResponse {
+  Status status = 1;
+  repeated School schools = 2;
 }
