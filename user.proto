@@ -144,4 +144,7 @@ message GetSchoolUsersRequest { string schoolCode = 1; }
 message GetSchoolUsersResponse {
   Status status = 1;
   repeated Students students = 2;
+  string schoolCode = 3;
+  string schoolName = 4;
+  string shortSchoolName = 5;
 }
