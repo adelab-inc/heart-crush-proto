@@ -97,8 +97,7 @@ message DeleteProfileImageRequest {
 }
 
 message DeleteProfileImageResponse {
-  string uid = 1;
-  bool gender = 2;
+  Status status = 1;
 }
 
 /*  */
