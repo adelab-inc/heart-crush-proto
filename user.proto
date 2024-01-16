@@ -15,11 +15,13 @@ service UserService {
   rpc CreateInquiry(CreateInquiryRequest) returns (CreateInquiryResponse) {}
   rpc CreateReport(CreateReportRequest) returns (CreateReportResponse) {}
   rpc GetSchoolUsers(GetSchoolUsersRequest) returns (GetSchoolUsersResponse) {}
+  rpc DeleteProfileImage(DeleteProfileImageRequest)
+      returns (DeleteProfileImageResponse) {}
 }
 
 message Chip {
   string schoolCode = 1;
-  string grade = 2;
+  int32 grade = 2;
   string instaAccount = 3;
   string tiktokAccount = 4;
   string mbti = 5;
@@ -50,6 +52,7 @@ message UpdateProfileRequest {
   Chip chip = 3;
   bytes profileImg = 4;
   google.protobuf.StringValue description = 5;
+  bool gender = 6;
 }
 
 message UpdateProfileResponse {
@@ -89,6 +92,15 @@ message DeleteUserResponse {
   // Error_INVALID_UID,Error_MONGO_DELETE, Error_MONGO_INSERT, Error_NO_ERROR
   Status status = 1;
 }
+
+message DeleteProfileImageRequest {
+  string uid = 1;
+  bool gender = 2;
+}
+
+message DeleteProfileImageResponse { Status status = 1; }
+
+/*  */
 
 message CreateInquiryRequest {
   string uid = 1;
