@@ -14,6 +14,7 @@ service UserService {
   rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse) {}
   rpc CreateInquiry(CreateInquiryRequest) returns (CreateInquiryResponse) {}
   rpc CreateReport(CreateReportRequest) returns (CreateReportResponse) {}
+  rpc GetSchoolUsers(GetSchoolUsersRequest) returns (GetSchoolUsersResponse) {}
 }
 
 message Chip {
@@ -26,11 +27,11 @@ message Chip {
 }
 
 message Config {
-  google.protobuf.BoolValue heartLock = 2;
-  google.protobuf.BoolValue systemAlarm = 3;
-  google.protobuf.BoolValue questionAlarm = 4;
-  google.protobuf.BoolValue bluetoothAlarm = 5;
-  google.protobuf.BoolValue likeAlarm = 6;
+  google.protobuf.BoolValue heartLock = 1;
+  google.protobuf.BoolValue systemAlarm = 2;
+  google.protobuf.BoolValue questionAlarm = 3;
+  google.protobuf.BoolValue bluetoothAlarm = 4;
+  google.protobuf.BoolValue likeAlarm = 5;
 }
 
 message GetMyProfileRequest { string uid = 1; }
@@ -114,4 +115,21 @@ message CreateReportRequest {
 message CreateReportResponse {
   // Error_KST_FAILED, Error_MONGO_INSERT, Error_NO_ERROR
   Status status = 1;
+}
+
+message Student {
+  string uid = 1;
+  string name = 2;
+}
+
+message Students {
+  int32 grade = 1;
+  repeated Student student = 2;
+}
+
+message GetSchoolUsersRequest { string schoolCode = 1; }
+
+message GetSchoolUsersResponse {
+  Status status = 1;
+  repeated Students students = 2;
 }
