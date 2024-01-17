@@ -14,7 +14,7 @@ service UserService {
   rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse) {}
   rpc CreateInquiry(CreateInquiryRequest) returns (CreateInquiryResponse) {}
   rpc CreateReport(CreateReportRequest) returns (CreateReportResponse) {}
-  rpc GetSchoolUsers(GetSchoolUsersRequest) returns (GetSchoolUsersResponse) {}
+  rpc GetStudents(GetStudentsRequest) returns (GetStudentsResponse) {}
   rpc GetNearBySchools(GetNearBySchoolsRequest)
       returns (GetNearBySchoolsResponse) {}
   rpc DeleteProfileImage(DeleteProfileImageRequest)
@@ -142,12 +142,12 @@ message Students {
   repeated Student student = 2;
 }
 
-message GetSchoolUsersRequest {
+message GetStudentsRequest {
   string uid = 1;
   string schoolCode = 2;
 }
 
-message GetSchoolUsersResponse {
+message GetStudentsResponse {
   Status status = 1;
   repeated Students students = 2;
   string schoolCode = 3;
