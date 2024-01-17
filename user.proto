@@ -161,7 +161,7 @@ message School {
   string address = 3;
 }
 
-message GetsSchoolsRequest {
+message GetNearBySchoolsRequest {
   string uid = 1;
   string schoolCode = 2;
 }
