@@ -64,7 +64,7 @@ message UpdateProfileResponse {
 }
 
 message UpdateConfigRequest {
-  Status status = 1;
+  reserved 1;
   string uid = 2;
   Config config = 3;
 }
