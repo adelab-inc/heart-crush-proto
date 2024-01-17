@@ -151,8 +151,7 @@ message GetStudentsResponse {
   Status status = 1;
   repeated Students students = 2;
   string schoolCode = 3;
-  string schoolName = 4;
-  string shortSchoolName = 5;
+  string shortSchoolName = 4;
 }
 
 message School {
