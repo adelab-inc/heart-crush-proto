@@ -19,6 +19,8 @@ service UserService {
       returns (GetNearBySchoolsResponse) {}
   rpc DeleteProfileImage(DeleteProfileImageRequest)
       returns (DeleteProfileImageResponse) {}
+  rpc GetRecommendFriends(GetRecommendFriendsRequest)
+      returns (GetRecommendFriendsResponse) {}
 }
 
 message Chip {
@@ -171,3 +173,15 @@ message GetNearBySchoolsResponse {
   Status status = 1;
   repeated School schools = 2;
 }
+
+message PhoneBookFriend {
+  string name = 1;
+  string phoneNumber = 2;
+}
+
+message GetRecommendFriendsRequest {
+  string uid = 1;
+  repeated PhoneBookFriend phoneBookFriends = 2;
+}
+
+message GetRecommendFriendsResponse {}
