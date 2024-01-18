@@ -54,12 +54,16 @@ message GetMyProfileResponse {
 }
 
 message UpdateProfileRequest {
+  reserved 2, 5;
   string uid = 1;
-  google.protobuf.StringValue name = 2;
+  // google.protobuf.StringValue name = 2;
   Chip chip = 3;
   bytes profileImg = 4;
-  google.protobuf.StringValue description = 5;
+  // google.protobuf.StringValue description = 5;
   bool gender = 6;
+  string name = 7;
+  string description = 8;
+  string schoolCode = 9;
 }
 
 message UpdateProfileResponse {
@@ -139,7 +143,7 @@ message CreateReportResponse {
 message Student {
   string uid = 1;
   string name = 2;
-}
+} 
 
 message Students {
   int32 grade = 1;
