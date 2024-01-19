@@ -3,6 +3,7 @@ syntax = "proto3";
 option go_package = "telepathy-server/proto";
 
 import "google/protobuf/wrappers.proto";
+
 import "error.proto";
 
 service UserService {
@@ -140,7 +141,7 @@ message CreateReportResponse {
 message Student {
   string uid = 1;
   string name = 2;
-} 
+}
 
 message Students {
   int32 grade = 1;
@@ -164,9 +165,19 @@ message PhoneBookFriend {
   string phoneNumber = 2;
 }
 
+message RecommendedFriends {
+  string uid = 1;
+  string name = 2;
+  string schoolShortName = 3;
+  int32 grade = 4;
+}
+
 message GetRecommendFriendsRequest {
   string uid = 1;
   repeated PhoneBookFriend phoneBookFriends = 2;
 }
 
-message GetRecommendFriendsResponse {}
+message GetRecommendFriendsResponse {
+  Status status = 1;
+  repeated RecommendedFriends recommendedFriends = 2;
+}
