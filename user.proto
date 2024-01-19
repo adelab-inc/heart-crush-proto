@@ -160,11 +160,6 @@ message GetStudentsResponse {
   string shortSchoolName = 4;
 }
 
-message PhoneBookFriend {
-  string name = 1;
-  string phoneNumber = 2;
-}
-
 message RecommendedFriends {
   string uid = 1;
   string name = 2;
@@ -174,7 +169,7 @@ message RecommendedFriends {
 
 message GetRecommendFriendsRequest {
   string uid = 1;
-  repeated PhoneBookFriend phoneBookFriends = 2;
+  repeated string phoneBookFriends = 2;
 }
 
 message GetRecommendFriendsResponse {
