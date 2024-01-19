@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+option go_package = "telepathy-server/proto";
+
+import "error.proto";
+
+service SchoolService {
+  rpc GetAllSchool(GetAllSchoolRequest) returns (GetAllSchoolResponse) {}
+  rpc GetNearBySchools(GetNearBySchoolsRequest)
+  returns (GetNearBySchoolsResponse) {}
+}
+
+message School {
+  string code = 1;
+  string name = 2;
+  string shortName = 3;
+  string address = 4;
+}
+
+message GetAllSchoolRequest { }
+
+message GetAllSchoolResponse {
+  Status status = 1;
+  repeated School schools = 2;
+}
+
+message GetNearBySchoolsRequest {
+  string uid = 1;
+  string schoolCode = 2;
+}
+
+message GetNearBySchoolsResponse {
+  Status status = 1;
+  repeated School schools = 2;
+}

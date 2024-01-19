@@ -3,7 +3,6 @@ syntax = "proto3";
 option go_package = "telepathy-server/proto";
 
 import "google/protobuf/wrappers.proto";
-
 import "error.proto";
 
 service UserService {
@@ -15,8 +14,6 @@ service UserService {
   rpc CreateInquiry(CreateInquiryRequest) returns (CreateInquiryResponse) {}
   rpc CreateReport(CreateReportRequest) returns (CreateReportResponse) {}
   rpc GetStudents(GetStudentsRequest) returns (GetStudentsResponse) {}
-  rpc GetNearBySchools(GetNearBySchoolsRequest)
-      returns (GetNearBySchoolsResponse) {}
   rpc DeleteProfileImage(DeleteProfileImageRequest)
       returns (DeleteProfileImageResponse) {}
   rpc GetRecommendFriends(GetRecommendFriendsRequest)
@@ -160,22 +157,6 @@ message GetStudentsResponse {
   repeated Students students = 2;
   string schoolCode = 3;
   string shortSchoolName = 4;
-}
-
-message School {
-  string code = 1;
-  string name = 2;
-  string address = 3;
-}
-
-message GetNearBySchoolsRequest {
-  string uid = 1;
-  string schoolCode = 2;
-}
-
-message GetNearBySchoolsResponse {
-  Status status = 1;
-  repeated School schools = 2;
 }
 
 message PhoneBookFriend {
