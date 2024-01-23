@@ -21,9 +21,13 @@ service UserService {
       returns (GetRecommendFriendsResponse) {}
   rpc GetBlockedFriends(GetBlockedFriendsRequest)
       returns (GetBlockedFriendsResponse) {}
-  rpc BlockFriend(BlockFriendRequest) returns (BlockFriendResponse) {}
-  rpc UnBlockFriend(UnBlockFriendRequest) returns (UnBlockFriendResponse) {}
-  rpc GetBestFriends(GetBestFriendsRequest) returns (GetBestFriendsResponse) {}
+  rpc CreateBlockedFriend(CreateBlockedFriendRequest)
+      returns (CreateBlockedFriendResponse) {}
+  rpc DeleteBlockedFriend(DeleteBlockedFriendRequest)
+      returns (DeleteBlockedFriendResponse) {}
+  // rpc GetBestFriends(GetBestFriendsRequest) returns (GetBestFriendsResponse)
+  // {} rpc CreateBestFriend() returns () {} rpc DeleteBestFriend() returns ()
+  // {}
 }
 
 message Chip {
@@ -194,22 +198,22 @@ message GetBlockedFriendsResponse {
   repeated ShortenUser blockedFriends = 2;
 }
 
-message BlockFriendRequest {
+message CreateBlockedFriendRequest {
   string uid = 1;
   string friendId = 2;
 }
 
-message BlockFriendResponse { Status status = 1; }
+message CreateBlockedFriendResponse { Status status = 1; }
 
-message UnBlockFriendRequest {
+message DeleteBlockedFriendRequest {
   string uid = 1;
   string friendId = 2;
 }
 
-message UnBlockFriendResponse { Status status = 1; }
+message DeleteBlockedFriendResponse { Status status = 1; }
 
-message BestFriend {}
+// message BestFriend {}
 
-message GetBestFriendsRequest { string uid = 1; }
+// message GetBestFriendsRequest { string uid = 1; }
 
-message GetBestFriendsResponse {}
+// message GetBestFriendsResponse {}
