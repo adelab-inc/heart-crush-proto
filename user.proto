@@ -19,6 +19,7 @@ service UserService {
       returns (DeleteProfileImageResponse) {}
   rpc GetRecommendFriends(GetRecommendFriendsRequest)
       returns (GetRecommendFriendsResponse) {}
+  rpc BlockFriend(BlockFriendRequest) returns (BlockFriendResponse) {}
 }
 
 message Chip {
@@ -176,3 +177,10 @@ message GetRecommendFriendsResponse {
   Status status = 1;
   repeated RecommendedFriends recommendedFriends = 2;
 }
+
+message BlockFriendRequest {
+  string uid = 1;
+  string friendId = 2;
+}
+
+message BlockFriendResponse { Status status = 1; }
