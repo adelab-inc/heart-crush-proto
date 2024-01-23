@@ -26,10 +26,8 @@ service UserService {
   rpc DeleteBlockedFriend(DeleteBlockedFriendRequest)
       returns (DeleteBlockedFriendResponse) {}
   rpc GetBestFriends(GetBestFriendsRequest) returns (GetBestFriendsResponse) {}
-  rpc CreateBestFriend(CreateBestFriendRequest)
-      returns (CreateBestFriendResponse) {}
-  rpc DeleteBestFriend(DeleteBestFriendRequest)
-      returns (DeleteBestFriendResponse) {}
+  rpc UpdateBestFriends(UpdateBestFriendsRequest)
+      returns (UpdateBestFriendsResponse) {}
 }
 
 message Chip {
@@ -214,22 +212,30 @@ message DeleteBlockedFriendRequest {
 
 message DeleteBlockedFriendResponse { Status status = 1; }
 
-message BestFriend {
+message BestFriendResponse {
   string uid = 1;
   string name = 2;
   string schoolShortName = 3;
-  int32 grade = 4;
-  bool alarm = 5;
+  string description = 4;
+  Chip chip = 5;
+  bool alarm = 6;
+}
+
+message BestFriendRequest {
+  string uid = 1;
+  bool alarm = 2;
 }
 
 message GetBestFriendsRequest { string uid = 1; }
 
 message GetBestFriendsResponse {
   Status status = 1;
-  repeated BestFriend bestFriends = 2;
+  repeated BestFriendResponse bestFriends = 2;
 }
 
-message CreateBestFriendRequest {}
-message CreateBestFriendResponse {}
-message DeleteBestFriendRequest {}
-message DeleteBestFriendResponse {}
+message UpdateBestFriendsRequest {
+  string uid = 1;
+  repeated BestFriendRequest bestFriends = 2;
+}
+
+message UpdateBestFriendsResponse { Status status = 1; }
