@@ -19,8 +19,11 @@ service UserService {
       returns (DeleteProfileImageResponse) {}
   rpc GetRecommendFriends(GetRecommendFriendsRequest)
       returns (GetRecommendFriendsResponse) {}
+  rpc GetBlockedFriends(GetBlockedFriendsRequest)
+      returns (GetBlockedFriendsResponse) {}
   rpc BlockFriend(BlockFriendRequest) returns (BlockFriendResponse) {}
   rpc UnBlockFriend(UnBlockFriendRequest) returns (UnBlockFriendResponse) {}
+  rpc GetBestFriends(GetBestFriendsRequest) returns (GetBestFriendsResponse) {}
 }
 
 message Chip {
@@ -39,6 +42,11 @@ message Config {
   google.protobuf.BoolValue questionAlarm = 3;
   google.protobuf.BoolValue bluetoothAlarm = 4;
   google.protobuf.BoolValue likeAlarm = 5;
+}
+
+message ShortenUser {
+  string uid = 1;
+  string name = 2;
 }
 
 message GetMyProfileRequest { string uid = 1; }
@@ -179,6 +187,13 @@ message GetRecommendFriendsResponse {
   repeated RecommendedFriends recommendedFriends = 2;
 }
 
+message GetBlockedFriendsRequest { string uid = 1; }
+
+message GetBlockedFriendsResponse {
+  Status status = 1;
+  repeated ShortenUser blockedFriends = 2;
+}
+
 message BlockFriendRequest {
   string uid = 1;
   string friendId = 2;
@@ -192,3 +207,9 @@ message UnBlockFriendRequest {
 }
 
 message UnBlockFriendResponse { Status status = 1; }
+
+message BestFriend {}
+
+message GetBestFriendsRequest { string uid = 1; }
+
+message GetBestFriendsResponse {}
