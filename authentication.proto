@@ -15,6 +15,10 @@ service AuthService {
   rpc LoginWithPassword(LoginWithPasswordRequest) returns (LoginResponse) {}
   rpc LockUser(LockUserRequest) returns (LockUserResponse) {}
   rpc ChangePassword(ChangePasswordRequest) returns (ChangePasswordResponse) {}
+  rpc EmailRegister(EmailRegisterRequest) returns (EmailRegisterResponse) {}
+  rpc CreateEmailAuthCode(CreateEmailAuthCodeRequest) returns (CreateEmailAuthCodeResponse) {}
+  rpc ValidateEmailAuthCode(ValidateEmailAuthCodeRequest) returns (ValidateEmailAuthCodeResponse) {}
+  rpc LockEmailUser(LockEmailUserRequest) returns (LockEmailUserResponse) {}
 }
 
 message AuthUser {
@@ -40,7 +44,9 @@ message Term {
 
 /* CreateAuthCode */
 
-message CreateAuthCodeRequest { Phone phone = 1; }
+message CreateAuthCodeRequest {
+  Phone phone = 1;
+}
 
 message CreateAuthCodeResponse { // info: user가 lock이 된 경우, status는 false
   Status status = 1;            // REQUIREDFIELD_MISSING, UNEXPECTED_ERROR, USER_LOCKED, SMS_SEND_ERROR, UNEXPECTED_ERROR, NO_ERROR
@@ -140,3 +146,51 @@ message ChangePasswordResponse {
 }
 
 /* ChangePassword */
+/* Email */
+// 내 프로필 설정 & 계정 정보 -> 이메일 입력하기 // 해당 과정에서 사용하시면 됩니다!
+
+message EmailRegisterRequest {
+  string uid = 1;
+  string email = 2;
+}
+
+message EmailRegisterResponse {
+  Status status = 1;
+}
+
+/* Email */
+/* CreateEmailAuthCode */
+
+message CreateEmailAuthCodeRequest { 
+  string email = 1;
+}
+
+message CreateEmailAuthCodeResponse { // info: user가 lock이 된 경우, status는 false
+  Status status = 1;            // REQUIREDFIELD_MISSING, UNEXPECTED_ERROR, USER_LOCKED, SMS_SEND_ERROR, UNEXPECTED_ERROR, NO_ERROR
+  bool isLocked = 2;            // user가 lock이 됐는지 확인
+  int32 lockedRemainedTick = 3; // unit is second, 남은 시간
+}
+
+/* CreateEmailAuthCode */
+/* ValidateEmailAuthCode */
+
+message ValidateEmailAuthCodeRequest {
+  string email = 1;
+  string code = 2;
+}
+
+message ValidateEmailAuthCodeResponse { 
+  Status status = 1; // ABNORMAL_APPROACH, UNEXPECTED_ERROR, AUTHENTICATE_FAILED, NO_ERROR
+} 
+
+/* ValidateEmailAuthCode */
+/* LockEmailUser */
+message LockEmailUserRequest { // all fields required
+  string email = 1;
+  int32 tick = 2; // unit is second
+}
+
+message LockEmailUserResponse { 
+  Status status = 1; // UNEXPECTED_ERROR, NO_ERROR
+}
+/* LockEmailUser */
