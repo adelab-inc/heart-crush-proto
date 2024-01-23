@@ -4,6 +4,7 @@ option go_package = "telepathy-server/proto";
 
 import "google/protobuf/wrappers.proto";
 
+import "common.proto";
 import "error.proto";
 
 service UserService {

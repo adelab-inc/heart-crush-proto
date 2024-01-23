@@ -1,0 +1,86 @@
+syntax = "proto3";
+
+option go_package = "telepathy-server/proto";
+
+import "common.proto";
+import "error.proto";
+
+service FriendService {
+  rpc GetRecommendFriends(GetRecommendFriendsRequest)
+      returns (GetRecommendFriendsResponse) {}
+  rpc GetBlockedFriends(GetBlockedFriendsRequest)
+      returns (GetBlockedFriendsResponse) {}
+  rpc CreateBlockedFriend(CreateBlockedFriendRequest)
+      returns (CreateBlockedFriendResponse) {}
+  rpc DeleteBlockedFriend(DeleteBlockedFriendRequest)
+      returns (DeleteBlockedFriendResponse) {}
+  rpc GetBestFriends(GetBestFriendsRequest) returns (GetBestFriendsResponse) {}
+  rpc UpdateBestFriends(UpdateBestFriendsRequest)
+      returns (UpdateBestFriendsResponse) {}
+}
+
+message RecommendedFriends {
+  string uid = 1;
+  string name = 2;
+  string schoolShortName = 3;
+  int32 grade = 4;
+}
+
+message BestFriendResponse {
+  string uid = 1;
+  string name = 2;
+  string schoolShortName = 3;
+  string description = 4;
+  Chip chip = 5;
+  bool alarm = 6;
+}
+
+message BestFriendRequest {
+  string uid = 1;
+  bool alarm = 2;
+}
+
+message GetRecommendFriendsRequest {
+  string uid = 1;
+  repeated string phoneBookFriends = 2;
+}
+
+message GetRecommendFriendsResponse {
+  Status status = 1;
+  repeated RecommendedFriends recommendedFriends = 2;
+}
+
+message GetBlockedFriendsRequest { string uid = 1; }
+
+message GetBlockedFriendsResponse {
+  Status status = 1;
+  repeated ShortenUser blockedFriends = 2;
+}
+
+message CreateBlockedFriendRequest {
+  string uid = 1;
+  string friendId = 2;
+}
+
+message CreateBlockedFriendResponse { Status status = 1; }
+
+message DeleteBlockedFriendRequest {
+  string uid = 1;
+  string friendId = 2;
+}
+
+message DeleteBlockedFriendResponse { Status status = 1; }
+
+message GetBestFriendsRequest { string uid = 1; }
+
+message GetBestFriendsResponse {
+  Status status = 1;
+  repeated BestFriendResponse bestFriends = 2;
+}
+
+message UpdateBestFriendsRequest {
+  string uid = 1;
+  repeated BestFriendRequest bestFriends = 2;
+}
+
+message UpdateBestFriendsResponse { Status status = 1; }
