@@ -3,8 +3,8 @@ syntax = "proto3";
 // package user;
 option go_package = "telepathy-server/proto";
 
+import "common.proto";
 import "error.proto";
-import "userStruct.proto";
 
 service AuthService {
   rpc CreateAuthCode(CreateAuthCodeRequest) returns (CreateAuthCodeResponse) {}
@@ -50,8 +50,9 @@ message CreateAuthCodeRequest {
 }
 
 message CreateAuthCodeResponse { // info: user가 lock이 된 경우, status는 false
-  Status status = 1;            // REQUIREDFIELD_MISSING, UNEXPECTED_ERROR, USER_LOCKED, SMS_SEND_ERROR, UNEXPECTED_ERROR, NO_ERROR
-  bool isLocked = 2;            // user가 lock이 됐는지 확인
+  Status status = 1; // REQUIREDFIELD_MISSING, UNEXPECTED_ERROR, USER_LOCKED,
+                     // SMS_SEND_ERROR, UNEXPECTED_ERROR, NO_ERROR
+  bool isLocked = 2; // user가 lock이 됐는지 확인
   int32 lockedRemainedTick = 3; // unit is second, 남은 시간
 }
 
@@ -63,9 +64,10 @@ message ValidateAuthCodeRequest {
   string code = 2;
 }
 
-message ValidateAuthCodeResponse { 
-  Status status = 1; // ABNORMAL_APPROACH, UNEXPECTED_ERROR, AUTHENTICATE_FAILED, NO_ERROR
-} 
+message ValidateAuthCodeResponse {
+  Status status =
+      1; // ABNORMAL_APPROACH, UNEXPECTED_ERROR, AUTHENTICATE_FAILED, NO_ERROR
+}
 
 /* ValidateAuthCode */
 /* SignUpRequest */
@@ -114,7 +116,8 @@ message LoginWithPasswordRequest { // all fields required
 }
 
 message LoginResponse {
-  Status status = 1; // USER_NOT_REGISTERED, UNEXPECTED_ERROR, AUTHENTICATE_FAILED, NO_ERROR
+  Status status =
+      1; // USER_NOT_REGISTERED, UNEXPECTED_ERROR, AUTHENTICATE_FAILED, NO_ERROR
   string uid = 2;
   bool isLocked = 3;            // user가 lock이 됐는지 확인
   int32 lockedRemainedTick = 4; // unit is second, 남은 시간
@@ -128,7 +131,7 @@ message LockUserRequest { // all fields required
   int32 tick = 2; // unit is second
 }
 
-message LockUserResponse { 
+message LockUserResponse {
   Status status = 1; // UNEXPECTED_ERROR, NO_ERROR
 }
 
@@ -143,7 +146,8 @@ message ChangePasswordRequest {
 }
 
 message ChangePasswordResponse {
-  Status status = 1; // INVALID_UID, UNEXPECTED_ERROR, AUTHENTICATE_FAILED, NO_ERROR
+  Status status =
+      1; // INVALID_UID, UNEXPECTED_ERROR, AUTHENTICATE_FAILED, NO_ERROR
 }
 
 /* ChangePassword */
