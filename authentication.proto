@@ -19,6 +19,7 @@ service AuthService {
   rpc CreateEmailAuthCode(CreateEmailAuthCodeRequest) returns (CreateEmailAuthCodeResponse) {}
   rpc ValidateEmailAuthCode(ValidateEmailAuthCodeRequest) returns (ValidateEmailAuthCodeResponse) {}
   rpc LockEmailUser(LockEmailUserRequest) returns (LockEmailUserResponse) {}
+  rpc UpdatePhoneNumber(UpdatePhoneNumberRequest) returns (UpdatePhoneNumberResponse) {}
 }
 
 message AuthUser {
@@ -185,10 +186,12 @@ message ValidateEmailAuthCodeRequest {
 
 message ValidateEmailAuthCodeResponse { 
   Status status = 1; // ABNORMAL_APPROACH, UNEXPECTED_ERROR, AUTHENTICATE_FAILED, NO_ERROR
+  string uid = 2;
 } 
 
 /* ValidateEmailAuthCode */
 /* LockEmailUser */
+
 message LockEmailUserRequest { // all fields required
   string email = 1;
   int32 tick = 2; // unit is second
@@ -197,4 +200,16 @@ message LockEmailUserRequest { // all fields required
 message LockEmailUserResponse { 
   Status status = 1; // UNEXPECTED_ERROR, NO_ERROR
 }
+
 /* LockEmailUser */
+/* UpdatePhoneNumber */
+
+message UpdatePhoneNumberRequest {
+  string uid = 1;
+  Phone phone = 2;
+}
+
+message UpdatePhoneNumberResponse {
+  Status status = 1;
+}
+/* UpdatePhoneNumber */
