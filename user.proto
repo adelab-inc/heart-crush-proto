@@ -18,18 +18,6 @@ service UserService {
   rpc GetStudents(GetStudentsRequest) returns (GetStudentsResponse) {}
   rpc DeleteProfileImage(DeleteProfileImageRequest)
       returns (DeleteProfileImageResponse) {}
-  rpc GetRecommendFriends(GetRecommendFriendsRequest)
-      returns (GetRecommendFriendsResponse) {}
-}
-
-message Chip {
-  string schoolName = 1;
-  string schoolShortName = 2;
-  int32 grade = 3;
-  string instaAccount = 4;
-  string tiktokAccount = 5;
-  string mbti = 6;
-  repeated string others = 7;
 }
 
 message Config {
@@ -159,21 +147,4 @@ message GetStudentsResponse {
   repeated Students students = 2;
   string schoolCode = 3;
   string shortSchoolName = 4;
-}
-
-message RecommendedFriends {
-  string uid = 1;
-  string name = 2;
-  string schoolShortName = 3;
-  int32 grade = 4;
-}
-
-message GetRecommendFriendsRequest {
-  string uid = 1;
-  repeated string phoneBookFriends = 2;
-}
-
-message GetRecommendFriendsResponse {
-  Status status = 1;
-  repeated RecommendedFriends recommendedFriends = 2;
 }
