@@ -2,6 +2,7 @@ syntax = "proto3";
 
 option go_package = "telepathy-server/proto";
 
+// import "google/protobuf/timestamp.proto";
 import "common.proto";
 import "error.proto";
 
@@ -17,6 +18,8 @@ service FriendService {
   rpc GetBestFriends(GetBestFriendsRequest) returns (GetBestFriendsResponse) {}
   rpc UpdateBestFriends(UpdateBestFriendsRequest)
       returns (UpdateBestFriendsResponse) {}
+  rpc CreateCrush(CreateCrushRequest) returns (CreateCrushResponse) {}
+  rpc GetCrush(GetCrushRequest) returns (GetCrushResponse) {}
 }
 
 message RecommendedFriends {
@@ -84,3 +87,31 @@ message UpdateBestFriendsRequest {
 }
 
 message UpdateBestFriendsResponse { Status status = 1; }
+
+message CreateCrushRequest {
+  string uid = 1;
+  string friendId = 2;
+  string displayName = 3;
+  string reason = 4;
+}
+
+message CreateCrushResponse { Status status = 1; }
+
+message GetCrushRequest { string uid = 1; }
+
+message GetCrushResponse {
+  Status status = 1;
+  string crushId = 2;
+  string name = 3;
+  string description = 4;
+  Chip chip = 5;
+}
+
+// TODO: 나에게 하트를 보낸 친구
+// message GetCrushResponse {
+//   Status status = 1;
+//   string friendId = 2;
+//   string displayName = 3;
+//   string reason = 4;
+//   google.protobuf.Timestamp createdAt = 5;
+// }
