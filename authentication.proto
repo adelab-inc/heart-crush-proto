@@ -16,25 +16,29 @@ service AuthService {
   rpc LockUser(LockUserRequest) returns (LockUserResponse) {}
   rpc ChangePassword(ChangePasswordRequest) returns (ChangePasswordResponse) {}
   rpc EmailRegister(EmailRegisterRequest) returns (EmailRegisterResponse) {}
-  rpc CreateEmailAuthCode(CreateEmailAuthCodeRequest) returns (CreateEmailAuthCodeResponse) {}
-  rpc ValidateEmailAuthCode(ValidateEmailAuthCodeRequest) returns (ValidateEmailAuthCodeResponse) {}
+  rpc CreateEmailAuthCode(CreateEmailAuthCodeRequest)
+      returns (CreateEmailAuthCodeResponse) {}
+  rpc ValidateEmailAuthCode(ValidateEmailAuthCodeRequest)
+      returns (ValidateEmailAuthCodeResponse) {}
   rpc LockEmailUser(LockEmailUserRequest) returns (LockEmailUserResponse) {}
-  rpc UpdatePhoneNumber(UpdatePhoneNumberRequest) returns (UpdatePhoneNumberResponse) {}
+  rpc UpdatePhoneNumber(UpdatePhoneNumberRequest)
+      returns (UpdatePhoneNumberResponse) {}
 }
 
 message AuthUser {
   string uid = 1;
-  Phone phone = 2;
+  string phone = 2;
   string password = 3;
   int64 createdAt = 4;      // UnixTime -> change to localtime (ex. kst)
   int64 phoneUpdatedAt = 5; // UnixTime
   int64 passwordUpdatedAt = 6;
 }
 
-message Phone {
-  string phoneNumber = 1;   // 전화번호
-  string countryNumber = 2; // 국가 번호 ex) 82
-}
+// * Phone을 string으로 대체. e164 포맷 사용
+// message Phone {
+//   string phoneNumber = 1; // 전화번호 01012341234
+//   string countryCode = 2; // 국가코드 ex) US, KR
+// }
 
 message Term {
   string uid = 1;
@@ -45,9 +49,7 @@ message Term {
 
 /* CreateAuthCode */
 
-message CreateAuthCodeRequest {
-  Phone phone = 1;
-}
+message CreateAuthCodeRequest { string phone = 1; }
 
 message CreateAuthCodeResponse { // info: user가 lock이 된 경우, status는 false
   Status status = 1; // REQUIREDFIELD_MISSING, UNEXPECTED_ERROR, USER_LOCKED,
@@ -60,7 +62,7 @@ message CreateAuthCodeResponse { // info: user가 lock이 된 경우, status는 
 /* ValidateAuthCode */
 
 message ValidateAuthCodeRequest {
-  Phone phone = 1;
+  string phone = 1;
   string code = 2;
 }
 
@@ -93,7 +95,7 @@ SignUpRequest : {
 message SignUpRequest { // user.uid / user.createdAt / user.updatedAt not needed
                         // in this request
   User user = 1;
-  Phone phone = 2;
+  string phone = 2;
   string password = 3;
 }
 
@@ -106,12 +108,12 @@ message SignUpResponse {
 /* LoginWithCode & LoginWithPassword */
 
 message LoginWithCodeRequest { // all fields required
-  Phone phone = 1;
+  string phone = 1;
   string code = 2;
 }
 
 message LoginWithPasswordRequest { // all fields required
-  Phone phone = 1;
+  string phone = 1;
   string password = 2;
 }
 
@@ -127,7 +129,7 @@ message LoginResponse {
 /* LockUser */
 
 message LockUserRequest { // all fields required
-  Phone phone = 1;
+  string phone = 1;
   int32 tick = 2; // unit is second
 }
 
@@ -140,7 +142,7 @@ message LockUserResponse {
 
 message ChangePasswordRequest {
   string uid = 1;
-  Phone phone = 2;
+  string phone = 2;
   string currentPassword = 3;
   string changedPassword = 4;
 }
@@ -152,27 +154,26 @@ message ChangePasswordResponse {
 
 /* ChangePassword */
 /* Email */
-// 내 프로필 설정 & 계정 정보 -> 이메일 입력하기 // 해당 과정에서 사용하시면 됩니다!
+// 내 프로필 설정 & 계정 정보 -> 이메일 입력하기 // 해당 과정에서 사용하시면
+// 됩니다!
 
 message EmailRegisterRequest {
   string uid = 1;
   string email = 2;
 }
 
-message EmailRegisterResponse {
-  Status status = 1;
-}
+message EmailRegisterResponse { Status status = 1; }
 
 /* Email */
 /* CreateEmailAuthCode */
 
-message CreateEmailAuthCodeRequest { 
-  string email = 1;
-}
+message CreateEmailAuthCodeRequest { string email = 1; }
 
-message CreateEmailAuthCodeResponse { // info: user가 lock이 된 경우, status는 false
-  Status status = 1;            // REQUIREDFIELD_MISSING, UNEXPECTED_ERROR, USER_LOCKED, SMS_SEND_ERROR, UNEXPECTED_ERROR, NO_ERROR
-  bool isLocked = 2;            // user가 lock이 됐는지 확인
+message
+CreateEmailAuthCodeResponse { // info: user가 lock이 된 경우, status는 false
+  Status status = 1; // REQUIREDFIELD_MISSING, UNEXPECTED_ERROR, USER_LOCKED,
+                     // SMS_SEND_ERROR, UNEXPECTED_ERROR, NO_ERROR
+  bool isLocked = 2; // user가 lock이 됐는지 확인
   int32 lockedRemainedTick = 3; // unit is second, 남은 시간
 }
 
@@ -184,10 +185,11 @@ message ValidateEmailAuthCodeRequest {
   string code = 2;
 }
 
-message ValidateEmailAuthCodeResponse { 
-  Status status = 1; // ABNORMAL_APPROACH, UNEXPECTED_ERROR, AUTHENTICATE_FAILED, NO_ERROR
+message ValidateEmailAuthCodeResponse {
+  Status status =
+      1; // ABNORMAL_APPROACH, UNEXPECTED_ERROR, AUTHENTICATE_FAILED, NO_ERROR
   string uid = 2;
-} 
+}
 
 /* ValidateEmailAuthCode */
 /* LockEmailUser */
@@ -197,7 +199,7 @@ message LockEmailUserRequest { // all fields required
   int32 tick = 2; // unit is second
 }
 
-message LockEmailUserResponse { 
+message LockEmailUserResponse {
   Status status = 1; // UNEXPECTED_ERROR, NO_ERROR
 }
 
@@ -206,10 +208,8 @@ message LockEmailUserResponse {
 
 message UpdatePhoneNumberRequest {
   string uid = 1;
-  Phone phone = 2;
+  string phone = 2;
 }
 
-message UpdatePhoneNumberResponse {
-  Status status = 1;
-}
+message UpdatePhoneNumberResponse { Status status = 1; }
 /* UpdatePhoneNumber */
