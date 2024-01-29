@@ -2,7 +2,6 @@ syntax = "proto3";
 
 option go_package = "telepathy-server/proto";
 import "error.proto";
-import "google/protobuf/wrappers.proto";
 import "google/protobuf/timestamp.proto";
 
 enum EFileType {
