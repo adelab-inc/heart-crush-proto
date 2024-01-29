@@ -21,6 +21,7 @@ enum Error {
 
   REQUIREDFIELD_MISSING = 400; // 필수적인 데이터가 누락되어 전달된 경우
   INVALID_UID = 401; // hex값인 uid를 ObjectId 타입으로 변환하지 못하는 경우
+  MAKE_UID_FAILED = 402;
 
   // 만약 해당 error가 발생하면 꼭! 백엔드 쪽에 알려주세요!
   UNEXPECTED_ERROR = 500;
