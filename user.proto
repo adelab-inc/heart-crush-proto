@@ -18,6 +18,8 @@ service UserService {
   rpc GetStudents(GetStudentsRequest) returns (GetStudentsResponse) {}
   rpc DeleteProfileImage(DeleteProfileImageRequest)
       returns (DeleteProfileImageResponse) {}
+  rpc GetUserByDid(GetUserByDidRequest) returns (GetUserByDidResponse) {}
+  rpc GetUsersByDids(GetUsersByDidsRequest) returns (GetUsersByDidsResponse) {}
 }
 
 message Config {
@@ -147,4 +149,18 @@ message GetStudentsResponse {
   repeated Students students = 2;
   string schoolCode = 3;
   string shortSchoolName = 4;
+}
+
+message GetUserByDidRequest { string dId = 1; }
+
+message GetUserByDidResponse {
+  Status status = 1;
+  User user = 2;
+}
+
+message GetUsersByDidsRequest { repeated string dIds = 1; }
+
+message GetUsersByDidsResponse {
+  Status status = 1;
+  repeated User users = 2;
 }
