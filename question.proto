@@ -10,7 +10,8 @@ service QuestionService {
   rpc CreateQuestion(CreateQuestionRequest) returns (CreateQuestionResponse) {}
   rpc GetQuestions(GetQuestionsRequest) returns (GetQuestionsResponse) {}
   rpc UpdateReply(UpdateReplyRequest) returns (UpdateReplyResponse) {}
-  rpc UpdateQuestion(UpdateQuestionRequest) returns (UpdateQuestionResponse) {}
+  rpc UpdateQuestionRead(UpdateQuestionReadRequest)
+      returns (UpdateQuestionReadResponse) {}
   // rpc DeleteQuestion() returns () {}
 }
 
@@ -64,6 +65,6 @@ message UpdateReplyRequest {
 
 message UpdateReplyResponse { Status status = 1; }
 
-message UpdateQuestionRequest { string qId = 1; }
+message UpdateQuestionReadRequest { string qId = 1; }
 
-message UpdateQuestionResponse {}
+message UpdateQuestionReadResponse { Status status = 1; }
