@@ -9,6 +9,9 @@ import "google/protobuf/timestamp.proto";
 service QuestionService {
   rpc CreateQuestion(CreateQuestionRequest) returns (CreateQuestionResponse) {}
   rpc GetQuestions(GetQuestionsRequest) returns (GetQuestionsResponse) {}
+  rpc CreateReply(CreateReplyRequest) returns (CreateReplyResponse) {}
+  rpc UpdateQuestion(UpdateQuestionRequest) returns (UpdateQuestionResponse) {}
+  // rpc DeleteQuestion() returns () {}
 }
 
 message Option {
@@ -31,7 +34,7 @@ message QuestionCard {
   string receiverId = 5;
   bool isRead = 6;
   bool isReply = 7;
-  repeated Content contents = 8;
+  Content content = 8;
   google.protobuf.Timestamp created_at = 9;
 }
 
@@ -40,7 +43,7 @@ message CreateQuestionRequest {
   string receiverId = 1;
   string displayName = 2;
   bool HideName = 3;
-  repeated Content contents = 4;
+  Content content = 4;
 }
 
 message CreateQuestionResponse { Status status = 1; }
@@ -53,3 +56,14 @@ message GetQuestionsResponse {
   repeated QuestionCard sentCard = 2;
   repeated QuestionCard receivedCard = 3;
 }
+
+message CreateReplyRequest {
+  string qId = 1;
+  repeated QuestionCard answers = 2;
+}
+
+message CreateReplyResponse { Status status = 1; }
+
+message UpdateQuestionRequest { string qId = 1; }
+
+message UpdateQuestionResponse {}
