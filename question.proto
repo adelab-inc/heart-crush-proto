@@ -4,6 +4,7 @@ option go_package = "telepathy-server/proto";
 
 import "common.proto";
 import "error.proto";
+import "google/protobuf/timestamp.proto";
 
 service QuestionService {
   rpc CreateQuestion(CreateQuestionRequest) returns (CreateQuestionResponse) {}
@@ -19,6 +20,19 @@ message Content {
   string questionType = 1;
   string questionTitle = 2;
   repeated Option questionOptions = 3;
+  Option answer = 4;
+}
+
+message QuestionCard {
+  string qId = 1;
+  string senderId = 2;
+  string displayName = 3;
+  bool hideName = 4;
+  string receiverId = 5;
+  bool isRead = 6;
+  bool isReply = 7;
+  repeated Content contents = 8;
+  google.protobuf.Timestamp created_at = 9;
 }
 
 // uid는 metadata로
@@ -31,6 +45,11 @@ message CreateQuestionRequest {
 
 message CreateQuestionResponse { Status status = 1; }
 
+// uid는 metadata로
 message GetQuestionsRequest {}
 
-message GetQuestionsResponse {}
+message GetQuestionsResponse {
+  Status status = 1;
+  repeated QuestionCard sentCard = 2;
+  repeated QuestionCard receivedCard = 3;
+}
