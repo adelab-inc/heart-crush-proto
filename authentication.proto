@@ -102,6 +102,7 @@ message SignUpRequest { // user.uid / user.createdAt / user.updatedAt not needed
 message SignUpResponse {
   Status status = 1; // USER_ALREADY_REGISTERED, UNEXPECTED_ERROR, NO_ERROR
   string uid = 2;
+  string token = 3;
 }
 
 /* SignUpRequest */
