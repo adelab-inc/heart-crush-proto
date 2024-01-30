@@ -12,7 +12,7 @@ service QuestionService {
   rpc UpdateReply(UpdateReplyRequest) returns (UpdateReplyResponse) {}
   rpc UpdateQuestionRead(UpdateQuestionReadRequest)
       returns (UpdateQuestionReadResponse) {}
-  // rpc DeleteQuestion() returns () {}
+  rpc DeleteQuestion(DeleteQuestionRequest) returns (DeleteQuestionResponse) {}
 }
 
 message Option {
@@ -31,7 +31,7 @@ message QuestionCard {
   string qId = 1;
   string senderId = 2;
   string displayName = 3;
-  bool hideName = 4;
+  bool isHideName = 4;
   string receiverId = 5;
   bool isRead = 6;
   bool isReply = 7;
@@ -43,7 +43,7 @@ message QuestionCard {
 message CreateQuestionRequest {
   string receiverId = 1;
   string displayName = 2;
-  bool HideName = 3;
+  bool IsHideName = 3;
   Content content = 4;
 }
 
@@ -68,3 +68,10 @@ message UpdateReplyResponse { Status status = 1; }
 message UpdateQuestionReadRequest { string qId = 1; }
 
 message UpdateQuestionReadResponse { Status status = 1; }
+
+message DeleteQuestionRequest {
+  string qId = 1;
+  bool isSender = 2;
+}
+
+message DeleteQuestionResponse { Status status = 1; }
