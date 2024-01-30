@@ -9,7 +9,7 @@ import "google/protobuf/timestamp.proto";
 service QuestionService {
   rpc CreateQuestion(CreateQuestionRequest) returns (CreateQuestionResponse) {}
   rpc GetQuestions(GetQuestionsRequest) returns (GetQuestionsResponse) {}
-  rpc CreateReply(CreateReplyRequest) returns (CreateReplyResponse) {}
+  rpc UpdateReply(UpdateReplyRequest) returns (UpdateReplyResponse) {}
   rpc UpdateQuestion(UpdateQuestionRequest) returns (UpdateQuestionResponse) {}
   // rpc DeleteQuestion() returns () {}
 }
@@ -57,12 +57,12 @@ message GetQuestionsResponse {
   repeated QuestionCard receivedCard = 3;
 }
 
-message CreateReplyRequest {
+message UpdateReplyRequest {
   string qId = 1;
-  repeated QuestionCard answers = 2;
+  Option answer = 2;
 }
 
-message CreateReplyResponse { Status status = 1; }
+message UpdateReplyResponse { Status status = 1; }
 
 message UpdateQuestionRequest { string qId = 1; }
 
