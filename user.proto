@@ -10,14 +10,13 @@ import "error.proto";
 service UserService {
   rpc GetMyProfile(GetMyProfileRequest) returns (GetMyProfileResponse) {}
   rpc UpdateProfile(UpdateProfileRequest) returns (UpdateProfileResponse) {}
+  rpc SetProfile(SetProfileRequest) returns (SetProfileResponse) {}
   rpc GetMyPage(GetMyPageRequest) returns (GetMyPageResponse) {}
   rpc UpdateConfig(UpdateConfigRequest) returns (UpdateConfigResponse) {}
   rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse) {}
   rpc CreateInquiry(CreateInquiryRequest) returns (CreateInquiryResponse) {}
   rpc CreateReport(CreateReportRequest) returns (CreateReportResponse) {}
   rpc GetStudents(GetStudentsRequest) returns (GetStudentsResponse) {}
-  rpc DeleteProfileImage(DeleteProfileImageRequest)
-      returns (DeleteProfileImageResponse) {}
   rpc GetUsersByDids(GetUsersByDidsRequest) returns (GetUsersByDidsResponse) {}
 }
 
@@ -41,20 +40,44 @@ message GetMyProfileResponse {
   bool gender = 7;
 }
 
+/* 
+profile을 업데이트하는 서비스 -> 기존의 정보와 바뀐 정보를 조합하고 채워넣어 보내주시면 됩니다.
+profile Image 삭제와 같은 경우에는 마찬가지로 다음과 같이 보내주시면 됩니다.
+prefix : "https://storage.googleapis.com/telepathy-server/image/{사진_이름}"
+여성 -> "girlThumbnail.png"과 "girl.png"를 보내주시면 됩니다. 
+남성 -> "boyThumbnail.png"과 "boy.png"를 보내주시면 됩니다.
+*/
 message UpdateProfileRequest {
-  reserved 2, 5;
   string uid = 1;
-  // google.protobuf.StringValue name = 2;
-  Chip chip = 3;
-  bytes profileImg = 4;
-  // google.protobuf.StringValue description = 5;
-  bool gender = 6;
-  string name = 7;
-  string description = 8;
-  string schoolCode = 9;
+  string name = 2;
+  string description = 3;
+  string schoolCode = 4;
+  Chip chip = 5;
+  string profileImgURL = 6;
+  string thumbnailImgURL = 7;
 }
 
 message UpdateProfileResponse {
+  Status status = 1; // Error_INVALID_UID, Error_FILE_UPLOAD_ERROR,
+                     // MONGO_UPDATE, Error_NO_ERROR
+}
+
+/*
+profile을 설정하는 서비스(초기에 한번!)
+profileImgURL과 같은 경우엔, 특별히 설정하지 않았다면
+prefix : "https://storage.googleapis.com/telepathy-server/image/{사진_이름}"
+여성 -> "girlThumbnail.png"과 "girl.png"를 보내주시면 됩니다. 
+남성 -> "boyThumbnail.png"과 "boy.png"를 보내주시면 됩니다. 
+*/
+message SetProfileRequest {
+  string uid = 1;
+  string schoolCode = 2;
+  Chip chip = 3;
+  string profileImgURL = 4; 
+  string thumbnailImgURL = 5;
+}
+
+message SetProfileResponse {
   Status status = 1; // Error_INVALID_UID, Error_FILE_UPLOAD_ERROR,
                      // MONGO_UPDATE, Error_NO_ERROR
 }
@@ -91,15 +114,6 @@ message DeleteUserResponse {
   // Error_INVALID_UID,Error_MONGO_DELETE, Error_MONGO_INSERT, Error_NO_ERROR
   Status status = 1;
 }
-
-message DeleteProfileImageRequest {
-  string uid = 1;
-  bool gender = 2;
-}
-
-message DeleteProfileImageResponse { Status status = 1; }
-
-/*  */
 
 message CreateInquiryRequest {
   string uid = 1;

@@ -14,7 +14,6 @@ service AuthService {
   rpc LoginWithCode(LoginWithCodeRequest) returns (LoginResponse) {}
   rpc LoginWithPassword(LoginWithPasswordRequest) returns (LoginResponse) {}
   rpc LockUser(LockUserRequest) returns (LockUserResponse) {}
-  rpc ChangePassword(ChangePasswordRequest) returns (ChangePasswordResponse) {}
   rpc EmailRegister(EmailRegisterRequest) returns (EmailRegisterResponse) {}
   rpc CreateEmailAuthCode(CreateEmailAuthCodeRequest)
       returns (CreateEmailAuthCodeResponse) {}
@@ -138,21 +137,6 @@ message LockUserResponse {
 }
 
 /* LockUser */
-/* ChangePassword */
-
-message ChangePasswordRequest {
-  string uid = 1;
-  string phone = 2;
-  string currentPassword = 3;
-  string changedPassword = 4;
-}
-
-message ChangePasswordResponse {
-  Status status =
-      1; // INVALID_UID, UNEXPECTED_ERROR, AUTHENTICATE_FAILED, NO_ERROR
-}
-
-/* ChangePassword */
 /* Email */
 // 내 프로필 설정 & 계정 정보 -> 이메일 입력하기 // 해당 과정에서 사용하시면
 // 됩니다!
