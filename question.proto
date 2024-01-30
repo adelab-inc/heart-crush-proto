@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+option go_package = "telepathy-server/proto";
+
+import "common.proto";
+import "error.proto";
+
+service QuestionService {
+  rpc CreateQuestion(CreateQuestionRequest) returns (CreateQuestionResponse) {}
+  rpc GetQuestions(GetQuestionsRequest) returns (GetQuestionsResponse) {}
+}
+
+message Option {
+  int32 idx = 1;
+  string text = 2;
+}
+
+message Content {
+  string questionType = 1;
+  string questionTitle = 2;
+  repeated Option questionOptions = 3;
+}
+
+// uid는 metadata로
+message CreateQuestionRequest {
+  string receiverId = 1;
+  string displayName = 2;
+  bool HideName = 3;
+  repeated Content contents = 4;
+}
+
+message CreateQuestionResponse { Status status = 1; }
+
+message GetQuestionsRequest {}
+
+message GetQuestionsResponse {}
