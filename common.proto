@@ -31,3 +31,9 @@ message ShortenUser {
   string thumbnailImageURL = 3;
   string profileImageURL = 4;
 }
+
+enum EGender {
+  EG_UNSPECIFIED = 0;
+  EG_MALE = 1;
+  EG_FEMALE = 2;
+}
