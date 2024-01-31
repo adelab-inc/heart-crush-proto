@@ -56,10 +56,7 @@ message CrushMe {
   google.protobuf.Timestamp createdAt = 6;
 }
 
-message GetRecommendFriendsUIDRequest {
-  string uid = 1;
-  repeated string phoneBookFriends = 2;
-}
+message GetRecommendFriendsUIDRequest { repeated string phoneBookFriends = 1; }
 
 message GetRecommendFriendsUIDResponse {
   Status status = 1;
@@ -75,43 +72,33 @@ message GetRecommendFriendsResponse {
   repeated RecommendedFriends recommendedFriends = 2;
 }
 
-message GetBlockedFriendsRequest { string uid = 1; }
+message GetBlockedFriendsRequest {}
 
 message GetBlockedFriendsResponse {
   Status status = 1;
   repeated ShortenUser blockedFriends = 2;
 }
 
-message CreateBlockedFriendRequest {
-  string uid = 1;
-  string friendId = 2;
-}
+message CreateBlockedFriendRequest { string friendId = 1; }
 
 message CreateBlockedFriendResponse { Status status = 1; }
 
-message DeleteBlockedFriendRequest {
-  string uid = 1;
-  string friendId = 2;
-}
+message DeleteBlockedFriendRequest { string friendId = 2; }
 
 message DeleteBlockedFriendResponse { Status status = 1; }
 
-message GetBestFriendsRequest { string uid = 1; }
+message GetBestFriendsRequest {}
 
 message GetBestFriendsResponse {
   Status status = 1;
   repeated BestFriendResponse bestFriends = 2;
 }
 
-message UpdateBestFriendsRequest {
-  string uid = 1;
-  repeated BestFriendRequest bestFriends = 2;
-}
+message UpdateBestFriendsRequest { repeated BestFriendRequest bestFriends = 2; }
 
 message UpdateBestFriendsResponse { Status status = 1; }
 
 message CreateCrushRequest {
-  string uid = 1;
   string friendId = 2;
   string displayName = 3;
   string reason = 4;
@@ -119,7 +106,7 @@ message CreateCrushRequest {
 
 message CreateCrushResponse { Status status = 1; }
 
-message GetCrushRequest { string uid = 1; }
+message GetCrushRequest {}
 
 message GetCrushResponse {
   Status status = 1;
@@ -131,7 +118,7 @@ message GetCrushResponse {
   string profileImageURL = 7;
 }
 
-message GetWhoCrushMeRequest { string uid = 1; }
+message GetWhoCrushMeRequest {}
 
 message GetWhoCrushMeResponse {
   Status status = 1;

@@ -28,35 +28,34 @@ message Config {
   google.protobuf.BoolValue likeAlarm = 5;
 }
 
-message GetMyProfileRequest { string uid = 1; }
+message GetMyProfileRequest {}
 
 message GetMyProfileResponse {
   Status status = 1;
-  string uid = 2;
-  string name = 3;
-  Chip chip = 4;
-  string description = 5;
-  string birth = 6;
-  bool gender = 7;
-  string profileImgURL = 8;
-  string thumbnailImgURL = 9;
+  string name = 2;
+  Chip chip = 3;
+  string description = 4;
+  string birth = 5;
+  bool gender = 6;
+  string profileImgURL = 9;
+  string thumbnailImgURL = 10;
 }
 
-/* 
-profile을 업데이트하는 서비스 -> 기존의 정보와 바뀐 정보를 조합하고 채워넣어 보내주시면 됩니다.
-profile Image 삭제와 같은 경우에는 마찬가지로 다음과 같이 보내주시면 됩니다.
-prefix : "https://storage.googleapis.com/telepathy-server/image/{사진_이름}"
-여성 -> "girlThumbnail.png"과 "girl.png"를 보내주시면 됩니다. 
-남성 -> "boyThumbnail.png"과 "boy.png"를 보내주시면 됩니다.
+/*
+profile을 업데이트하는 서비스 -> 기존의 정보와 바뀐 정보를 조합하고 채워넣어
+보내주시면 됩니다. profile Image 삭제와 같은 경우에는 마찬가지로 다음과 같이
+보내주시면 됩니다. prefix :
+"https://storage.googleapis.com/telepathy-server/image/{사진_이름}" 여성 ->
+"girlThumbnail.png"과 "girl.png"를 보내주시면 됩니다. 남성 ->
+"boyThumbnail.png"과 "boy.png"를 보내주시면 됩니다.
 */
 message UpdateProfileRequest {
-  string uid = 1;
-  string name = 2;
-  string description = 3;
-  string schoolCode = 4;
-  Chip chip = 5;
-  string profileImgURL = 6;
-  string thumbnailImgURL = 7;
+  string name = 1;
+  string description = 2;
+  string schoolCode = 3;
+  Chip chip = 4;
+  string profileImgURL = 5;
+  string thumbnailImgURL = 6;
 }
 
 message UpdateProfileResponse {
@@ -68,15 +67,14 @@ message UpdateProfileResponse {
 profile을 설정하는 서비스(초기에 한번!)
 profileImgURL과 같은 경우엔, 특별히 설정하지 않았다면
 prefix : "https://storage.googleapis.com/telepathy-server/image/{사진_이름}"
-여성 -> "girlThumbnail.png"과 "girl.png"를 보내주시면 됩니다. 
-남성 -> "boyThumbnail.png"과 "boy.png"를 보내주시면 됩니다. 
+여성 -> "girlThumbnail.png"과 "girl.png"를 보내주시면 됩니다.
+남성 -> "boyThumbnail.png"과 "boy.png"를 보내주시면 됩니다.
 */
 message SetProfileRequest {
-  string uid = 1;
-  string schoolCode = 2;
-  Chip chip = 3;
-  string profileImgURL = 4; 
-  string thumbnailImgURL = 5;
+  string schoolCode = 1;
+  Chip chip = 2;
+  string profileImgURL = 3;
+  string thumbnailImgURL = 4;
 }
 
 message SetProfileResponse {
@@ -84,17 +82,13 @@ message SetProfileResponse {
                      // MONGO_UPDATE, Error_NO_ERROR
 }
 
-message UpdateConfigRequest {
-  reserved 1;
-  string uid = 2;
-  Config config = 3;
-}
+message UpdateConfigRequest { Config config = 1; }
 
 message UpdateConfigResponse {
   Status status = 1; // Error_INVALID_UID, MONGO_UPDATE, Error_NO_ERROR
 }
 
-message GetMyPageRequest { string uid = 1; }
+message GetMyPageRequest {}
 
 message GetMyPageResponse {
   // Error_INVALID_UID, Error_USER_NOT_REGISTERED, Error_NO_ERROR
@@ -109,10 +103,7 @@ message GetMyPageResponse {
   string thumbnailImgURL = 9;
 }
 
-message DeleteUserRequest {
-  string uid = 1;
-  string reason = 2;
-}
+message DeleteUserRequest { string reason = 2; }
 
 message DeleteUserResponse {
   // Error_INVALID_UID,Error_MONGO_DELETE, Error_MONGO_INSERT, Error_NO_ERROR
@@ -120,13 +111,12 @@ message DeleteUserResponse {
 }
 
 message CreateInquiryRequest {
-  string uid = 1;
-  string kind = 2;
-  string title = 3;
-  string content = 4;
-  string replyEmail = 5;
-  repeated bytes images = 6;
-  bool agreement = 7;
+  string kind = 1;
+  string title = 2;
+  string content = 3;
+  string replyEmail = 4;
+  repeated bytes images = 5;
+  bool agreement = 6;
 }
 
 message CreateInquiryResponse {
@@ -135,11 +125,10 @@ message CreateInquiryResponse {
 }
 
 message CreateReportRequest {
-  string uid = 1;
-  string kind = 2;
-  string target = 3;
-  string problemType = 4;
-  string problemDetail = 5;
+  string kind = 1;
+  string target = 2;
+  string problemType = 3;
+  string problemDetail = 4;
 }
 message CreateReportResponse {
   // Error_KST_FAILED, Error_MONGO_INSERT, Error_NO_ERROR
@@ -147,10 +136,9 @@ message CreateReportResponse {
 }
 
 message Student {
-  string uid = 1;
-  string name = 2;
-  string profileImgURL = 3;
-  string thumbnailImgURL = 4;
+  string name = 1;
+  string profileImgURL = 2;
+  string thumbnailImgURL = 3;
 }
 
 message Students {
@@ -158,10 +146,7 @@ message Students {
   repeated Student student = 2;
 }
 
-message GetStudentsRequest {
-  string uid = 1;
-  string schoolCode = 2;
-}
+message GetStudentsRequest { string schoolCode = 1; }
 
 message GetStudentsResponse {
   Status status = 1;

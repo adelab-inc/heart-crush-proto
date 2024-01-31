@@ -7,7 +7,7 @@ import "error.proto";
 service SchoolService {
   rpc GetAllSchool(GetAllSchoolRequest) returns (GetAllSchoolResponse) {}
   rpc GetNearBySchools(GetNearBySchoolsRequest)
-  returns (GetNearBySchoolsResponse) {}
+      returns (GetNearBySchoolsResponse) {}
 }
 
 message School {
@@ -17,17 +17,14 @@ message School {
   string address = 4;
 }
 
-message GetAllSchoolRequest { }
+message GetAllSchoolRequest {}
 
 message GetAllSchoolResponse {
   Status status = 1;
   repeated School schools = 2;
 }
 
-message GetNearBySchoolsRequest {
-  string uid = 1;
-  string schoolCode = 2;
-}
+message GetNearBySchoolsRequest { string schoolCode = 1; }
 
 message GetNearBySchoolsResponse {
   Status status = 1;
