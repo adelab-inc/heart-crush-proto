@@ -23,6 +23,7 @@ service AuthService {
   rpc UpdatePhoneNumber(UpdatePhoneNumberRequest)
       returns (UpdatePhoneNumberResponse) {}
   rpc TestToken(TestTokenRequest) returns (TestTokenResponse) {}
+  rpc UpdateUserInfo(UpdateUserInfoRequest) returns (UpdateUserInfoResponse) {}
 }
 
 message AuthUser {
@@ -41,7 +42,7 @@ message Term {
   int64 updatedAt = 4; // UnixTime
 }
 
-message CreateAuthCodeRequest { string phone = 1; }
+message CreateAuthCodeRequest {string phone = 1;}
 
 message CreateAuthCodeResponse {
   Status status = 1;
@@ -54,7 +55,7 @@ message ValidateAuthCodeRequest {
   string code = 2;
 }
 
-message ValidateAuthCodeResponse { Status status = 1; }
+message ValidateAuthCodeResponse {Status status = 1;}
 
 message SignUpRequestUser {
   string name = 1;
@@ -99,7 +100,7 @@ message LoginResponse {
   string token = 5;
 }
 
-message LockUserRequest { // all fields required
+message LockUserRequest {// all fields required
   string phone = 1;
   int32 tick = 2; // unit is second
 }
@@ -108,11 +109,11 @@ message LockUserResponse {
   Status status = 1; // UNEXPECTED_ERROR, NO_ERROR
 }
 
-message EmailRegisterRequest { string email = 1; }
+message EmailRegisterRequest {string email = 1;}
 
-message EmailRegisterResponse { Status status = 1; }
+message EmailRegisterResponse {Status status = 1;}
 
-message CreateEmailAuthCodeRequest { string email = 1; }
+message CreateEmailAuthCodeRequest {string email = 1;}
 
 message CreateEmailAuthCodeResponse {
   Status status = 1;
@@ -135,15 +136,31 @@ message LockEmailUserRequest {
   string email = 1;
   int32 tick = 2;
 }
-message LockEmailUserResponse { Status status = 1; }
+message LockEmailUserResponse {Status status = 1;}
 
-message UpdatePhoneNumberRequest { string phone = 1; }
+message UpdatePhoneNumberRequest {string phone = 1;}
 
-message UpdatePhoneNumberResponse { Status status = 1; }
+message UpdatePhoneNumberResponse {Status status = 1;}
 
-message TestTokenRequest { string uid = 1; }
+message TestTokenRequest {string uid = 1;}
 
 message TestTokenResponse {
   string idToken = 1;
   string refreshToken = 2;
+}
+
+
+message UpdateUserInfoRequest {
+  optional string name = 1;
+  optional bool gender = 2;        // false is male / true is female
+  optional string birth = 3;       // 20030407
+  optional string deviceId = 4;
+  optional string profileImgURL = 5;
+  optional string thumbnailImgURL = 6;
+  optional string fcmToken = 7;
+}
+
+message UpdateUserInfoResponse {
+  Status status = 1;
+  optional User user = 2;
 }
