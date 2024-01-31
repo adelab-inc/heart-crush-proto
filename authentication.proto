@@ -56,8 +56,20 @@ message ValidateAuthCodeRequest {
 
 message ValidateAuthCodeResponse { Status status = 1; }
 
+message SignUpRequestUser {
+  string name = 1;
+  bool gender = 2;        // false is male / true is female
+  string birth = 3;       // 20030407
+  string phoneNumber = 4; // 01041948536
+  int64 createdAt = 6;    // UnixTime -> change to localtime (ex. kst)
+  int64 updatedAt = 7;    // UnixTime
+  string deviceId = 8;
+  string profileImgURL = 9;
+  string thumbnailImgURL = 10;
+}
+
 message SignUpRequest {
-  User user = 1;
+  SignUpRequestUser user = 1;
   string phone = 2;
   string password = 3;
 }
