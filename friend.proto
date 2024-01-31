@@ -1,0 +1,139 @@
+syntax = "proto3";
+
+option go_package = "telepathy-server/proto";
+
+import "google/protobuf/timestamp.proto";
+import "common.proto";
+import "error.proto";
+
+service FriendService {
+  rpc GetRecommendFriends(GetRecommendFriendsRequest)
+      returns (GetRecommendFriendsResponse) {}
+  rpc GetBlockedFriends(GetBlockedFriendsRequest)
+      returns (GetBlockedFriendsResponse) {}
+  rpc CreateBlockedFriend(CreateBlockedFriendRequest)
+      returns (CreateBlockedFriendResponse) {}
+  rpc DeleteBlockedFriend(DeleteBlockedFriendRequest)
+      returns (DeleteBlockedFriendResponse) {}
+  rpc GetBestFriends(GetBestFriendsRequest) returns (GetBestFriendsResponse) {}
+  rpc UpdateBestFriends(UpdateBestFriendsRequest)
+      returns (UpdateBestFriendsResponse) {}
+  rpc CreateCrush(CreateCrushRequest) returns (CreateCrushResponse) {}
+  rpc GetCrush(GetCrushRequest) returns (GetCrushResponse) {}
+  rpc GetWhoCrushMe(GetWhoCrushMeRequest) returns (GetWhoCrushMeResponse) {}
+}
+
+message RecommendedFriends {
+  string uid = 1;
+  string name = 2;
+  string schoolShortName = 3;
+  int32 grade = 4;
+  string thumbnailImageURL = 5;
+  string profileImageURL = 6;
+}
+
+message BestFriendRequest {
+  string uid = 1;
+  bool alarm = 2;
+}
+
+message BestFriendResponse {
+  string uid = 1;
+  string name = 2;
+  string schoolShortName = 3;
+  string description = 4;
+  string thumbnailImageURL = 5;
+  string profileImageURL = 6;
+  Chip chip = 7;
+  bool alarm = 8;
+}
+
+message CrushMe {
+  string friendId = 1;
+  string displayName = 2;
+  string reason = 3;
+  bool gender = 5;
+  google.protobuf.Timestamp createdAt = 6;
+}
+
+message GetRecommendFriendsUIDRequest {
+  string uid = 1;
+  repeated string phoneBookFriends = 2;
+}
+
+message GetRecommendFriendsUIDResponse {
+  Status status = 1;
+  repeated string recommendedFriendsUID = 2;
+}
+
+message GetRecommendFriendsRequest {
+  repeated string recommendedFriendsUID = 1;
+}
+
+message GetRecommendFriendsResponse {
+  Status status = 1;
+  repeated RecommendedFriends recommendedFriends = 2;
+}
+
+message GetBlockedFriendsRequest { string uid = 1; }
+
+message GetBlockedFriendsResponse {
+  Status status = 1;
+  repeated ShortenUser blockedFriends = 2;
+}
+
+message CreateBlockedFriendRequest {
+  string uid = 1;
+  string friendId = 2;
+}
+
+message CreateBlockedFriendResponse { Status status = 1; }
+
+message DeleteBlockedFriendRequest {
+  string uid = 1;
+  string friendId = 2;
+}
+
+message DeleteBlockedFriendResponse { Status status = 1; }
+
+message GetBestFriendsRequest { string uid = 1; }
+
+message GetBestFriendsResponse {
+  Status status = 1;
+  repeated BestFriendResponse bestFriends = 2;
+}
+
+message UpdateBestFriendsRequest {
+  string uid = 1;
+  repeated BestFriendRequest bestFriends = 2;
+}
+
+message UpdateBestFriendsResponse { Status status = 1; }
+
+message CreateCrushRequest {
+  string uid = 1;
+  string friendId = 2;
+  string displayName = 3;
+  string reason = 4;
+}
+
+message CreateCrushResponse { Status status = 1; }
+
+message GetCrushRequest { string uid = 1; }
+
+message GetCrushResponse {
+  Status status = 1;
+  string crushId = 2;
+  string name = 3;
+  string description = 4;
+  Chip chip = 5;
+  string thumbnailImageURL = 6;
+  string profileImageURL = 7;
+}
+
+message GetWhoCrushMeRequest { string uid = 1; }
+
+message GetWhoCrushMeResponse {
+  Status status = 1;
+  repeated CrushMe friendsWhoCrushMe = 2;
+}

@@ -1,0 +1,106 @@
+syntax = "proto3";
+
+option go_package = "telepathy-server/proto";
+import "error.proto";
+import "google/protobuf/timestamp.proto";
+
+enum EFileType {
+  EFT_UNSPECIFIED = 0;
+  EFT_IMAGE = 1;
+  EFT_VIDEO = 2;
+}
+
+enum ERoomType {
+  ERT_UNSPECIFIED = 0;
+  //  me-
+  ERT_ME = 1;
+  //  pv-
+  ERT_PRIVATE = 2;
+  //  gr-
+  //  ERT_GROUP = 3;
+}
+
+/*
+Room id generation rule
+* 1. me-<uuid>
+* 2. pv-<uuid1>-<uuid2> (alphabetical case sensitive order)
+* 3. gr-<random hash>
+*/
+
+service ChatService {
+  rpc CreateRoom(CreateRoomRequest) returns (CreateRoomResponse) {}
+  rpc GetRooms(GetRoomsRequest) returns (GetRoomsResponse) {
+  } // do not fetch does not have updated_at
+  rpc SendMsg(SendMsgRequest) returns (SendMsgResponse) {
+  } // send notification to participants
+  rpc GetMsgs(GetMsgsRequest) returns (GetMsgsResponse) {
+  } // get messages from room
+}
+
+message Room {
+  string id = 1; // lookup the rule above, parse ERoomType with this id
+  repeated string participants = 2;
+  google.protobuf.Timestamp created_at = 3;
+  optional google.protobuf.Timestamp updated_at =
+      4; // updated when new message is sent
+  optional string title = 5;
+  optional string recent_msg = 6; // ex: 사진을 보냈습니다
+}
+
+message Message {
+  string id = 1; // uuid v4
+  string room_id = 2;
+  google.protobuf.Timestamp created_at = 3;
+  string sender_uid = 4;
+  optional string body = 5;
+  optional MessageFile file = 6;
+}
+
+message CreateRoomRequest {
+  ERoomType type = 1;
+  string title = 2;
+  repeated string participants = 3;
+}
+
+message CreateRoomResponse {
+  Status status = 1;
+  Room room = 2;
+}
+
+message GetRoomsRequest {}
+
+message GetRoomsResponse {
+  Status status = 1;
+  repeated Room rooms = 2;
+}
+
+message MessageFile {
+  string uri = 1;
+  string mime = 2; // ex: image/jpeg
+  optional string thumb_uri = 3;
+}
+
+// Parse uuid(sender) with auth token
+// assert: body != nil || file != nil
+message SendMsgRequest {
+  string room_id = 1;
+  optional string body = 2;
+  optional MessageFile file = 3;
+}
+
+message SendMsgResponse {
+  Status status = 1;
+  optional google.protobuf.Timestamp created_at = 2;
+}
+
+message GetMsgsRequest {
+  string room_id = 1;
+  optional google.protobuf.Timestamp before = 3;
+  optional int32 limit = 4; // default: 100
+}
+
+message GetMsgsResponse {
+  Status status = 1;
+  repeated Message msgs = 2;
+  bool has_more = 3;
+}

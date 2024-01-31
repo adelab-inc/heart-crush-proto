@@ -4,40 +4,20 @@ option go_package = "telepathy-server/proto";
 
 import "google/protobuf/wrappers.proto";
 
+import "common.proto";
 import "error.proto";
 
 service UserService {
   rpc GetMyProfile(GetMyProfileRequest) returns (GetMyProfileResponse) {}
   rpc UpdateProfile(UpdateProfileRequest) returns (UpdateProfileResponse) {}
+  rpc SetProfile(SetProfileRequest) returns (SetProfileResponse) {}
   rpc GetMyPage(GetMyPageRequest) returns (GetMyPageResponse) {}
   rpc UpdateConfig(UpdateConfigRequest) returns (UpdateConfigResponse) {}
   rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse) {}
   rpc CreateInquiry(CreateInquiryRequest) returns (CreateInquiryResponse) {}
   rpc CreateReport(CreateReportRequest) returns (CreateReportResponse) {}
   rpc GetStudents(GetStudentsRequest) returns (GetStudentsResponse) {}
-  rpc DeleteProfileImage(DeleteProfileImageRequest)
-      returns (DeleteProfileImageResponse) {}
-  rpc GetRecommendFriends(GetRecommendFriendsRequest)
-      returns (GetRecommendFriendsResponse) {}
-  rpc GetBlockedFriends(GetBlockedFriendsRequest)
-      returns (GetBlockedFriendsResponse) {}
-  rpc CreateBlockedFriend(CreateBlockedFriendRequest)
-      returns (CreateBlockedFriendResponse) {}
-  rpc DeleteBlockedFriend(DeleteBlockedFriendRequest)
-      returns (DeleteBlockedFriendResponse) {}
-  rpc GetBestFriends(GetBestFriendsRequest) returns (GetBestFriendsResponse) {}
-  rpc UpdateBestFriends(UpdateBestFriendsRequest)
-      returns (UpdateBestFriendsResponse) {}
-}
-
-message Chip {
-  string schoolName = 1;
-  string schoolShortName = 2;
-  int32 grade = 3;
-  string instaAccount = 4;
-  string tiktokAccount = 5;
-  string mbti = 6;
-  repeated string others = 7;
+  rpc GetUsersByDids(GetUsersByDidsRequest) returns (GetUsersByDidsResponse) {}
 }
 
 message Config {
@@ -46,11 +26,6 @@ message Config {
   google.protobuf.BoolValue questionAlarm = 3;
   google.protobuf.BoolValue bluetoothAlarm = 4;
   google.protobuf.BoolValue likeAlarm = 5;
-}
-
-message ShortenUser {
-  string uid = 1;
-  string name = 2;
 }
 
 message GetMyProfileRequest { string uid = 1; }
@@ -63,22 +38,48 @@ message GetMyProfileResponse {
   string description = 5;
   string birth = 6;
   bool gender = 7;
+  string profileImgURL = 8;
+  string thumbnailImgURL = 9;
 }
 
+/* 
+profile을 업데이트하는 서비스 -> 기존의 정보와 바뀐 정보를 조합하고 채워넣어 보내주시면 됩니다.
+profile Image 삭제와 같은 경우에는 마찬가지로 다음과 같이 보내주시면 됩니다.
+prefix : "https://storage.googleapis.com/telepathy-server/image/{사진_이름}"
+여성 -> "girlThumbnail.png"과 "girl.png"를 보내주시면 됩니다. 
+남성 -> "boyThumbnail.png"과 "boy.png"를 보내주시면 됩니다.
+*/
 message UpdateProfileRequest {
-  reserved 2, 5;
   string uid = 1;
-  // google.protobuf.StringValue name = 2;
-  Chip chip = 3;
-  bytes profileImg = 4;
-  // google.protobuf.StringValue description = 5;
-  bool gender = 6;
-  string name = 7;
-  string description = 8;
-  string schoolCode = 9;
+  string name = 2;
+  string description = 3;
+  string schoolCode = 4;
+  Chip chip = 5;
+  string profileImgURL = 6;
+  string thumbnailImgURL = 7;
 }
 
 message UpdateProfileResponse {
+  Status status = 1; // Error_INVALID_UID, Error_FILE_UPLOAD_ERROR,
+                     // MONGO_UPDATE, Error_NO_ERROR
+}
+
+/*
+profile을 설정하는 서비스(초기에 한번!)
+profileImgURL과 같은 경우엔, 특별히 설정하지 않았다면
+prefix : "https://storage.googleapis.com/telepathy-server/image/{사진_이름}"
+여성 -> "girlThumbnail.png"과 "girl.png"를 보내주시면 됩니다. 
+남성 -> "boyThumbnail.png"과 "boy.png"를 보내주시면 됩니다. 
+*/
+message SetProfileRequest {
+  string uid = 1;
+  string schoolCode = 2;
+  Chip chip = 3;
+  string profileImgURL = 4; 
+  string thumbnailImgURL = 5;
+}
+
+message SetProfileResponse {
   Status status = 1; // Error_INVALID_UID, Error_FILE_UPLOAD_ERROR,
                      // MONGO_UPDATE, Error_NO_ERROR
 }
@@ -104,6 +105,8 @@ message GetMyPageResponse {
   Chip chip = 5;
   Config config = 6;
   int32 bestFriends = 7;
+  string profileImgURL = 8;
+  string thumbnailImgURL = 9;
 }
 
 message DeleteUserRequest {
@@ -115,15 +118,6 @@ message DeleteUserResponse {
   // Error_INVALID_UID,Error_MONGO_DELETE, Error_MONGO_INSERT, Error_NO_ERROR
   Status status = 1;
 }
-
-message DeleteProfileImageRequest {
-  string uid = 1;
-  bool gender = 2;
-}
-
-message DeleteProfileImageResponse { Status status = 1; }
-
-/*  */
 
 message CreateInquiryRequest {
   string uid = 1;
@@ -155,6 +149,8 @@ message CreateReportResponse {
 message Student {
   string uid = 1;
   string name = 2;
+  string profileImgURL = 3;
+  string thumbnailImgURL = 4;
 }
 
 message Students {
@@ -174,68 +170,9 @@ message GetStudentsResponse {
   string shortSchoolName = 4;
 }
 
-message RecommendedFriends {
-  string uid = 1;
-  string name = 2;
-  string schoolShortName = 3;
-  int32 grade = 4;
-}
+message GetUsersByDidsRequest { repeated string dIds = 1; }
 
-message GetRecommendFriendsRequest {
-  string uid = 1;
-  repeated string phoneBookFriends = 2;
-}
-
-message GetRecommendFriendsResponse {
+message GetUsersByDidsResponse {
   Status status = 1;
-  repeated RecommendedFriends recommendedFriends = 2;
+  repeated User users = 2;
 }
-
-message GetBlockedFriendsRequest { string uid = 1; }
-
-message GetBlockedFriendsResponse {
-  Status status = 1;
-  repeated ShortenUser blockedFriends = 2;
-}
-
-message CreateBlockedFriendRequest {
-  string uid = 1;
-  string friendId = 2;
-}
-
-message CreateBlockedFriendResponse { Status status = 1; }
-
-message DeleteBlockedFriendRequest {
-  string uid = 1;
-  string friendId = 2;
-}
-
-message DeleteBlockedFriendResponse { Status status = 1; }
-
-message BestFriendResponse {
-  string uid = 1;
-  string name = 2;
-  string schoolShortName = 3;
-  string description = 4;
-  Chip chip = 5;
-  bool alarm = 6;
-}
-
-message BestFriendRequest {
-  string uid = 1;
-  bool alarm = 2;
-}
-
-message GetBestFriendsRequest { string uid = 1; }
-
-message GetBestFriendsResponse {
-  Status status = 1;
-  repeated BestFriendResponse bestFriends = 2;
-}
-
-message UpdateBestFriendsRequest {
-  string uid = 1;
-  repeated BestFriendRequest bestFriends = 2;
-}
-
-message UpdateBestFriendsResponse { Status status = 1; }
