@@ -28,6 +28,8 @@ message RecommendedFriends {
   string name = 2;
   string schoolShortName = 3;
   int32 grade = 4;
+  string thumbnailImageURL = 5;
+  string profileImageURL = 6;
 }
 
 message BestFriendRequest {
@@ -40,20 +42,32 @@ message BestFriendResponse {
   string name = 2;
   string schoolShortName = 3;
   string description = 4;
-  Chip chip = 5;
-  bool alarm = 6;
+  string thumbnailImageURL = 5;
+  string profileImageURL = 6;
+  Chip chip = 7;
+  bool alarm = 8;
 }
 
 message CrushMe {
   string friendId = 1;
   string displayName = 2;
   string reason = 3;
-  google.protobuf.Timestamp createdAt = 4;
+  bool gender = 5;
+  google.protobuf.Timestamp createdAt = 6;
+}
+
+message GetRecommendFriendsUIDRequest {
+  string uid = 1;
+  repeated string phoneBookFriends = 2;
+}
+
+message GetRecommendFriendsUIDResponse {
+  Status status = 1;
+  repeated string recommendedFriendsUID = 2;
 }
 
 message GetRecommendFriendsRequest {
-  string uid = 1;
-  repeated string phoneBookFriends = 2;
+  repeated string recommendedFriendsUID = 1;
 }
 
 message GetRecommendFriendsResponse {
@@ -113,6 +127,8 @@ message GetCrushResponse {
   string name = 3;
   string description = 4;
   Chip chip = 5;
+  string thumbnailImageURL = 6;
+  string profileImageURL = 7;
 }
 
 message GetWhoCrushMeRequest { string uid = 1; }

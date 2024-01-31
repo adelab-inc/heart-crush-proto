@@ -26,4 +26,6 @@ message Chip {
 message ShortenUser {
   string uid = 1;
   string name = 2;
+  string thumbnailImageURL = 3;
+  string profileImageURL = 4;
 }
