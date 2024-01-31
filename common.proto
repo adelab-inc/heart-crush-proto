@@ -11,6 +11,8 @@ message User {
   int64 createdAt = 7;    // UnixTime -> change to localtime (ex. kst)
   int64 updatedAt = 8;    // UnixTime
   string deviceId = 9;
+  string profileImgURL = 10;
+  string thumbnailImgURL = 11;
 }
 
 message Chip {

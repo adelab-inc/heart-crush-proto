@@ -38,6 +38,8 @@ message GetMyProfileResponse {
   string description = 5;
   string birth = 6;
   bool gender = 7;
+  string profileImgURL = 8;
+  string thumbnailImgURL = 9;
 }
 
 /* 
@@ -103,6 +105,8 @@ message GetMyPageResponse {
   Chip chip = 5;
   Config config = 6;
   int32 bestFriends = 7;
+  string profileImgURL = 8;
+  string thumbnailImgURL = 9;
 }
 
 message DeleteUserRequest {
@@ -145,6 +149,8 @@ message CreateReportResponse {
 message Student {
   string uid = 1;
   string name = 2;
+  string profileImgURL = 3;
+  string thumbnailImgURL = 4;
 }
 
 message Students {
