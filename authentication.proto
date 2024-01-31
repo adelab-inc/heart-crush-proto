@@ -145,7 +145,7 @@ message LockUserResponse {
 // 됩니다!
 
 message EmailRegisterRequest {
-  string uid = 1;
+  // string uid = 1;
   string email = 2;
 }
 
@@ -194,7 +194,7 @@ message LockEmailUserResponse {
 /* UpdatePhoneNumber */
 
 message UpdatePhoneNumberRequest {
-  string uid = 1;
+  // string uid = 1;
   string phone = 2;
 }
 
