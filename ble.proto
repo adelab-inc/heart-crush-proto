@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+option go_package = "telepathy-server/proto";
+
+import "common.proto";
+import "error.proto";
+
+service BLEService {
+  rpc CreateBLERecord(CreateBLERecordRequest) returns (CreateBLERecordResponse) {}
+}
+
+message CreateBLERecordRequest {
+  string targetUid = 1;
+}
+
+message CreateBLERecordResponse {
+  Status status = 1;
+}
