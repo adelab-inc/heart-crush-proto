@@ -5,7 +5,6 @@ option go_package = "telepathy-server/proto";
 
 // import "google/protobuf/timestamp.proto";
 
-import "common.proto";
 import "error.proto";
 
 service AuthService {
@@ -25,7 +24,6 @@ service AuthService {
   rpc UpdatePhoneNumber(UpdatePhoneNumberRequest)
       returns (UpdatePhoneNumberResponse) {}
   rpc TestToken(TestTokenRequest) returns (TestTokenResponse) {}
-  rpc UpdateUserInfo(UpdateUserInfoRequest) returns (UpdateUserInfoResponse) {}
 }
 
 message AuthUser {
@@ -147,19 +145,4 @@ message TestTokenRequest { string uid = 1; }
 message TestTokenResponse {
   string idToken = 1;
   string refreshToken = 2;
-}
-
-message UpdateUserInfoRequest {
-  optional string name = 1;
-  optional bool gender = 2;  // false is male / true is female
-  optional string birth = 3; // 20030407
-  optional string deviceId = 4;
-  optional string profileImgURL = 5;
-  optional string thumbnailImgURL = 6;
-  optional string fcmToken = 7;
-}
-
-message UpdateUserInfoResponse {
-  Status status = 1;
-  optional User user = 2;
 }
