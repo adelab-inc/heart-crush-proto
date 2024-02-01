@@ -7,6 +7,10 @@ import "common.proto";
 import "error.proto";
 
 service FriendService {
+  // 주기적으로(앱을 처음 키는 시점 정도로) 추천친구를 가져오는 서비스
+  rpc GetRecommendFriendsUID(GetRecommendFriendsUIDRequest)
+      returns (GetRecommendFriendsUIDResponse) {}
+  // 제공된 추천친구 uid들을 기반으로 친구정보를 가져오는 서비스
   rpc GetRecommendFriends(GetRecommendFriendsRequest)
       returns (GetRecommendFriendsResponse) {}
   rpc GetBlockedFriends(GetBlockedFriendsRequest)
