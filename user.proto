@@ -18,6 +18,7 @@ service UserService {
   rpc CreateReport(CreateReportRequest) returns (CreateReportResponse) {}
   rpc GetStudents(GetStudentsRequest) returns (GetStudentsResponse) {}
   rpc GetUsersByDids(GetUsersByDidsRequest) returns (GetUsersByDidsResponse) {}
+  rpc GetUserByUid(GetUserByUidRequest) returns (GetUserByUidResponse) {}
 }
 
 message Config {
@@ -160,4 +161,13 @@ message GetUsersByDidsRequest { repeated string dIds = 1; }
 message GetUsersByDidsResponse {
   Status status = 1;
   repeated User users = 2;
+}
+
+message GetUserByUidRequest {
+  string uid = 1;
+}
+
+message GetUserByUidResponse {
+  Status status = 1;
+  User user = 2;
 }
