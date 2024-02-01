@@ -44,7 +44,7 @@ message BestFriendResponse {
   string description = 4;
   string thumbnailImageURL = 5;
   string profileImageURL = 6;
-  Chip chip = 7;
+  repeated ChipItem chip = 7;
   bool alarm = 8;
 }
 
@@ -113,7 +113,7 @@ message GetCrushResponse {
   string crushId = 2;
   string name = 3;
   string description = 4;
-  Chip chip = 5;
+  repeated ChipItem chip = 5;
   string thumbnailImageURL = 6;
   string profileImageURL = 7;
 }

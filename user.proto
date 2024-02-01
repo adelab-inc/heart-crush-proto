@@ -33,7 +33,7 @@ message GetMyProfileRequest {}
 message GetMyProfileResponse {
   Status status = 1;
   string name = 2;
-  Chip chip = 3;
+  repeated ChipItem chip = 3;
   string description = 4;
   string birth = 5;
   bool gender = 6;
@@ -53,7 +53,7 @@ message UpdateProfileRequest {
   string name = 1;
   string description = 2;
   string schoolCode = 3;
-  Chip chip = 4;
+  repeated ChipItem chip = 4;
   string profileImgURL = 5;
   string thumbnailImgURL = 6;
 }
@@ -72,7 +72,7 @@ prefix : "https://storage.googleapis.com/telepathy-server/image/{사진_이름}"
 */
 message SetProfileRequest {
   string schoolCode = 1;
-  Chip chip = 2;
+  repeated ChipItem chip = 2;
   string profileImgURL = 3;
   string thumbnailImgURL = 4;
 }
@@ -96,7 +96,7 @@ message GetMyPageResponse {
   string name = 2;
   string description = 3;
   string birth = 4;
-  Chip chip = 5;
+  repeated ChipItem chip = 5;
   Config config = 6;
   int32 bestFriends = 7;
   string profileImgURL = 8;

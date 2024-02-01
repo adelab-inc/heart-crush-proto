@@ -2,28 +2,35 @@ syntax = "proto3";
 
 option go_package = "telepathy-server/proto";
 
+enum ChipType {
+  SCHOOL_NAME = 0;
+  SCHOOL_SHORT_NAME = 1;
+  GRADE = 2;
+  INSTA_ACCOUNT = 3;
+  TIKTOK_ACCOUNT = 4;
+  MBTI = 5;
+  OTHER = 6;
+}
+
 message User {
   string uid = 1;
   string name = 2;
-  bool gender = 3;        // false is male / true is female
-  string birth = 4;       // 20030407
-  string phoneNumber = 6; // 01041948536
-  int64 createdAt = 7;    // UnixTime -> change to localtime (ex. kst)
-  int64 updatedAt = 8;    // UnixTime
+  bool gender = 3;                 // false is male / true is female
+  optional string birth = 4;       // 20030407
+  optional string phoneNumber = 6; // 01041948536
+  optional int64 createdAt = 7;    // UnixTime -> change to localtime (ex. kst)
+  optional int64 updatedAt = 8;    // UnixTime
   string deviceId = 9;
   string profileImgURL = 10;
   string thumbnailImgURL = 11;
 }
 
-message Chip {
-  string schoolName = 1;
-  string schoolShortName = 2;
-  int32 grade = 3;
-  string instaAccount = 4;
-  string tiktokAccount = 5;
-  string mbti = 6;
-  repeated string others = 7;
+message ChipItem {
+  ChipType type = 1;
+  string text = 2;
 }
+
+message Chip { repeated ChipItem chip = 1; }
 
 message ShortenUser {
   string uid = 1;
