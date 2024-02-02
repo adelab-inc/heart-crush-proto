@@ -58,10 +58,9 @@ message UpdateProfileRequest {
   repeated ChipItem chip = 4;
   optional string profileImgURL = 5;
   optional string thumbnailImgURL = 6;
-  optional string deviceId = 7;
-  optional string fcmToken = 8;
-  optional string birth = 9;
-  optional bool gender = 10; // false is male, true is female
+  optional string fcmToken = 7;
+  optional string birth = 8;
+  optional bool gender = 9; // false is male, true is female
 }
 
 message UpdateProfileResponse {

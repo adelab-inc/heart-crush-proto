@@ -21,9 +21,8 @@ message User {
   optional string phoneNumber = 6; // 01041948536
   optional google.protobuf.Timestamp createdAt = 7;
   optional google.protobuf.Timestamp updatedAt = 8; // UnixTime
-  string deviceId = 9;
-  string profileImgURL = 10;
-  string thumbnailImgURL = 11;
+  string profileImgURL = 9;
+  string thumbnailImgURL = 10;
 }
 
 message ChipItem {
