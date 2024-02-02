@@ -67,7 +67,9 @@ message CreateRoomResponse {
   Room room = 2;
 }
 
-message GetRoomsRequest {}
+message GetRoomsRequest {
+  repeated string room_ids = 1; // optional, empty list 일 경우 모든 방을 가져옴
+}
 
 message GetRoomsResponse {
   Status status = 1;
