@@ -35,7 +35,8 @@ message QuestionCard {
   bool isRead = 6;
   bool isReply = 7;
   Content content = 8;
-  google.protobuf.Timestamp created_at = 9;
+  bool gender = 9; // false is male, true is female
+  google.protobuf.Timestamp created_at = 10;
 }
 
 // uid는 metadata로

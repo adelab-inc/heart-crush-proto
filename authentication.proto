@@ -92,10 +92,9 @@ message LoginWithPasswordRequest {
 message LoginResponse {
   Status status =
       1; // USER_NOT_REGISTERED, UNEXPECTED_ERROR, AUTHENTICATE_FAILED, NO_ERROR
-  string uid = 2;
-  bool isLocked = 3;            // user가 lock이 됐는지 확인
-  int32 lockedRemainedTick = 4; // unit is second, 남은 시간
-  string token = 5;
+  bool isLocked = 2;            // user가 lock이 됐는지 확인
+  int32 lockedRemainedTick = 3; // unit is second, 남은 시간
+  string token = 4;
 }
 
 message LockUserRequest { // all fields required
