@@ -5,13 +5,13 @@ option go_package = "telepathy-server/proto";
 import "google/protobuf/timestamp.proto";
 
 enum EChipType {
-  SCHOOL_NAME = 0;
-  SCHOOL_SHORT_NAME = 1;
-  GRADE = 2;
-  INSTA_ACCOUNT = 3;
-  TIKTOK_ACCOUNT = 4;
-  MBTI = 5;
-  OTHER = 6;
+  ECT_SCHOOL_NAME = 0;
+  ECT_SCHOOL_SHORT_NAME = 1;
+  ECT_GRADE = 2;
+  ECT_INSTA_ACCOUNT = 3;
+  ECT_TIKTOK_ACCOUNT = 4;
+  ECT_MBTI = 5;
+  ECT_OTHER = 6;
 }
 
 enum EGender {
@@ -37,9 +37,9 @@ message User {
   string name = 2;
   string description = 3;
   EGender gender = 4; // false is male / true is female
-  repeated ChipItem chip = 5;
+  repeated ChipItem chips = 5;
   optional string birth = 6;       // 20030407
-  optional string phoneNumber = 7; // 01041948536
+  optional string phoneNumber = 7; // E.164
   string email = 8;
   Config config = 9;
   string profileImgURL = 10;
