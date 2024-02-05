@@ -42,7 +42,8 @@ message UpdateProfileRequest {
   optional string thumbnailImgURL = 6;
   optional string fcmToken = 7;
   optional string birth = 8;
-  optional EGender gender = 9; // false is male, true is female
+  optional EGender gender = 9;
+  optional bool isInitialized = 10;
 }
 
 message UpdateProfileResponse {
