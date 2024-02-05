@@ -5,7 +5,6 @@ option go_package = "telepathy-server/proto";
 
 // import "google/protobuf/timestamp.proto";
 
-import "common.proto";
 import "error.proto";
 
 service AuthService {
@@ -25,7 +24,6 @@ service AuthService {
   rpc UpdatePhoneNumber(UpdatePhoneNumberRequest)
       returns (UpdatePhoneNumberResponse) {}
   rpc TestToken(TestTokenRequest) returns (TestTokenResponse) {}
-  rpc UpdateUserInfo(UpdateUserInfoRequest) returns (UpdateUserInfoResponse) {}
 }
 
 message AuthUser {
@@ -64,9 +62,8 @@ message SignUpRequestUser {
   bool gender = 2;        // false is male / true is female
   string birth = 3;       // 20030407
   string phoneNumber = 4; // 01041948536
-  string deviceId = 5;
-  string profileImgURL = 6;
-  string thumbnailImgURL = 7;
+  string profileImgURL = 5;
+  string thumbnailImgURL = 6;
   // google.protobuf.Timestamp createdAt = 8;
   // google.protobuf.Timestamp updatedAt = 9;
 }
@@ -94,10 +91,9 @@ message LoginWithPasswordRequest {
 message LoginResponse {
   Status status =
       1; // USER_NOT_REGISTERED, UNEXPECTED_ERROR, AUTHENTICATE_FAILED, NO_ERROR
-  string uid = 2;
-  bool isLocked = 3;            // user가 lock이 됐는지 확인
-  int32 lockedRemainedTick = 4; // unit is second, 남은 시간
-  string token = 5;
+  bool isLocked = 2;            // user가 lock이 됐는지 확인
+  int32 lockedRemainedTick = 3; // unit is second, 남은 시간
+  string token = 4;
 }
 
 message LockUserRequest { // all fields required
@@ -147,19 +143,4 @@ message TestTokenRequest { string uid = 1; }
 message TestTokenResponse {
   string idToken = 1;
   string refreshToken = 2;
-}
-
-message UpdateUserInfoRequest {
-  optional string name = 1;
-  optional bool gender = 2;  // false is male / true is female
-  optional string birth = 3; // 20030407
-  optional string deviceId = 4;
-  optional string profileImgURL = 5;
-  optional string thumbnailImgURL = 6;
-  optional string fcmToken = 7;
-}
-
-message UpdateUserInfoResponse {
-  Status status = 1;
-  optional User user = 2;
 }

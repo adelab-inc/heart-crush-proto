@@ -1,6 +1,7 @@
 syntax = "proto3";
 
 option go_package = "telepathy-server/proto";
+import "google/protobuf/timestamp.proto";
 
 enum ChipType {
   SCHOOL_NAME = 0;
@@ -18,11 +19,10 @@ message User {
   bool gender = 3;                 // false is male / true is female
   optional string birth = 4;       // 20030407
   optional string phoneNumber = 6; // 01041948536
-  optional int64 createdAt = 7;    // UnixTime -> change to localtime (ex. kst)
-  optional int64 updatedAt = 8;    // UnixTime
-  string deviceId = 9;
-  string profileImgURL = 10;
-  string thumbnailImgURL = 11;
+  optional google.protobuf.Timestamp createdAt = 7;
+  optional google.protobuf.Timestamp updatedAt = 8; // UnixTime
+  string profileImgURL = 9;
+  string thumbnailImgURL = 10;
 }
 
 message ChipItem {

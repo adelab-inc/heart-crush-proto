@@ -17,8 +17,8 @@ service UserService {
   rpc CreateInquiry(CreateInquiryRequest) returns (CreateInquiryResponse) {}
   rpc CreateReport(CreateReportRequest) returns (CreateReportResponse) {}
   rpc GetStudents(GetStudentsRequest) returns (GetStudentsResponse) {}
-  rpc GetUsersByDids(GetUsersByDidsRequest) returns (GetUsersByDidsResponse) {}
-  rpc GetUserByUid(GetUserByUidRequest) returns (GetUserByUidResponse) {}
+  // rpc GetUsersByDids(GetUsersByDidsRequest) returns (GetUsersByDidsResponse)
+  // {} rpc GetUserByUid(GetUserByUidRequest) returns (GetUserByUidResponse) {}
 }
 
 message Config {
@@ -33,13 +33,14 @@ message GetMyProfileRequest {}
 
 message GetMyProfileResponse {
   Status status = 1;
-  string name = 2;
-  repeated ChipItem chip = 3;
-  string description = 4;
-  string birth = 5;
-  bool gender = 6;
-  string profileImgURL = 9;
-  string thumbnailImgURL = 10;
+  string uid = 2;
+  string name = 3;
+  repeated ChipItem chip = 4;
+  string description = 5;
+  string birth = 6;
+  bool gender = 7;
+  string profileImgURL = 8;
+  string thumbnailImgURL = 9;
 }
 
 /*
@@ -51,17 +52,20 @@ profile을 업데이트하는 서비스 -> 기존의 정보와 바뀐 정보를 
 "boyThumbnail.png"과 "boy.png"를 보내주시면 됩니다.
 */
 message UpdateProfileRequest {
-  string name = 1;
-  string description = 2;
-  string schoolCode = 3;
+  optional string name = 1;
+  optional string description = 2;
+  optional string schoolCode = 3;
   repeated ChipItem chip = 4;
-  string profileImgURL = 5;
-  string thumbnailImgURL = 6;
+  optional string profileImgURL = 5;
+  optional string thumbnailImgURL = 6;
+  optional string fcmToken = 7;
+  optional string birth = 8;
+  optional bool gender = 9; // false is male, true is female
 }
 
 message UpdateProfileResponse {
-  Status status = 1; // Error_INVALID_UID, Error_FILE_UPLOAD_ERROR,
-                     // MONGO_UPDATE, Error_NO_ERROR
+  Status status = 1;
+  optional User user = 2;
 }
 
 /*
@@ -156,12 +160,12 @@ message GetStudentsResponse {
   string shortSchoolName = 4;
 }
 
-message GetUsersByDidsRequest { repeated string dIds = 1; }
+// message GetUsersByDidsRequest { repeated string dIds = 1; }
 
-message GetUsersByDidsResponse {
-  Status status = 1;
-  repeated User users = 2;
-}
+// message GetUsersByDidsResponse {
+//   Status status = 1;
+//   repeated User users = 2;
+// }
 
 message GetUserByUidRequest { string uid = 1; }
 
