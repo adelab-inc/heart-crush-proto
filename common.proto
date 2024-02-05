@@ -45,8 +45,9 @@ message User {
   string profileImgURL = 10;
   string thumbnailImgURL = 11;
   int32 bestFriends = 12;
-  optional google.protobuf.Timestamp createdAt = 13;
-  optional google.protobuf.Timestamp updatedAt = 14; // UnixTime
+  optional bool isInitialized = 13;
+  optional google.protobuf.Timestamp createdAt = 14;
+  optional google.protobuf.Timestamp updatedAt = 15; // UnixTime
 }
 
 message ShortenUser {
