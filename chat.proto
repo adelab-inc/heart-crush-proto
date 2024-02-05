@@ -92,7 +92,7 @@ message SendMsgRequest {
 
 message SendMsgResponse {
   Status status = 1;
-  optional google.protobuf.Timestamp created_at = 2;
+  optional Message message = 2;
 }
 
 message GetMsgsRequest {

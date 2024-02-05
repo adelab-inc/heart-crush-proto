@@ -2,8 +2,10 @@ syntax = "proto3";
 
 option go_package = "telepathy-server/proto";
 
-import "error.proto";
 import "google/protobuf/timestamp.proto";
+
+import "error.proto";
+import "common.proto";
 
 service QuestionService {
   rpc CreateQuestion(CreateQuestionRequest) returns (CreateQuestionResponse) {}
@@ -35,7 +37,7 @@ message QuestionCard {
   bool isRead = 6;
   bool isReply = 7;
   Content content = 8;
-  bool gender = 9; // false is male, true is female
+  EGender gender = 9; // false is male, true is female
   google.protobuf.Timestamp created_at = 10;
 }
 

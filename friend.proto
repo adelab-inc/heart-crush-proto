@@ -56,7 +56,7 @@ message CrushMe {
   string friendId = 1;
   string displayName = 2;
   string reason = 3;
-  bool gender = 5;
+  EGender gender = 5;
   google.protobuf.Timestamp createdAt = 6;
 }
 
