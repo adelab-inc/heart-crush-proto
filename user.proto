@@ -96,7 +96,6 @@ message UpdateConfigResponse {
 message GetMyPageRequest {}
 
 message GetMyPageResponse {
-  // Error_INVALID_UID, Error_USER_NOT_REGISTERED, Error_NO_ERROR
   Status status = 1;
   string name = 2;
   string description = 3;
@@ -106,6 +105,8 @@ message GetMyPageResponse {
   int32 bestFriends = 7;
   string profileImgURL = 8;
   string thumbnailImgURL = 9;
+  string phone = 10;
+  string email = 11;
 }
 
 message DeleteUserRequest { string reason = 2; }
