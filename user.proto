@@ -2,8 +2,6 @@ syntax = "proto3";
 
 option go_package = "telepathy-server/proto";
 
-import "google/protobuf/wrappers.proto";
-
 import "common.proto";
 import "error.proto";
 
@@ -11,7 +9,6 @@ service UserService {
   rpc GetMyProfile(GetMyProfileRequest) returns (GetMyProfileResponse) {}
   rpc UpdateProfile(UpdateProfileRequest) returns (UpdateProfileResponse) {}
   rpc SetProfile(SetProfileRequest) returns (SetProfileResponse) {}
-  rpc GetMyPage(GetMyPageRequest) returns (GetMyPageResponse) {}
   rpc UpdateConfig(UpdateConfigRequest) returns (UpdateConfigResponse) {}
   rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse) {}
   rpc CreateInquiry(CreateInquiryRequest) returns (CreateInquiryResponse) {}
@@ -21,26 +18,11 @@ service UserService {
   // {} rpc GetUserByUid(GetUserByUidRequest) returns (GetUserByUidResponse) {}
 }
 
-message Config {
-  google.protobuf.BoolValue heartLock = 1;
-  google.protobuf.BoolValue systemAlarm = 2;
-  google.protobuf.BoolValue questionAlarm = 3;
-  google.protobuf.BoolValue bluetoothAlarm = 4;
-  google.protobuf.BoolValue likeAlarm = 5;
-}
-
 message GetMyProfileRequest {}
 
 message GetMyProfileResponse {
   Status status = 1;
-  string uid = 2;
-  string name = 3;
-  repeated ChipItem chip = 4;
-  string description = 5;
-  string birth = 6;
-  bool gender = 7;
-  string profileImgURL = 8;
-  string thumbnailImgURL = 9;
+  User user = 2;
 }
 
 /*
@@ -60,7 +42,7 @@ message UpdateProfileRequest {
   optional string thumbnailImgURL = 6;
   optional string fcmToken = 7;
   optional string birth = 8;
-  optional bool gender = 9; // false is male, true is female
+  optional EGender gender = 9; // false is male, true is female
 }
 
 message UpdateProfileResponse {
@@ -91,22 +73,6 @@ message UpdateConfigRequest { Config config = 1; }
 
 message UpdateConfigResponse {
   Status status = 1; // Error_INVALID_UID, MONGO_UPDATE, Error_NO_ERROR
-}
-
-message GetMyPageRequest {}
-
-message GetMyPageResponse {
-  Status status = 1;
-  string name = 2;
-  string description = 3;
-  string birth = 4;
-  repeated ChipItem chip = 5;
-  Config config = 6;
-  int32 bestFriends = 7;
-  string profileImgURL = 8;
-  string thumbnailImgURL = 9;
-  string phone = 10;
-  string email = 11;
 }
 
 message DeleteUserRequest { string reason = 2; }

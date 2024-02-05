@@ -1,9 +1,10 @@
 syntax = "proto3";
 
 option go_package = "telepathy-server/proto";
+
 import "google/protobuf/timestamp.proto";
 
-enum ChipType {
+enum EChipType {
   SCHOOL_NAME = 0;
   SCHOOL_SHORT_NAME = 1;
   GRADE = 2;
@@ -13,34 +14,44 @@ enum ChipType {
   OTHER = 6;
 }
 
-message User {
-  string uid = 1;
-  string name = 2;
-  bool gender = 3;                 // false is male / true is female
-  optional string birth = 4;       // 20030407
-  optional string phoneNumber = 6; // 01041948536
-  optional google.protobuf.Timestamp createdAt = 7;
-  optional google.protobuf.Timestamp updatedAt = 8; // UnixTime
-  string profileImgURL = 9;
-  string thumbnailImgURL = 10;
+enum EGender {
+  EG_UNSPECIFIED = 0;
+  EG_MALE = 1;
+  EG_FEMALE = 2;
 }
 
 message ChipItem {
-  ChipType type = 1;
+  EChipType type = 1;
   string text = 2;
 }
+message Config {
+  optional bool heartLock = 1;
+  optional bool systemAlarm = 2;
+  optional bool questionAlarm = 3;
+  optional bool bluetoothAlarm = 4;
+  optional bool heartAlarm = 5;
+}
 
-message Chip { repeated ChipItem chip = 1; }
+message User {
+  string uid = 1;
+  string name = 2;
+  string description = 3;
+  EGender gender = 4; // false is male / true is female
+  repeated ChipItem chip = 5;
+  optional string birth = 6;       // 20030407
+  optional string phoneNumber = 7; // 01041948536
+  string email = 8;
+  Config config = 9;
+  string profileImgURL = 10;
+  string thumbnailImgURL = 11;
+  int32 bestFriends = 12;
+  optional google.protobuf.Timestamp createdAt = 13;
+  optional google.protobuf.Timestamp updatedAt = 14; // UnixTime
+}
 
 message ShortenUser {
   string uid = 1;
   string name = 2;
   string thumbnailImageURL = 3;
   string profileImageURL = 4;
-}
-
-enum EGender {
-  EG_UNSPECIFIED = 0;
-  EG_MALE = 1;
-  EG_FEMALE = 2;
 }
