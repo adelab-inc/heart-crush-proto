@@ -58,10 +58,9 @@ message UpdateProfileRequest {
   repeated ChipItem chip = 4;
   optional string profileImgURL = 5;
   optional string thumbnailImgURL = 6;
-  optional string deviceId = 7;
-  optional string fcmToken = 8;
-  optional string birth = 9;
-  optional bool gender = 10; // false is male, true is female
+  optional string fcmToken = 7;
+  optional string birth = 8;
+  optional bool gender = 9; // false is male, true is female
 }
 
 message UpdateProfileResponse {
@@ -97,7 +96,6 @@ message UpdateConfigResponse {
 message GetMyPageRequest {}
 
 message GetMyPageResponse {
-  // Error_INVALID_UID, Error_USER_NOT_REGISTERED, Error_NO_ERROR
   Status status = 1;
   string name = 2;
   string description = 3;
@@ -107,6 +105,8 @@ message GetMyPageResponse {
   int32 bestFriends = 7;
   string profileImgURL = 8;
   string thumbnailImgURL = 9;
+  string phone = 10;
+  string email = 11;
 }
 
 message DeleteUserRequest { string reason = 2; }

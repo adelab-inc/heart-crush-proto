@@ -62,9 +62,8 @@ message SignUpRequestUser {
   bool gender = 2;        // false is male / true is female
   string birth = 3;       // 20030407
   string phoneNumber = 4; // 01041948536
-  string deviceId = 5;
-  string profileImgURL = 6;
-  string thumbnailImgURL = 7;
+  string profileImgURL = 5;
+  string thumbnailImgURL = 6;
   // google.protobuf.Timestamp createdAt = 8;
   // google.protobuf.Timestamp updatedAt = 9;
 }
