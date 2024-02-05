@@ -4,6 +4,7 @@ syntax = "proto3";
 option go_package = "telepathy-server/proto";
 
 import "common.proto";
+import "google/protobuf/timestamp.proto";
 import "error.proto";
 
 service AuthService {
@@ -22,6 +23,8 @@ service AuthService {
   rpc LockEmailUser(LockEmailUserRequest) returns (LockEmailUserResponse) {}
   rpc UpdatePhoneNumber(UpdatePhoneNumberRequest)
       returns (UpdatePhoneNumberResponse) {}
+  rpc CheckUserStatus(CheckUserStatusRequest) returns (CheckUserStatusResponse) {}
+  rpc BanUser(BanUserRequest) returns (BanUserResponse) {}
   rpc TestToken(TestTokenRequest) returns (TestTokenResponse) {}
 }
 
@@ -39,6 +42,22 @@ message Term {
   bool agree = 2;
   int64 createdAt = 3; // UnixTime -> change to localtime (ex. kst)
   int64 updatedAt = 4; // UnixTime
+}
+
+enum UserStatus {
+  // 정상적인 유저
+  VALID = 0; // 정상적인 유저의 경우
+
+  // 기타 등등 1xx
+  INVALID = 100; // 가입되어있지 않은 유저의 경우
+
+  // 시스템 관련 2xx
+  SYSTEM_MAINTENANCE = 200; // 시스템 점검 관련
+  NEED_UPDATE = 201; // 업데이트가 필요한 유저의 경우
+
+  // 이용 제한 관련 3xx
+  BANNED = 300; // 유저가 이용제한(임시 정지)된 경우
+  FORBBIDEN = 301; // 유저가 이용정지(영구 정지)된 경우  
 }
 
 message CreateAuthCodeRequest { string phone = 1; }
@@ -140,4 +159,31 @@ message TestTokenRequest { string uid = 1; }
 message TestTokenResponse {
   string idToken = 1;
   string refreshToken = 2;
+}
+
+message BanUser {
+  bool isForbid = 1; // true -> 영구 정지 // false -> 임시 정지
+  string content = 2; // 제한 내용 // ex. 하트크러시 이용제한 7일
+  string reason = 3; // 제한 사유 // ex. 이용약관 위반
+  google.protobuf.Timestamp createdAt = 4; // 언제부터 정지인지 명시
+  optional google.protobuf.Timestamp expiredAt = 5; // 언제까지 정지인지 명시 // 영구정지시 안보내주거나, null값을 보내주시면 됩니다.
+}
+
+message BanUserRequest {
+  string uid = 1;
+  BanUser banUser = 2;
+}
+
+message BanUserResponse {
+  Status status = 1;
+}
+
+message CheckUserStatusRequest {
+  // string version = 2; // unimplement yet
+}
+
+message CheckUserStatusResponse {
+  Status status = 1;
+  optional UserStatus userStatus = 2;
+  optional BanUser banUser = 3;
 }
