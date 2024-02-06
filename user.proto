@@ -37,7 +37,7 @@ message UpdateUserRequest {
   optional string name = 1;
   optional string description = 2;
   optional string schoolCode = 3;
-  repeated ChipItem chip = 4;
+  repeated ChipItem chips = 4;
   optional string profileImgURL = 5;
   optional string thumbnailImgURL = 6;
   optional string fcmToken = 7; // 서버에만 업데이트 함
