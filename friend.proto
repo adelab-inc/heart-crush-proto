@@ -80,7 +80,7 @@ message GetBlockedFriendsRequest {}
 
 message GetBlockedFriendsResponse {
   Status status = 1;
-  repeated ShortenUser blockedFriends = 2;
+  repeated User blockedFriends = 2;
 }
 
 message CreateBlockedFriendRequest { string friendId = 1; }
