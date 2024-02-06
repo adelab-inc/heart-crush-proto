@@ -7,7 +7,7 @@ import "error.proto";
 
 service UserService {
 //  rpc GetMyProfile(GetMyProfileRequest) returns (GetMyProfileResponse) {}
-  rpc UpdateProfile(UpdateProfileRequest) returns (UpdateProfileResponse) {}
+  rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse) {}
   rpc SetProfile(SetProfileRequest) returns (SetProfileResponse) {}
   rpc UpdateConfig(UpdateConfigRequest) returns (UpdateConfigResponse) {}
   rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse) {}
@@ -18,12 +18,12 @@ service UserService {
   // {} rpc GetUserByUid(GetUserByUidRequest) returns (GetUserByUidResponse) {}
 }
 
-message GetMyProfileRequest {}
-
-message GetMyProfileResponse {
-  Status status = 1;
-  User user = 2;
-}
+//message GetMyProfileRequest {}
+//
+//message GetMyProfileResponse {
+//  Status status = 1;
+//  User user = 2;
+//}
 
 /*
 profile을 업데이트하는 서비스 -> 기존의 정보와 바뀐 정보를 조합하고 채워넣어
@@ -33,20 +33,20 @@ profile을 업데이트하는 서비스 -> 기존의 정보와 바뀐 정보를 
 "girlThumbnail.png"과 "girl.png"를 보내주시면 됩니다. 남성 ->
 "boyThumbnail.png"과 "boy.png"를 보내주시면 됩니다.
 */
-message UpdateProfileRequest {
+message UpdateUserRequest {
   optional string name = 1;
   optional string description = 2;
   optional string schoolCode = 3;
   repeated ChipItem chip = 4;
   optional string profileImgURL = 5;
   optional string thumbnailImgURL = 6;
-  optional string fcmToken = 7;
+  optional string fcmToken = 7; // 서버에만 업데이트 함
   optional string birth = 8;
   optional EGender gender = 9;
   optional bool isInitialized = 10;
 }
 
-message UpdateProfileResponse {
+message UpdateUserResponse {
   Status status = 1;
   optional User user = 2;
 }
