@@ -38,16 +38,17 @@ message User {
   string description = 3;
   EGender gender = 4; // false is male / true is female
   repeated ChipItem chips = 5;
-  optional string birth = 6;       // 20030407
-  optional string phoneNumber = 7; // E.164
-  string email = 8;
+  optional string birth = 6;       // only me, 20030407
+  optional string phoneNumber = 7; // only me, E.164
+  string email = 8; // only me
   optional Config config = 9;
   string profileImgURL = 10;
-  string thumbnailImgURL = 11;
-  optional int32 bestFriends = 12;
-  optional bool isInitialized = 13;
-  optional google.protobuf.Timestamp createdAt = 14;
-  optional google.protobuf.Timestamp updatedAt = 15; // UnixTime
+  string thumbnailImgURL = 11; //
+  optional int32 bestFriends = 12; // only me
+  optional bool isInitialized = 13; // only me
+  optional google.protobuf.Timestamp createdAt = 14; // only me
+  optional google.protobuf.Timestamp updatedAt = 15; // only me, UnixTime
+  optional string schoolCode = 16; // only me
 }
 
 //message ShortenUser {
