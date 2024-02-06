@@ -102,7 +102,7 @@ message GetStudentsRequest {string schoolCode = 1;}
 
 message GetStudentsResponse {
   Status status = 1;
-  repeated StudentsInGrade students = 2;
+  repeated StudentsInGrade allGradeStudents = 2;
   string schoolCode = 3;
   string shortSchoolName = 4;
 }
