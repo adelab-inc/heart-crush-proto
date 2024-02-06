@@ -57,7 +57,7 @@ message CrushMe {
   string displayName = 2;
   string reason = 3;
   EGender gender = 5;
-  google.protobuf.Timestamp createdAt = 6;
+  google.protobuf.Timestamp timerEndAt = 6;
 }
 
 message GetRecommendFriendsUIDRequest { repeated string phoneBookFriends = 1; }
@@ -114,10 +114,14 @@ message GetCrushRequest {}
 
 message GetCrushResponse {
   Status status = 1;
-  string crushId = 2;
-  string name = 3;
-  string description = 4;
-  repeated ChipItem chip = 5;
+
+  // 짝사랑 대상의 정보
+  User crushUser = 2;
+  google.protobuf.Timestamp timerEndAt = 3; // timer가 끝나는 시점
+
+  // 나의 익명 정보
+  string displayName = 4;
+  string reason = 5; // 짝사랑 이유
   string thumbnailImageURL = 6;
   string profileImageURL = 7;
 }
