@@ -6,7 +6,7 @@ import "common.proto";
 import "error.proto";
 
 service UserService {
-  rpc GetMyProfile(GetMyProfileRequest) returns (GetMyProfileResponse) {}
+//  rpc GetMyProfile(GetMyProfileRequest) returns (GetMyProfileResponse) {}
   rpc UpdateProfile(UpdateProfileRequest) returns (UpdateProfileResponse) {}
   rpc SetProfile(SetProfileRequest) returns (SetProfileResponse) {}
   rpc UpdateConfig(UpdateConfigRequest) returns (UpdateConfigResponse) {}
@@ -14,7 +14,7 @@ service UserService {
   rpc CreateInquiry(CreateInquiryRequest) returns (CreateInquiryResponse) {}
   rpc CreateReport(CreateReportRequest) returns (CreateReportResponse) {}
   rpc GetStudents(GetStudentsRequest) returns (GetStudentsResponse) {}
-  // rpc GetUsersByDids(GetUsersByDidsRequest) returns (GetUsersByDidsResponse)
+  rpc GetUsersByUuids(GetUsersByUuidsRequest) returns (GetUsersByUuidsResponse) {}
   // {} rpc GetUserByUid(GetUserByUidRequest) returns (GetUserByUidResponse) {}
 }
 
@@ -67,16 +67,16 @@ message SetProfileRequest {
 
 message SetProfileResponse {
   Status status = 1; // Error_INVALID_UID, Error_FILE_UPLOAD_ERROR,
-                     // MONGO_UPDATE, Error_NO_ERROR
+  // MONGO_UPDATE, Error_NO_ERROR
 }
 
-message UpdateConfigRequest { Config config = 1; }
+message UpdateConfigRequest {Config config = 1;}
 
 message UpdateConfigResponse {
   Status status = 1; // Error_INVALID_UID, MONGO_UPDATE, Error_NO_ERROR
 }
 
-message DeleteUserRequest { string reason = 2; }
+message DeleteUserRequest {string reason = 2;}
 
 message DeleteUserResponse {
   // Error_INVALID_UID,Error_MONGO_DELETE, Error_MONGO_INSERT, Error_NO_ERROR
@@ -119,7 +119,7 @@ message Students {
   repeated Student student = 2;
 }
 
-message GetStudentsRequest { string schoolCode = 1; }
+message GetStudentsRequest {string schoolCode = 1;}
 
 message GetStudentsResponse {
   Status status = 1;
@@ -135,9 +135,11 @@ message GetStudentsResponse {
 //   repeated User users = 2;
 // }
 
-message GetUserByUidRequest { string uid = 1; }
+message GetUsersByUuidsRequest{
+  repeated string uuids = 1;
+}
 
-message GetUserByUidResponse {
+message GetUsersByUuidsResponse {
   Status status = 1;
-  User user = 2;
+  repeated User user = 2;
 }
