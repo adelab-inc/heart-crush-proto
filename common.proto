@@ -41,18 +41,18 @@ message User {
   optional string birth = 6;       // 20030407
   optional string phoneNumber = 7; // E.164
   string email = 8;
-  Config config = 9;
+  optional Config config = 9;
   string profileImgURL = 10;
   string thumbnailImgURL = 11;
-  int32 bestFriends = 12;
+  optional int32 bestFriends = 12;
   optional bool isInitialized = 13;
   optional google.protobuf.Timestamp createdAt = 14;
   optional google.protobuf.Timestamp updatedAt = 15; // UnixTime
 }
 
-message ShortenUser {
-  string uid = 1;
-  string name = 2;
-  string thumbnailImageURL = 3;
-  string profileImageURL = 4;
-}
+//message ShortenUser {
+//  string uid = 1;
+//  string name = 2;
+//  string thumbnailImageURL = 3;
+//  string profileImageURL = 4;
+//}
