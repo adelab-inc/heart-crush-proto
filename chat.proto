@@ -98,7 +98,8 @@ message SendMsgResponse {
 message GetMsgsRequest {
   string room_id = 1;
   optional google.protobuf.Timestamp before = 3;
-  optional int32 limit = 4; // default: 100
+  optional google.protobuf.Timestamp after = 4;
+  optional int32 limit = 5; // default: 100
 }
 
 message GetMsgsResponse {
