@@ -27,30 +27,30 @@ service FriendService {
   rpc GetWhoCrushMe(GetWhoCrushMeRequest) returns (GetWhoCrushMeResponse) {}
 }
 
-message RecommendedFriends {
-  string uid = 1;
-  string name = 2;
-  string schoolShortName = 3;
-  int32 grade = 4;
-  string thumbnailImageURL = 5;
-  string profileImageURL = 6;
-}
+// message RecommendedFriends {
+//   string uid = 1;
+//   string name = 2;
+//   string schoolShortName = 3;
+//   int32 grade = 4;
+//   string thumbnailImageURL = 5;
+//   string profileImageURL = 6;
+// }
 
 message BestFriendRequest {
   string uid = 1;
   bool alarm = 2;
 }
 
-message BestFriendResponse {
-  string uid = 1;
-  string name = 2;
-  string schoolShortName = 3;
-  string description = 4;
-  string thumbnailImageURL = 5;
-  string profileImageURL = 6;
-  repeated ChipItem chip = 7;
-  bool alarm = 8;
-}
+// message BestFriendResponse {
+//   string uid = 1;
+//   string name = 2;
+//   string schoolShortName = 3;
+//   string description = 4;
+//   string thumbnailImageURL = 5;
+//   string profileImageURL = 6;
+//   repeated ChipItem chip = 7;
+//   bool alarm = 8;
+// }
 
 message CrushMe {
   string friendId = 1;
@@ -73,14 +73,14 @@ message GetRecommendFriendsRequest {
 
 message GetRecommendFriendsResponse {
   Status status = 1;
-  repeated RecommendedFriends recommendedFriends = 2;
+  repeated Friend recommendedFriends = 2;
 }
 
 message GetBlockedFriendsRequest {}
 
 message GetBlockedFriendsResponse {
   Status status = 1;
-  repeated User blockedFriends = 2;
+  repeated Friend blockedFriends = 2;
 }
 
 message CreateBlockedFriendRequest { string friendId = 1; }
@@ -95,7 +95,7 @@ message GetBestFriendsRequest {}
 
 message GetBestFriendsResponse {
   Status status = 1;
-  repeated BestFriendResponse bestFriends = 2;
+  repeated Friend bestFriends = 2;
 }
 
 message UpdateBestFriendsRequest { repeated BestFriendRequest bestFriends = 2; }
