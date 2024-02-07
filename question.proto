@@ -16,13 +16,19 @@ service QuestionService {
   rpc DeleteQuestion(DeleteQuestionRequest) returns (DeleteQuestionResponse) {}
 }
 
+enum EQuestionType {
+  EQT_GETTOKNOW = 0;
+  EQT_BALANCE = 1;
+  EQT_CHOOSE = 2;
+}
+
 message Option {
   int32 idx = 1;
   string text = 2;
 }
 
 message Content {
-  string questionType = 1;
+  EQuestionType questionType = 1;
   string questionTitle = 2;
   repeated Option questionOptions = 3;
   Option answer = 4;
