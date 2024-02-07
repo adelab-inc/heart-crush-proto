@@ -40,20 +40,24 @@ message User {
   repeated ChipItem chips = 5;
   optional string birth = 6;       // only me, 20030407
   optional string phoneNumber = 7; // only me, E.164
-  optional string email = 8; // only me
+  optional string email = 8;       // only me
   optional Config config = 9;
   string profileImgURL = 10;
-  string thumbnailImgURL = 11; //
-  optional int32 bestFriends = 12; // only me
-  optional bool isInitialized = 13; // only me
+  string thumbnailImgURL = 11;                       //
+  optional int32 bestFriends = 12;                   // only me
+  optional bool isInitialized = 13;                  // only me
   optional google.protobuf.Timestamp createdAt = 14; // only me
   optional google.protobuf.Timestamp updatedAt = 15; // only me, UnixTime
-  optional string schoolCode = 16; // only me
+  optional string schoolCode = 16;                   // only me
 }
 
-//message ShortenUser {
-//  string uid = 1;
-//  string name = 2;
-//  string thumbnailImageURL = 3;
-//  string profileImageURL = 4;
-//}
+message Friend {
+  string uid = 1;
+  string name = 2;
+  string profileImgURL = 3;
+  string thumbnailImgURL = 4;
+  repeated ChipItem chips = 5;
+  optional string description = 6;
+  optional EGender gender = 7;
+  optional bool alarm = 8;
+}
