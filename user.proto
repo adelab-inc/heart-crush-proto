@@ -14,17 +14,18 @@ service UserService {
   rpc CreateInquiry(CreateInquiryRequest) returns (CreateInquiryResponse) {}
   rpc CreateReport(CreateReportRequest) returns (CreateReportResponse) {}
   rpc GetStudents(GetStudentsRequest) returns (GetStudentsResponse) {}
-  rpc GetUsersByUuids(GetUsersByUuidsRequest) returns (GetUsersByUuidsResponse) {}
+  rpc GetUsersByUuids(GetUsersByUuidsRequest)
+      returns (GetUsersByUuidsResponse) {}
   rpc GetRandomNick(GetRandomNickRequest) returns (GetRandomNickResponse) {}
   // {} rpc GetUserByUid(GetUserByUidRequest) returns (GetUserByUidResponse) {}
 }
 
-//message GetMyProfileRequest {}
+// message GetMyProfileRequest {}
 //
-//message GetMyProfileResponse {
-//  Status status = 1;
-//  User user = 2;
-//}
+// message GetMyProfileResponse {
+//   Status status = 1;
+//   User user = 2;
+// }
 
 /*
 profile을 업데이트하는 서비스 -> 기존의 정보와 바뀐 정보를 조합하고 채워넣어
@@ -53,10 +54,7 @@ message UpdateUserResponse {
   optional User user = 2;
 }
 
-
-message DeleteUserRequest {
-  string reason = 2;
-}
+message DeleteUserRequest { string reason = 2; }
 
 message DeleteUserResponse {
   // Error_INVALID_UID,Error_MONGO_DELETE, Error_MONGO_INSERT, Error_NO_ERROR
@@ -92,6 +90,7 @@ message Student {
   string name = 1;
   string profileImgURL = 2;
   string thumbnailImgURL = 3;
+  string uid = 4;
 }
 
 message StudentsInGrade {
@@ -99,7 +98,7 @@ message StudentsInGrade {
   repeated Student student = 2;
 }
 
-message GetStudentsRequest {string schoolCode = 1;}
+message GetStudentsRequest { string schoolCode = 1; }
 
 message GetStudentsResponse {
   Status status = 1;
@@ -108,16 +107,14 @@ message GetStudentsResponse {
   string shortSchoolName = 4;
 }
 
-message GetUsersByUuidsRequest {
-  repeated string uuids = 1;
-}
+message GetUsersByUuidsRequest { repeated string uuids = 1; }
 
 message GetUsersByUuidsResponse {
   Status status = 1;
   repeated User users = 2;
 }
 
-message GetRandomNickRequest { }
+message GetRandomNickRequest {}
 
 message GetRandomNickResponse {
   Status status = 1;
