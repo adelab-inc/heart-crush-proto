@@ -28,6 +28,7 @@ service FriendService {
       returns (CreateBestFriendResponse) {}
   rpc CreateCrush(CreateCrushRequest) returns (CreateCrushResponse) {}
   rpc GetCrush(GetCrushRequest) returns (GetCrushResponse) {}
+  rpc DeleteCrush(DeleteCrushRequest) returns (DeleteCrushResponse) {}
   rpc GetWhoCrushMe(GetWhoCrushMeRequest) returns (GetWhoCrushMeResponse) {}
   rpc GetPhoneBookFriend(GetPhoneBookFriendRequest)
       returns (GetPhoneBookFriendResponse) {}
@@ -131,6 +132,13 @@ message GetCrushResponse {
   string thumbnailImageURL = 6;
   string profileImageURL = 7;
 }
+
+message DeleteCrushRequest {}
+
+message DeleteCrushResponse {
+  Status status = 1;
+}
+
 
 message GetWhoCrushMeRequest {}
 
