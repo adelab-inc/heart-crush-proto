@@ -22,11 +22,15 @@ service FriendService {
   rpc GetBestFriends(GetBestFriendsRequest) returns (GetBestFriendsResponse) {}
   rpc UpdateBestFriends(UpdateBestFriendsRequest)
       returns (UpdateBestFriendsResponse) {}
+  rpc DeleteBestFriend(DeleteBestFriendRequest)
+      returns (DeleteBestFriendResponse) {}
   rpc CreateBestFriend(CreateBestFriendRequest)
       returns (CreateBestFriendResponse) {}
   rpc CreateCrush(CreateCrushRequest) returns (CreateCrushResponse) {}
   rpc GetCrush(GetCrushRequest) returns (GetCrushResponse) {}
   rpc GetWhoCrushMe(GetWhoCrushMeRequest) returns (GetWhoCrushMeResponse) {}
+  rpc GetPhoneBookFriend(GetPhoneBookFriendRequest)
+      returns (GetPhoneBookFriendResponse) {}
 }
 
 // message RecommendedFriends {
@@ -138,3 +142,14 @@ message GetWhoCrushMeResponse {
 message CreateBestFriendRequest { string friendId = 1; }
 
 message CreateBestFriendResponse { Status status = 1; }
+
+message DeleteBestFriendRequest { string friendId = 1; }
+
+message DeleteBestFriendResponse { Status status = 1; }
+
+message GetPhoneBookFriendRequest { string phoneNumber = 1; }
+
+message GetPhoneBookFriendResponse {
+  Status status = 1;
+  User user = 2;
+}
