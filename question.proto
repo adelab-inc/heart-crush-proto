@@ -14,6 +14,7 @@ service QuestionService {
   rpc UpdateQuestionRead(UpdateQuestionReadRequest)
       returns (UpdateQuestionReadResponse) {}
   rpc DeleteQuestion(DeleteQuestionRequest) returns (DeleteQuestionResponse) {}
+  rpc GetRandomQuestion(GetRandomQuestionRequest) returns (GetRandomQuestionResponse) {}
 }
 
 enum EQuestionType {
@@ -83,3 +84,13 @@ message DeleteQuestionRequest {
 }
 
 message DeleteQuestionResponse { Status status = 1; }
+
+message GetRandomQuestionRequest {
+  EQuestionType questionType = 1;
+  string targetUid = 2;
+}
+
+message GetRandomQuestionResponse { 
+  Status status = 1;
+  Content content = 2; // answer는 null 값으로 들어옴!
+}
