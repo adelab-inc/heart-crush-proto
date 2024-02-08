@@ -22,6 +22,8 @@ service FriendService {
   rpc GetBestFriends(GetBestFriendsRequest) returns (GetBestFriendsResponse) {}
   rpc UpdateBestFriends(UpdateBestFriendsRequest)
       returns (UpdateBestFriendsResponse) {}
+  rpc CreateBestFriend(CreateBestFriendRequest)
+      returns (CreateBestFriendResponse) {}
   rpc CreateCrush(CreateCrushRequest) returns (CreateCrushResponse) {}
   rpc GetCrush(GetCrushRequest) returns (GetCrushResponse) {}
   rpc GetWhoCrushMe(GetWhoCrushMeRequest) returns (GetWhoCrushMeResponse) {}
@@ -132,3 +134,7 @@ message GetWhoCrushMeResponse {
   Status status = 1;
   repeated CrushMe friendsWhoCrushMe = 2;
 }
+
+message CreateBestFriendRequest { string friendId = 1; }
+
+message CreateBestFriendResponse { Status status = 1; }
