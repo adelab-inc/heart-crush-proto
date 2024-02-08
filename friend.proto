@@ -73,14 +73,14 @@ message GetRecommendFriendsRequest {
 
 message GetRecommendFriendsResponse {
   Status status = 1;
-  repeated Friend recommendedFriends = 2;
+  repeated User recommendedFriends = 2;
 }
 
 message GetBlockedFriendsRequest {}
 
 message GetBlockedFriendsResponse {
   Status status = 1;
-  repeated Friend blockedFriends = 2;
+  repeated User blockedFriends = 2;
 }
 
 message CreateBlockedFriendRequest { string friendId = 1; }
@@ -95,7 +95,7 @@ message GetBestFriendsRequest {}
 
 message GetBestFriendsResponse {
   Status status = 1;
-  repeated Friend bestFriends = 2;
+  repeated User bestFriends = 2;
 }
 
 message UpdateBestFriendsRequest { repeated BestFriendRequest bestFriends = 2; }

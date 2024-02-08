@@ -55,14 +55,3 @@ message User {
   optional google.protobuf.Timestamp updatedAt = 15; // only me, UnixTime
   optional string schoolCode = 16;                   // only me
 }
-
-message Friend {
-  string uid = 1;
-  string name = 2;
-  string profileImgURL = 3;
-  string thumbnailImgURL = 4;
-  repeated ChipItem chips = 5;
-  optional string description = 6;
-  optional EGender gender = 7;
-  optional bool alarm = 8;
-}

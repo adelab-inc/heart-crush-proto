@@ -87,16 +87,9 @@ message CreateReportResponse {
   Status status = 1;
 }
 
-message Student {
-  string name = 1;
-  string profileImgURL = 2;
-  string thumbnailImgURL = 3;
-  string uid = 4;
-}
-
 message StudentsInGrade {
   int32 grade = 1;
-  repeated Student student = 2;
+  repeated User students = 2;
 }
 
 message GetStudentsRequest { string schoolCode = 1; }
@@ -104,8 +97,6 @@ message GetStudentsRequest { string schoolCode = 1; }
 message GetStudentsResponse {
   Status status = 1;
   repeated StudentsInGrade allGradeStudents = 2;
-  string schoolCode = 3;
-  string shortSchoolName = 4;
 }
 
 message GetUsersByUuidsRequest { repeated string uuids = 1; }
