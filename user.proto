@@ -17,6 +17,7 @@ service UserService {
   rpc GetUsersByUuids(GetUsersByUuidsRequest)
       returns (GetUsersByUuidsResponse) {}
   rpc GetRandomNick(GetRandomNickRequest) returns (GetRandomNickResponse) {}
+  rpc GetUserByPhone(GetUserByPhoneRequest) returns (GetUserByPhoneResponse) {}
   // {} rpc GetUserByUid(GetUserByUidRequest) returns (GetUserByUidResponse) {}
 }
 
@@ -119,4 +120,13 @@ message GetRandomNickRequest {}
 message GetRandomNickResponse {
   Status status = 1;
   string randomNick = 2;
+}
+
+message GetUserByPhoneRequest {
+  string phone = 1; // +8210...
+}
+
+message GetUserByPhoneResponse {
+  Status status = 1;
+  User user = 2;
 }
