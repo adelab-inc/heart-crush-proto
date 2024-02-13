@@ -32,9 +32,11 @@ service ChatService {
   rpc GetRooms(GetRoomsRequest) returns (GetRoomsResponse) {
   } // do not fetch does not have updated_at
   rpc SendMsg(SendMsgRequest) returns (SendMsgResponse) {
-  } // send notification to participants
+  } // send notification to participants { "chat": ...Message }
   rpc GetMsgs(GetMsgsRequest) returns (GetMsgsResponse) {
   } // get messages from room
+  rpc UpdateRead(UpdateReadRequest) returns (UpdateReadResponse) {
+  } // update read, send data notification to participants (MessageRead), { "read": ...MessageRead }
 }
 
 message Room {
@@ -54,6 +56,13 @@ message Message {
   string sender_uid = 4;
   optional string body = 5;
   optional MessageFile file = 6;
+  repeated MessageRead reads = 7;
+}
+
+message MessageRead {
+  string message_id = 1;
+  string uuid = 2;
+  google.protobuf.Timestamp read_at = 3;
 }
 
 message CreateRoomRequest {
@@ -106,4 +115,13 @@ message GetMsgsResponse {
   Status status = 1;
   repeated Message msgs = 2;
   bool has_more = 3;
+}
+
+message UpdateReadRequest {
+  string message_id = 1;
+}
+
+message UpdateReadResponse {
+  Status status = 1;
+  optional google.protobuf.Timestamp read_at = 2;
 }
