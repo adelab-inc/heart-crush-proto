@@ -7,13 +7,22 @@ import "error.proto";
 
 service BLEService {
   rpc CreateBLERecord(CreateBLERecordRequest) returns (CreateBLERecordResponse) {}
+  rpc CreateBLERecords(CreateBLERecordsRequest) returns (CreateBLERecordsResponse) {}
 }
 
 message CreateBLERecordRequest {
+  string targetUid = 1;
+}
+
+message CreateBLERecordResponse {
+  Status status = 1;
+}
+
+message CreateBLERecordsRequest {
   reserved 1;
   repeated string targetUids = 2;
 }
 
-message CreateBLERecordResponse {
+message CreateBLERecordsResponse {
   Status status = 1;
 }
