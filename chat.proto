@@ -56,13 +56,7 @@ message Message {
   string sender_uid = 4;
   optional string body = 5;
   optional MessageFile file = 6;
-  repeated MessageRead reads = 7;
-}
-
-message MessageRead {
-  string message_id = 1;
-  string uuid = 2;
-  google.protobuf.Timestamp read_at = 3;
+  optional google.protobuf.Timestamp read_at = 7;
 }
 
 message CreateRoomRequest {
