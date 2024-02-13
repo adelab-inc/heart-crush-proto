@@ -10,7 +10,8 @@ service BLEService {
 }
 
 message CreateBLERecordRequest {
-  string targetUid = 1;
+  reserved 1;
+  repeated string targetUids = 2;
 }
 
 message CreateBLERecordResponse {
