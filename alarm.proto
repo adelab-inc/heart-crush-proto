@@ -15,15 +15,18 @@ enum EAlarmType {
 
 service AlarmService {
   rpc GetAlarms(GetAlarmsRequest) returns (GetAlarmsResponse) {}
+  rpc UpdateAlarms(UpdateAlarmsRequest) returns (UpdateAlarmsResponse) {}
 }
 
 // * Entity
 message Alarm {
-  EAlarmType type = 1;
-  string title = 2;
-  string body = 3;
-  optional string data = 4;
-  optional google.protobuf.Timestamp createdAt = 5;
+  string id = 1;
+  optional EAlarmType type = 2;
+  optional string title = 3;
+  optional string body = 4;
+  optional bool is_read = 5;
+  optional string data = 6;
+  optional google.protobuf.Timestamp createdAt = 7;
 }
 
 // * Request & Response
@@ -32,3 +35,6 @@ message GetAlarmsResponse {
   Status status = 1;
   repeated Alarm alarms = 2;
 }
+
+message UpdateAlarmsRequest { repeated Alarm alarms = 1; }
+message UpdateAlarmsResponse { Status status = 1; }
