@@ -2,7 +2,6 @@ syntax = "proto3";
 
 option go_package = "telepathy-server/proto";
 
-import "google/protobuf/timestamp.proto";
 import "common.proto";
 import "error.proto";
 
@@ -26,45 +25,14 @@ service FriendService {
       returns (DeleteBestFriendResponse) {}
   rpc CreateBestFriend(CreateBestFriendRequest)
       returns (CreateBestFriendResponse) {}
-  rpc CreateCrush(CreateCrushRequest) returns (CreateCrushResponse) {}
-  rpc GetCrush(GetCrushRequest) returns (GetCrushResponse) {}
-  rpc DeleteCrush(DeleteCrushRequest) returns (DeleteCrushResponse) {}
   rpc GetWhoCrushMe(GetWhoCrushMeRequest) returns (GetWhoCrushMeResponse) {}
   rpc GetPhoneBookFriend(GetPhoneBookFriendRequest)
       returns (GetPhoneBookFriendResponse) {}
 }
 
-// message RecommendedFriends {
-//   string uid = 1;
-//   string name = 2;
-//   string schoolShortName = 3;
-//   int32 grade = 4;
-//   string thumbnailImageURL = 5;
-//   string profileImageURL = 6;
-// }
-
 message BestFriendRequest {
   string uid = 1;
   bool alarm = 2;
-}
-
-// message BestFriendResponse {
-//   string uid = 1;
-//   string name = 2;
-//   string schoolShortName = 3;
-//   string description = 4;
-//   string thumbnailImageURL = 5;
-//   string profileImageURL = 6;
-//   repeated ChipItem chip = 7;
-//   bool alarm = 8;
-// }
-
-message CrushMe {
-  string friendId = 1;
-  string displayName = 2;
-  string reason = 3;
-  EGender gender = 5;
-  google.protobuf.Timestamp timerEndAt = 6;
 }
 
 message GetRecommendFriendsUIDRequest { repeated string phoneBookFriends = 1; }
@@ -117,34 +85,11 @@ message CreateCrushRequest {
 
 message CreateCrushResponse { Status status = 1; }
 
-message GetCrushRequest {}
-
-message GetCrushResponse {
-  Status status = 1;
-
-  // 짝사랑 대상의 정보
-  User crushUser = 2;
-  google.protobuf.Timestamp timerEndAt = 3; // timer가 끝나는 시점
-
-  // 나의 익명 정보
-  string displayName = 4;
-  string reason = 5; // 짝사랑 이유
-  string thumbnailImageURL = 6;
-  string profileImageURL = 7;
-}
-
-message DeleteCrushRequest {}
-
-message DeleteCrushResponse {
-  Status status = 1;
-}
-
-
 message GetWhoCrushMeRequest {}
 
 message GetWhoCrushMeResponse {
   Status status = 1;
-  repeated CrushMe friendsWhoCrushMe = 2;
+  repeated User users = 2;
 }
 
 message CreateBestFriendRequest { string friendId = 1; }
