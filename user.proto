@@ -18,6 +18,7 @@ service UserService {
       returns (GetUsersByUuidsResponse) {}
   rpc GetRandomNick(GetRandomNickRequest) returns (GetRandomNickResponse) {}
   rpc GetUserByPhone(GetUserByPhoneRequest) returns (GetUserByPhoneResponse) {}
+  rpc CreateAnonymous(CreateAnonymousRequest) returns (CreateAnonymousResponse) {}
   // {} rpc GetUserByUid(GetUserByUidRequest) returns (GetUserByUidResponse) {}
 }
 
@@ -40,6 +41,9 @@ message UpdateUserRequest {
   optional string name = 1;
   optional string description = 2;
   optional string schoolCode = 3;
+
+  optional string schoolName = 12; // 학교 풀네임 이동
+
   repeated ChipItem chips = 4;
   optional string profileImgURL = 5;
   optional string thumbnailImgURL = 6;
@@ -120,4 +124,13 @@ message GetUserByPhoneRequest {
 message GetUserByPhoneResponse {
   Status status = 1;
   User user = 2;
+}
+
+message CreateAnonymousRequest { // 짝사랑 Anonymous 포함
+  User user = 1; // uid 필드는 ignore됩니다.
+}
+
+message CreateAnonymousResponse {
+  Status status = 1;
+  string uid = 2;
 }

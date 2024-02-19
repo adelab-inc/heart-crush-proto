@@ -19,7 +19,6 @@ message CreateBLERecordResponse {
 }
 
 message CreateBLERecordsRequest {
-  reserved 1;
   repeated string targetUids = 2;
 }
 

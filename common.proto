@@ -10,13 +10,12 @@ import "google/protobuf/timestamp.proto";
 // width: 360, height: 360,
 
 enum EChipType {
-  ECT_SCHOOL_NAME = 0;
+  ECT_OTHER = 0;
   ECT_SCHOOL_SHORT_NAME = 1;
   ECT_GRADE = 2;
   ECT_INSTA_ACCOUNT = 3;
   ECT_TIKTOK_ACCOUNT = 4;
   ECT_MBTI = 5;
-  ECT_OTHER = 6;
 }
 
 enum EGender {
@@ -28,6 +27,7 @@ enum EGender {
 message ChipItem {
   EChipType type = 1;
   string text = 2;
+  optional string image_url = 3;
 }
 message Config {
   optional bool heartLock = 1;
@@ -37,21 +37,35 @@ message Config {
   optional bool heartAlarm = 5;
 }
 
+enum EUserType {
+  EUT_USER = 0; // 일반 유저
+  EUT_ANONYMOUS = 1; // 익명 유저
+  EUT_CRUSH = 2; // 짝사랑 익명 유저
+  EUT_UNREGISTERED = 3; // 등록되지 않은 유저
+}
+
 message User {
+  EUserType user_type = 20;
+  optional string referenced_uid = 21;                  // only EUT_ANONYMOUS // only me
+  optional string target_uid = 22;                      // only EUT_CRUSH
+  optional google.protobuf.Timestamp crush_ended_at = 23; // only EUT_CRUSH
+
   string uid = 1;
   string name = 2;
   string description = 3;
   EGender gender = 4;
   repeated ChipItem chips = 5;
-  optional string birth = 6;       // only me, 20030407
-  optional string phoneNumber = 7; // only me, E.164
-  optional string email = 8;       // only me
-  optional Config config = 9;
+  optional string birth = 6;       // only EUT_USER // only me, 20030407
+  optional string phoneNumber = 7; // only EUT_USER // only me, E.164
+  optional string email = 8;       // only EUT_USER // only me
+  optional Config config = 9;      // only EUT_USER // only me
   string profileImgURL = 10;
-  string thumbnailImgURL = 11;                       //
-  optional int32 bestFriends = 12;                   // only me
-  optional bool isInitialized = 13;                  // only me
-  optional google.protobuf.Timestamp createdAt = 14; // only me
-  optional google.protobuf.Timestamp updatedAt = 15; // only me, UnixTime
-  optional string schoolCode = 16;                   // only me
+  string thumbnailImgURL = 11;
+  optional int32 bestFriends = 12;                   // only EUT_USER // only me
+  optional bool isInitialized = 13;                  // only EUT_USER // only me
+  optional google.protobuf.Timestamp createdAt = 14; // only EUT_USER, EUT_ANONYMOUS, EUT_CRUSH // only me
+  optional google.protobuf.Timestamp updatedAt = 15; // only EUT_USER, EUT_ANONYMOUS, EUT_CRUSH // only me, UnixTime
+  optional string schoolCode = 16;                   // only EUT_USER // only me
+  string schoolName = 17;                            // only EUT_USER 
+  string schoolGrade = 18;                           // only EUT_USER 
 }
