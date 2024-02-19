@@ -6,10 +6,7 @@ import "common.proto";
 import "error.proto";
 
 service UserService {
-  //  rpc GetMyProfile(GetMyProfileRequest) returns (GetMyProfileResponse) {}
   rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse) {}
-  //  rpc SetProfile(SetProfileRequest) returns (SetProfileResponse) {}
-  //  rpc UpdateConfig(UpdateConfigRequest) returns (UpdateConfigResponse) {}
   rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse) {}
   rpc CreateInquiry(CreateInquiryRequest) returns (CreateInquiryResponse) {}
   rpc CreateReport(CreateReportRequest) returns (CreateReportResponse) {}
@@ -19,15 +16,7 @@ service UserService {
   rpc GetRandomNick(GetRandomNickRequest) returns (GetRandomNickResponse) {}
   rpc GetUserByPhone(GetUserByPhoneRequest) returns (GetUserByPhoneResponse) {}
   rpc CreateAnonymous(CreateAnonymousRequest) returns (CreateAnonymousResponse) {}
-  // {} rpc GetUserByUid(GetUserByUidRequest) returns (GetUserByUidResponse) {}
 }
-
-// message GetMyProfileRequest {}
-//
-// message GetMyProfileResponse {
-//   Status status = 1;
-//   User user = 2;
-// }
 
 /*
 profile을 업데이트하는 서비스 -> 기존의 정보와 바뀐 정보를 조합하고 채워넣어
