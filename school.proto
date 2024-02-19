@@ -8,6 +8,7 @@ service SchoolService {
   rpc GetAllSchool(GetAllSchoolRequest) returns (GetAllSchoolResponse) {}
   rpc GetNearBySchools(GetNearBySchoolsRequest)
       returns (GetNearBySchoolsResponse) {}
+  rpc SearchSchool(SearchSchoolRequest) returns (SearchSchoolResponse) {}
 }
 
 message School {
@@ -27,6 +28,12 @@ message GetAllSchoolResponse {
 message GetNearBySchoolsRequest { string schoolCode = 1; }
 
 message GetNearBySchoolsResponse {
+  Status status = 1;
+  repeated School schools = 2;
+}
+
+message SearchSchoolRequest { string keyword = 1; }
+message SearchSchoolResponse {
   Status status = 1;
   repeated School schools = 2;
 }
