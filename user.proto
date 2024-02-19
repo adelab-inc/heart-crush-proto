@@ -92,11 +92,14 @@ message StudentsInGrade {
   repeated User students = 2;
 }
 
-message GetStudentsRequest { string schoolCode = 1; }
+message GetStudentsRequest {
+  optional string schoolCode = 1;
+  optional string name = 2;
+}
 
 message GetStudentsResponse {
   Status status = 1;
-  repeated StudentsInGrade allGradeStudents = 2;
+  repeated User students = 2;
 }
 
 message GetUsersByUuidsRequest { repeated string uuids = 1; }
