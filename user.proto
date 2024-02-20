@@ -13,8 +13,14 @@ service UserService {
       returns (GetUsersByUuidsResponse) {}
   rpc GetRandomNick(GetRandomNickRequest) returns (GetRandomNickResponse) {}
   rpc GetUserByPhone(GetUserByPhoneRequest) returns (GetUserByPhoneResponse) {}
+
+  // * 익명 프로필 서비스
   rpc CreateAnonymous(CreateAnonymousRequest)
       returns (CreateAnonymousResponse) {}
+
+  rpc GetSentHeart(GetSentHeartRequest) returns (GetSentHeartResponse) {}
+  rpc GetReceivedHeart(GetReceivedHeartRequest)
+      returns (GetReceivedHeartResponse) {}
 }
 
 /*
@@ -92,11 +98,23 @@ message GetUserByPhoneResponse {
   User user = 2;
 }
 
+// * 익명 프로필 서비스
 message CreateAnonymousRequest { // 짝사랑 Anonymous 포함
   User user = 1;                 // uid 필드는 ignore됩니다.
 }
-
 message CreateAnonymousResponse {
   Status status = 1;
   string uid = 2;
+}
+
+message GetSentHeartRequest {}
+message GetSentHeartResponse {
+  Status status = 1;
+  User sentHeart = 2;
+}
+
+message GetReceivedHeartRequest {}
+message GetReceivedHeartResponse {
+  Status status = 1;
+  repeated User receivedHeart = 2;
 }
