@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+option go_package = "telepathy-server/proto";
+
+import "error.proto";
+
+service ContactService {
+  rpc CreateInquiry(CreateInquiryRequest) returns (CreateInquiryResponse) {}
+  rpc CreateReport(CreateReportRequest) returns (CreateReportResponse) {}
+}
+
+enum EContactType {
+  ECT_INQUIRY = 0;
+  ECT_REPORT = 1;
+}
+
+enum EInquiryType {
+  EIT_SERVICE_MANUAL = 0;
+  EIT_SERVICE_ERROR = 1;
+  EIT_ACCOUNT_ERROR = 2;
+  EIT_PROPOSAL = 3;
+  EIT_ETC = 4;
+}
+
+enum EReportType {
+  ERT_CHEAT = 0;
+  ERT_VIOLENCE = 1;
+  ERT_SEXUAl_CRIME = 2;
+  ERT_BULLYING = 3;
+  ERT_ETC = 4;
+}
+
+enum ETargetType {
+  ETT_USER = 0;
+  ETT_MESSAGE = 1;
+}
+
+message CreateInquiryRequest {
+  EContactType contact_type = 1;
+  EInquiryType inquiry_type = 2;
+  string title = 3;
+  optional string content = 4;
+  string reply_email = 5;
+  repeated bytes images = 6;
+  bool agreement = 7;
+}
+
+message CreateInquiryResponse { Status status = 1; }
+
+message CreateReportRequest {
+  EContactType contact_type = 1;
+  EReportType report_type = 2;
+  ETargetType target_type = 3;
+  string target_id = 4;
+  string detail = 5;
+}
+message CreateReportResponse { Status status = 1; }
