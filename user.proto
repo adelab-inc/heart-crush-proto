@@ -15,8 +15,10 @@ service UserService {
   rpc GetUserByPhone(GetUserByPhoneRequest) returns (GetUserByPhoneResponse) {}
 
   // * 익명 프로필 서비스
-  rpc CreateAnonymous(CreateAnonymousRequest)
-      returns (CreateAnonymousResponse) {}
+  rpc CreateAnonymousProfile(CreateAnonymousProfileRequest)
+      returns (CreateAnonymousProfileResponse) {}
+  rpc CreateCrushProfile(CreateCrushProfileRequest)
+      returns (CreateCrushProfileResponse) {}
 
   rpc GetSentHeart(GetSentHeartRequest) returns (GetSentHeartResponse) {}
   rpc GetReceivedHeart(GetReceivedHeartRequest)
@@ -99,12 +101,21 @@ message GetUserByPhoneResponse {
 }
 
 // * 익명 프로필 서비스
-message CreateAnonymousRequest { // 짝사랑 Anonymous 포함
-  User user = 1;                 // uid 필드는 ignore됩니다.
-}
-message CreateAnonymousResponse {
+message CreateAnonymousProfileRequest { User user = 1; }
+message CreateAnonymousProfileResponse {
   Status status = 1;
-  string uid = 2;
+  User profile = 2;
+}
+
+message CreateCrushProfileRequest {
+  User user = 1;
+  bool is_target_exist = 2;
+  optional string target_phone_number = 3;
+  optional string target_name = 4;
+}
+message CreateCrushProfileResponse {
+  Status status = 1;
+  User profile = 2;
 }
 
 message GetSentHeartRequest {}
