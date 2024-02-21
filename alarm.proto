@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+option go_package = "telepathy-server/proto";
+
+// import "common.proto";
+import "google/protobuf/timestamp.proto";
+import "error.proto";
+
+enum EAlarmType {
+  EAT_BLUETOOTH = 0;
+  EAT_LIKE = 1;
+  EAT_SYSTEM = 2;
+  EAT_QUESTION = 3;
+}
+
+service AlarmService {
+  rpc GetAlarms(GetAlarmsRequest) returns (GetAlarmsResponse) {}
+  rpc UpdateAlarms(UpdateAlarmsRequest) returns (UpdateAlarmsResponse) {}
+}
+
+// * Entity
+message Alarm {
+  string id = 1;
+  optional EAlarmType type = 2;
+  optional string title = 3;
+  optional string body = 4;
+  optional bool is_read = 5;
+  optional string data = 6;
+  optional google.protobuf.Timestamp createdAt = 7;
+}
+
+// * Request & Response
+message GetAlarmsRequest {}
+message GetAlarmsResponse {
+  Status status = 1;
+  repeated Alarm alarms = 2;
+}
+
+message UpdateAlarmsRequest { repeated Alarm alarms = 1; }
+message UpdateAlarmsResponse { Status status = 1; }

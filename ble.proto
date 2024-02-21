@@ -2,7 +2,6 @@ syntax = "proto3";
 
 option go_package = "telepathy-server/proto";
 
-import "common.proto";
 import "error.proto";
 
 service BLEService {
@@ -19,7 +18,6 @@ message CreateBLERecordResponse {
 }
 
 message CreateBLERecordsRequest {
-  reserved 1;
   repeated string targetUids = 2;
 }
 

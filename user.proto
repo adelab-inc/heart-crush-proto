@@ -6,27 +6,24 @@ import "common.proto";
 import "error.proto";
 
 service UserService {
-  //  rpc GetMyProfile(GetMyProfileRequest) returns (GetMyProfileResponse) {}
   rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse) {}
-  //  rpc SetProfile(SetProfileRequest) returns (SetProfileResponse) {}
-  //  rpc UpdateConfig(UpdateConfigRequest) returns (UpdateConfigResponse) {}
   rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse) {}
-  rpc CreateInquiry(CreateInquiryRequest) returns (CreateInquiryResponse) {}
-  rpc CreateReport(CreateReportRequest) returns (CreateReportResponse) {}
   rpc GetStudents(GetStudentsRequest) returns (GetStudentsResponse) {}
   rpc GetUsersByUuids(GetUsersByUuidsRequest)
       returns (GetUsersByUuidsResponse) {}
   rpc GetRandomNick(GetRandomNickRequest) returns (GetRandomNickResponse) {}
   rpc GetUserByPhone(GetUserByPhoneRequest) returns (GetUserByPhoneResponse) {}
-  // {} rpc GetUserByUid(GetUserByUidRequest) returns (GetUserByUidResponse) {}
-}
 
-// message GetMyProfileRequest {}
-//
-// message GetMyProfileResponse {
-//   Status status = 1;
-//   User user = 2;
-// }
+  // * 익명 프로필 서비스
+  rpc CreateAnonymousProfile(CreateAnonymousProfileRequest)
+      returns (CreateAnonymousProfileResponse) {}
+  rpc CreateCrushProfile(CreateCrushProfileRequest)
+      returns (CreateCrushProfileResponse) {}
+
+  rpc GetSentHeart(GetSentHeartRequest) returns (GetSentHeartResponse) {}
+  rpc GetReceivedHeart(GetReceivedHeartRequest)
+      returns (GetReceivedHeartResponse) {}
+}
 
 /*
 profile을 업데이트하는 서비스 -> 기존의 정보와 바뀐 정보를 조합하고 채워넣어
@@ -40,6 +37,9 @@ message UpdateUserRequest {
   optional string name = 1;
   optional string description = 2;
   optional string schoolCode = 3;
+
+  optional string schoolName = 12; // 학교 풀네임 이동
+
   repeated ChipItem chips = 4;
   optional string profileImgURL = 5;
   optional string thumbnailImgURL = 6;
@@ -62,41 +62,19 @@ message DeleteUserResponse {
   Status status = 1;
 }
 
-message CreateInquiryRequest {
-  string kind = 1;
-  string title = 2;
-  string content = 3;
-  string replyEmail = 4;
-  repeated bytes images = 5;
-  bool agreement = 6;
-}
-
-message CreateInquiryResponse {
-  // Error_KST_FAILED, Error_MONGO_INSERT, Error_NO_ERROR
-  Status status = 1;
-}
-
-message CreateReportRequest {
-  string kind = 1;
-  string target = 2;
-  string problemType = 3;
-  string problemDetail = 4;
-}
-message CreateReportResponse {
-  // Error_KST_FAILED, Error_MONGO_INSERT, Error_NO_ERROR
-  Status status = 1;
-}
-
 message StudentsInGrade {
   int32 grade = 1;
   repeated User students = 2;
 }
 
-message GetStudentsRequest { string schoolCode = 1; }
+message GetStudentsRequest {
+  optional string schoolCode = 1;
+  optional string name = 2;
+}
 
 message GetStudentsResponse {
   Status status = 1;
-  repeated StudentsInGrade allGradeStudents = 2;
+  repeated User students = 2;
 }
 
 message GetUsersByUuidsRequest { repeated string uuids = 1; }
@@ -120,4 +98,34 @@ message GetUserByPhoneRequest {
 message GetUserByPhoneResponse {
   Status status = 1;
   User user = 2;
+}
+
+// * 익명 프로필 서비스
+message CreateAnonymousProfileRequest { User user = 1; }
+message CreateAnonymousProfileResponse {
+  Status status = 1;
+  User profile = 2;
+}
+
+message CreateCrushProfileRequest {
+  User user = 1;
+  bool is_target_exist = 2;
+  optional string target_phone_number = 3;
+  optional string target_name = 4;
+}
+message CreateCrushProfileResponse {
+  Status status = 1;
+  User profile = 2;
+}
+
+message GetSentHeartRequest {}
+message GetSentHeartResponse {
+  Status status = 1;
+  User sentHeart = 2;
+}
+
+message GetReceivedHeartRequest {}
+message GetReceivedHeartResponse {
+  Status status = 1;
+  repeated User receivedHeart = 2;
 }
