@@ -1,0 +1,77 @@
+syntax = "proto3";
+
+option go_package = "telepathy-server/proto";
+
+import "google/protobuf/timestamp.proto";
+import "error.proto";
+
+service FriendRequestService {
+  rpc SendFriendRequest(SendFriendRequestRequest) returns (SendFriendRequestResponse);
+  rpc AcceptFriendRequest(AcceptFriendRequestRequest) returns (AcceptFriendRequestResponse);
+  rpc RejectFriendRequest(RejectFriendRequestRequest) returns (RejectFriendRequestResponse);
+  rpc CancelFriendRequest(CancelFriendRequestRequest) returns (CancelFriendRequestResponse);
+  rpc GetFriendRequests(GetFriendRequestsRequest) returns (GetFriendRequestsResponse);
+}
+
+enum ERequestStatus {
+  ERS_UNSPECIFIED = 0;
+  ERS_REQUESTED = 1;
+  ERS_ACCEPTED = 2;
+  ERS_REJECTED = 3;
+  ERS_CANCELLED = 4;
+}
+
+message FriendRequest {
+  string from = 1;
+  string to = 2;
+  ERequestStatus status = 3;
+  optional google.protobuf.Timestamp requested_at = 4; // 내가 요청을 보낸 시간
+  optional google.protobuf.Timestamp accepted_at = 5; // 상대방이 요청을 수락한 경우
+  optional google.protobuf.Timestamp rejected_at = 6; // 상대방이 요청을 거절한 경우
+  optional google.protobuf.Timestamp cancelled_at = 7; // 내가 요청을 취소한 경우
+}
+
+message SendFriendRequestRequest {
+  string from = 1;
+  string to = 2;
+}
+
+message SendFriendRequestResponse {
+  Status status = 1;
+}
+
+message AcceptFriendRequestRequest {
+  string from = 1;
+  string to = 2;
+}
+
+message AcceptFriendRequestResponse {
+  Status status = 1;
+}
+
+message RejectFriendRequestRequest {
+  string from = 1;
+  string to = 2;
+}
+
+message RejectFriendRequestResponse {
+  Status status = 1;
+}
+
+message CancelFriendRequestRequest {
+  string from = 1;
+  string to = 2;
+}
+
+message CancelFriendRequestResponse {
+  Status status = 1;
+}
+
+message GetFriendRequestsRequest {
+  string userId = 1;
+}
+
+message GetFriendRequestsResponse {
+  Status status = 1;
+  repeated string requests = 2;
+}
