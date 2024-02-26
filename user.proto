@@ -19,10 +19,14 @@ service UserService {
       returns (CreateAnonymousProfileResponse) {}
   rpc CreateCrushProfile(CreateCrushProfileRequest)
       returns (CreateCrushProfileResponse) {}
-
+  rpc GetAnonymousProfile(GetAnonymousProfileRequest)
+      returns (GetAnonymousProfileResponse) {}
+  rpc GetCrushProfile(GetCrushProfileRequest)
+      returns (GetCrushProfileResponse) {}
   rpc GetSentHeart(GetSentHeartRequest) returns (GetSentHeartResponse) {}
   rpc GetReceivedHeart(GetReceivedHeartRequest)
       returns (GetReceivedHeartResponse) {}
+  rpc DeleteProfile(DeleteProfileRequest) returns (DeleteProfileResponse) {}
 }
 
 /*
@@ -118,6 +122,18 @@ message CreateCrushProfileResponse {
   User profile = 2;
 }
 
+message GetAnonymousProfileRequest {}
+message GetAnonymousProfileResponse {
+  Status status = 1;
+  User profile = 2;
+}
+
+message GetCrushProfileRequest {}
+message GetCrushProfileResponse {
+  Status status = 1;
+  User profile = 2;
+}
+
 message GetSentHeartRequest {}
 message GetSentHeartResponse {
   Status status = 1;
@@ -129,3 +145,6 @@ message GetReceivedHeartResponse {
   Status status = 1;
   repeated User receivedHeart = 2;
 }
+
+message DeleteProfileRequest { string profile_id = 1; }
+message DeleteProfileResponse { Status status = 1; }
