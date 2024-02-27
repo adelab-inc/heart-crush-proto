@@ -33,16 +33,16 @@ message AuthUser {
   string uid = 1;
   string phone = 2;
   string password = 3;
-  int64 createdAt = 4;      // UnixTime -> change to localtime (ex. kst)
-  int64 phoneUpdatedAt = 5; // UnixTime
-  int64 passwordUpdatedAt = 6;
+  int64 created_at = 4;      // UnixTime -> change to localtime (ex. kst)
+  int64 phone_updated_at = 5; // UnixTime
+  int64 password_updated_at = 6;
 }
 
 message Term {
   string uid = 1;
   bool agree = 2;
-  int64 createdAt = 3; // UnixTime -> change to localtime (ex. kst)
-  int64 updatedAt = 4; // UnixTime
+  int64 created_at = 3; // UnixTime -> change to localtime (ex. kst)
+  int64 updated_at = 4; // UnixTime
 }
 
 enum UserStatus {
@@ -66,7 +66,7 @@ message CreateAuthCodeRequest {string phone = 1;}
 message CreateAuthCodeResponse {
   Status status = 1;
   bool isLocked = 2;
-  int32 lockedRemainedTick = 3;
+  int32 locked_remained_tick = 3;
 }
 
 message ValidateAuthCodeRequest {
@@ -109,7 +109,7 @@ message LoginResponse {
   Status status =
       1; // USER_NOT_REGISTERED, UNEXPECTED_ERROR, AUTHENTICATE_FAILED, NO_ERROR
   bool isLocked = 2;            // user가 lock이 됐는지 확인
-  int32 lockedRemainedTick = 3; // unit is second, 남은 시간
+  int32 locked_remained_tick = 3; // unit is second, 남은 시간
   string token = 4;
 }
 
@@ -131,7 +131,7 @@ message CreateEmailAuthCodeRequest {string email = 1;}
 message CreateEmailAuthCodeResponse {
   Status status = 1;
   bool isLocked = 2;            // user가 lock이 됐는지 확인
-  int32 lockedRemainedTick = 3; // unit is second, 남은 시간
+  int32 locked_remained_tick = 3; // unit is second, 남은 시간
 }
 
 message ValidateEmailAuthCodeRequest {
@@ -158,8 +158,8 @@ message UpdatePhoneNumberResponse {Status status = 1;}
 message TestTokenRequest {string uid = 1;}
 
 message TestTokenResponse {
-  string idToken = 1;
-  string refreshToken = 2;
+  string id_token = 1;
+  string refresh_token = 2;
 }
 
 message BannedUser {

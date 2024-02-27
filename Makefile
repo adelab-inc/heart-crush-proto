@@ -12,8 +12,9 @@ REMOTE_GRPC_OUT=../telepathy-server/proto/generated
 REMOTE_FLUTTER_OUT=../ble-app/lib/utils/grpc/proto
 
 flutter-app:
-	$(PROTOC) -I $(REMOTE_DIR) \
-		--dart_out=$(REMOTE_FLUTTER_OUT) \
+	$(PROTOC) \
+		--dart_out=grpc:$(REMOTE_FLUTTER_OUT) \
+		-I. \
 		$(REMOTE_FILES) \
   	google/protobuf/timestamp.proto google/protobuf/wrappers.proto
 

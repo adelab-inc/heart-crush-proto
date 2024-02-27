@@ -26,7 +26,7 @@ message Alarm {
   optional string body = 4;
   optional bool is_read = 5;
   optional string data = 6;
-  optional google.protobuf.Timestamp createdAt = 7;
+  optional google.protobuf.Timestamp created_at = 7;
 }
 
 // * Request & Response
