@@ -18,6 +18,7 @@ service FriendService {
       returns (CreateBlockedFriendResponse) {}
   rpc DeleteBlockedFriend(DeleteBlockedFriendRequest)
       returns (DeleteBlockedFriendResponse) {}
+  rpc GetFriends(GetFriendsRequest) returns (GetFriendsResponse) {}
   rpc GetBestFriends(GetBestFriendsRequest) returns (GetBestFriendsResponse) {}
   rpc UpdateBestFriends(UpdateBestFriendsRequest)
       returns (UpdateBestFriendsResponse) {}
@@ -65,6 +66,13 @@ message CreateBlockedFriendResponse { Status status = 1; }
 message DeleteBlockedFriendRequest { string friendId = 2; }
 
 message DeleteBlockedFriendResponse { Status status = 1; }
+
+message GetFriendsRequest {}
+
+message GetFriendsResponse {
+  Status status = 1;
+  repeated User friends = 2;
+}
 
 message GetBestFriendsRequest {}
 
