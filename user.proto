@@ -27,6 +27,7 @@ service UserService {
   rpc GetReceivedHeart(GetReceivedHeartRequest)
       returns (GetReceivedHeartResponse) {}
   rpc DeleteProfile(DeleteProfileRequest) returns (DeleteProfileResponse) {}
+  rpc SearchUsers(SearchUsersRequest) returns (SearchUsersResponse) {}
 }
 
 /*
@@ -59,7 +60,7 @@ message UpdateUserResponse {
   optional User user = 2;
 }
 
-message DeleteUserRequest { string reason = 2; }
+message DeleteUserRequest {string reason = 2;}
 
 message DeleteUserResponse {
   // Error_INVALID_UID,Error_MONGO_DELETE, Error_MONGO_INSERT, Error_NO_ERROR
@@ -81,7 +82,7 @@ message GetStudentsResponse {
   repeated User students = 2;
 }
 
-message GetUsersByUuidsRequest { repeated string uuids = 1; }
+message GetUsersByUuidsRequest {repeated string uuids = 1;}
 
 message GetUsersByUuidsResponse {
   Status status = 1;
@@ -105,7 +106,7 @@ message GetUserByPhoneResponse {
 }
 
 // * 익명 프로필 서비스
-message CreateAnonymousProfileRequest { User user = 1; }
+message CreateAnonymousProfileRequest {User user = 1;}
 message CreateAnonymousProfileResponse {
   Status status = 1;
   User profile = 2;
@@ -146,5 +147,16 @@ message GetReceivedHeartResponse {
   repeated User receivedHeart = 2;
 }
 
-message DeleteProfileRequest { string profile_id = 1; }
-message DeleteProfileResponse { Status status = 1; }
+message DeleteProfileRequest {string profile_id = 1;}
+message DeleteProfileResponse {Status status = 1;}
+
+
+message SearchUsersRequest {
+  repeated string uuids = 1;
+  repeated string phone_number_hashes = 2;
+}
+
+message SearchUsersResponse {
+  Status status = 1;
+  repeated User users = 2;
+}
