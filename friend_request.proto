@@ -7,9 +7,7 @@ import "error.proto";
 
 service FriendRequestService {
   rpc SendFriendRequest(SendFriendRequestRequest) returns (SendFriendRequestResponse);
-  rpc AcceptFriendRequest(AcceptFriendRequestRequest) returns (AcceptFriendRequestResponse);
-  rpc RejectFriendRequest(RejectFriendRequestRequest) returns (RejectFriendRequestResponse);
-  rpc CancelFriendRequest(CancelFriendRequestRequest) returns (CancelFriendRequestResponse);
+  rpc UpdateFriendRequestStatus(UpdateFriendRequestStatusRequest) returns (UpdateFriendRequestStatusResponse); // ACCEPTED, REJECTED, CANCELED
   rpc GetFriendRequests(GetFriendRequestsRequest) returns (GetFriendRequestsResponse); // 받은 친구 요청들
   rpc GetSentFriendRequests(GetSentFriendRequestsRequest) returns (GetSentFriendRequestsResponse); // 보낸 친구 요청들
 }
@@ -41,27 +39,12 @@ message SendFriendRequestResponse {
   Status status = 1;
 }
 
-message AcceptFriendRequestRequest {
+message UpdateFriendRequestStatusRequest {
   string id = 1;
+  EFriendRequestStatus status = 2;
 }
 
-message AcceptFriendRequestResponse {
-  Status status = 1;
-}
-
-message RejectFriendRequestRequest {
-  string id = 1;
-}
-
-message RejectFriendRequestResponse {
-  Status status = 1;
-}
-
-message CancelFriendRequestRequest {
-  string id = 2;
-}
-
-message CancelFriendRequestResponse {
+message UpdateFriendRequestStatusResponse {
   Status status = 1;
 }
 
