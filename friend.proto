@@ -6,12 +6,6 @@ import "common.proto";
 import "error.proto";
 
 service FriendService {
-  // 주기적으로(앱을 처음 키는 시점 정도로) 추천친구를 가져오는 서비스
-  rpc GetRecommendFriendsUID(GetRecommendFriendsUIDRequest)
-      returns (GetRecommendFriendsUIDResponse) {}
-  // 제공된 추천친구 uid들을 기반으로 친구정보를 가져오는 서비스
-  rpc GetRecommendFriends(GetRecommendFriendsRequest)
-      returns (GetRecommendFriendsResponse) {}
   rpc GetBlockedFriends(GetBlockedFriendsRequest)
       returns (GetBlockedFriendsResponse) {}
   rpc CreateBlockedFriend(CreateBlockedFriendRequest)
@@ -26,29 +20,11 @@ service FriendService {
   rpc CreateBestFriend(CreateBestFriendRequest)
       returns (CreateBestFriendResponse) {}
   rpc GetWhoCrushMe(GetWhoCrushMeRequest) returns (GetWhoCrushMeResponse) {}
-  rpc GetPhoneBookFriend(GetPhoneBookFriendRequest)
-      returns (GetPhoneBookFriendResponse) {}
 }
 
 message BestFriendRequest {
   string uid = 1;
   bool alarm = 2;
-}
-
-message GetRecommendFriendsUIDRequest {repeated string phoneBookFriends = 1;}
-
-message GetRecommendFriendsUIDResponse {
-  Status status = 1;
-  repeated string recommendedFriendsUID = 2;
-}
-
-message GetRecommendFriendsRequest {
-  repeated string recommendedFriendsUID = 1;
-}
-
-message GetRecommendFriendsResponse {
-  Status status = 1;
-  repeated User recommendedFriends = 2;
 }
 
 message GetBlockedFriendsRequest {}
@@ -99,12 +75,3 @@ message CreateBestFriendResponse {Status status = 1;}
 message DeleteBestFriendRequest {string friendId = 1;}
 
 message DeleteBestFriendResponse {Status status = 1;}
-
-message GetPhoneBookFriendRequest {
-  string phone_number_hash = 1;
-}
-
-message GetPhoneBookFriendResponse {
-  Status status = 1;
-  User user = 2;
-}

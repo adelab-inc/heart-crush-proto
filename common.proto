@@ -50,6 +50,8 @@ message User {
   optional string target_uid = 22;                      // only EUT_CRUSH
   optional google.protobuf.Timestamp crush_ended_at = 23; // only EUT_CRUSH
 
+  optional string phone_hash = 24; // only EUT_USER // only searchUser's phone_hashes
+
   string uid = 1;
   string name = 2;
   string description = 3;
