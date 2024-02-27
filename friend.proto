@@ -35,7 +35,7 @@ message BestFriendRequest {
   bool alarm = 2;
 }
 
-message GetRecommendFriendsUIDRequest { repeated string phoneBookFriends = 1; }
+message GetRecommendFriendsUIDRequest {repeated string phoneBookFriends = 1;}
 
 message GetRecommendFriendsUIDResponse {
   Status status = 1;
@@ -58,13 +58,13 @@ message GetBlockedFriendsResponse {
   repeated User blockedFriends = 2;
 }
 
-message CreateBlockedFriendRequest { string friendId = 1; }
+message CreateBlockedFriendRequest {string friendId = 1;}
 
-message CreateBlockedFriendResponse { Status status = 1; }
+message CreateBlockedFriendResponse {Status status = 1;}
 
-message DeleteBlockedFriendRequest { string friendId = 2; }
+message DeleteBlockedFriendRequest {string friendId = 2;}
 
-message DeleteBlockedFriendResponse { Status status = 1; }
+message DeleteBlockedFriendResponse {Status status = 1;}
 
 message GetBestFriendsRequest {}
 
@@ -73,9 +73,9 @@ message GetBestFriendsResponse {
   repeated User bestFriends = 2;
 }
 
-message UpdateBestFriendsRequest { repeated BestFriendRequest bestFriends = 2; }
+message UpdateBestFriendsRequest {repeated BestFriendRequest bestFriends = 2;}
 
-message UpdateBestFriendsResponse { Status status = 1; }
+message UpdateBestFriendsResponse {Status status = 1;}
 
 message CreateCrushRequest {
   string friendId = 2;
@@ -83,7 +83,7 @@ message CreateCrushRequest {
   string reason = 4;
 }
 
-message CreateCrushResponse { Status status = 1; }
+message CreateCrushResponse {Status status = 1;}
 
 message GetWhoCrushMeRequest {}
 
@@ -92,15 +92,17 @@ message GetWhoCrushMeResponse {
   repeated User users = 2;
 }
 
-message CreateBestFriendRequest { string friendId = 1; }
+message CreateBestFriendRequest {string friendId = 1;}
 
-message CreateBestFriendResponse { Status status = 1; }
+message CreateBestFriendResponse {Status status = 1;}
 
-message DeleteBestFriendRequest { string friendId = 1; }
+message DeleteBestFriendRequest {string friendId = 1;}
 
-message DeleteBestFriendResponse { Status status = 1; }
+message DeleteBestFriendResponse {Status status = 1;}
 
-message GetPhoneBookFriendRequest { string phoneNumber = 1; }
+message GetPhoneBookFriendRequest {
+  string phone_number_hash = 1;
+}
 
 message GetPhoneBookFriendResponse {
   Status status = 1;
