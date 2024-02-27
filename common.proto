@@ -30,11 +30,11 @@ message ChipItem {
   optional string image_url = 3;
 }
 message Config {
-  optional bool heartLock = 1;
-  optional bool systemAlarm = 2;
-  optional bool questionAlarm = 3;
-  optional bool bluetoothAlarm = 4;
-  optional bool heartAlarm = 5;
+  optional bool heart_lock = 1;
+  optional bool system_alarm = 2;
+  optional bool question_alarm = 3;
+  optional bool bluetooth_alarm = 4;
+  optional bool heart_alarm = 5;
 }
 
 enum EUserType {

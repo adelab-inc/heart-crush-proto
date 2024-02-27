@@ -46,8 +46,8 @@ message UpdateUserRequest {
   optional string schoolName = 12; // 학교 풀네임 이동
 
   repeated ChipItem chips = 4;
-  optional string profileImgURL = 5;
-  optional string thumbnailImgURL = 6;
+  optional string profile_img_url = 5;
+  optional string thumbnail_img_url = 6;
   optional string fcmToken = 7; // 서버에만 업데이트 함
   optional string birth = 8;
   optional EGender gender = 9;

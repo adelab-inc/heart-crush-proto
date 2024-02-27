@@ -5,7 +5,6 @@ option go_package = "telepathy-server/proto";
 import "google/protobuf/timestamp.proto";
 
 import "error.proto";
-import "common.proto";
 
 service QuestionService {
   rpc CreateQuestion(CreateQuestionRequest) returns (CreateQuestionResponse) {}
@@ -96,7 +95,7 @@ message GetRandomQuestionRequest {
   string targetUid = 2;
 }
 
-message GetRandomQuestionResponse { 
+message GetRandomQuestionResponse {
   Status status = 1;
   Content content = 2;
 }

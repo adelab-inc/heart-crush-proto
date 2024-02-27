@@ -1,12 +1,3 @@
-flutter-app:
-	protoc --dart_out=grpc:../ble-app/lib/utils/grpc/proto -I. \
-  ./authentication.proto ./chat.proto \
-  ./common.proto ./error.proto ./friend.proto \
-  ./health_check.proto \
-  ./school.proto ./user.proto \
-  google/protobuf/timestamp.proto google/protobuf/wrappers.proto
-
-
 # 프로토콜 버퍼 컴파일 관련 변수
 PROTOC=protoc
 PROTOC_GEN_GO=$(GOBIN)/protoc-gen-go
@@ -16,6 +7,15 @@ REMOTE_DIR=.
 REMOTE_FILES=$(wildcard $(REMOTE_DIR)/*.proto)
 REMOTE_OUT=../telepathy-server/proto/generated
 REMOTE_GRPC_OUT=../telepathy-server/proto/generated
+
+
+REMOTE_FLUTTER_OUT=../ble-app/lib/utils/grpc/proto
+
+flutter-app:
+	$(PROTOC) -I $(REMOTE_DIR) \
+		--dart_out=$(REMOTE_FLUTTER_OUT) \
+		$(REMOTE_FILES) \
+  	google/protobuf/timestamp.proto google/protobuf/wrappers.proto
 
 server: ./*.proto
 	$(PROTOC) -I $(REMOTE_DIR) \
