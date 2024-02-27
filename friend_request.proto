@@ -10,30 +10,31 @@ service FriendRequestService {
   rpc AcceptFriendRequest(AcceptFriendRequestRequest) returns (AcceptFriendRequestResponse);
   rpc RejectFriendRequest(RejectFriendRequestRequest) returns (RejectFriendRequestResponse);
   rpc CancelFriendRequest(CancelFriendRequestRequest) returns (CancelFriendRequestResponse);
-  rpc GetFriendRequests(GetFriendRequestsRequest) returns (GetFriendRequestsResponse);
+  rpc GetFriendRequests(GetFriendRequestsRequest) returns (GetFriendRequestsResponse); // 받은 친구 요청들
+  rpc GetSentFriendRequests(GetSentFriendRequestsRequest) returns (GetSentFriendRequestsResponse); // 보낸 친구 요청들
 }
 
-enum ERequestStatus {
-  ERS_UNSPECIFIED = 0;
-  ERS_REQUESTED = 1;
-  ERS_ACCEPTED = 2;
-  ERS_REJECTED = 3;
-  ERS_CANCELLED = 4;
+enum EFriendRequestStatus {
+  EFRS_UNSPECIFIED = 0;
+  EFRS_REQUESTED = 1;
+  EFRS_ACCEPTED = 2;
+  EFRS_REJECTED = 3;
+  EFRS_CANCELED = 4;
 }
 
 message FriendRequest {
-  string from = 1;
-  string to = 2;
-  ERequestStatus status = 3;
-  optional google.protobuf.Timestamp requested_at = 4; // 내가 요청을 보낸 시간
-  optional google.protobuf.Timestamp accepted_at = 5; // 상대방이 요청을 수락한 경우
-  optional google.protobuf.Timestamp rejected_at = 6; // 상대방이 요청을 거절한 경우
-  optional google.protobuf.Timestamp cancelled_at = 7; // 내가 요청을 취소한 경우
+  string id = 1;
+  string from = 2;
+  string to = 3;
+  EFriendRequestStatus status = 4;
+  optional google.protobuf.Timestamp requested_at = 5; // 내가 요청을 보낸 시간
+  optional google.protobuf.Timestamp accepted_at = 6; // 상대방이 요청을 수락한 경우
+  optional google.protobuf.Timestamp rejected_at = 7; // 상대방이 요청을 거절한 경우
+  optional google.protobuf.Timestamp canceled_at = 8; // 내가 요청을 취소한 경우
 }
 
 message SendFriendRequestRequest {
-  string from = 1;
-  string to = 2;
+  string to = 1;
 }
 
 message SendFriendRequestResponse {
@@ -41,8 +42,7 @@ message SendFriendRequestResponse {
 }
 
 message AcceptFriendRequestRequest {
-  string from = 1;
-  string to = 2;
+  string id = 1;
 }
 
 message AcceptFriendRequestResponse {
@@ -50,8 +50,7 @@ message AcceptFriendRequestResponse {
 }
 
 message RejectFriendRequestRequest {
-  string from = 1;
-  string to = 2;
+  string id = 1;
 }
 
 message RejectFriendRequestResponse {
@@ -59,8 +58,7 @@ message RejectFriendRequestResponse {
 }
 
 message CancelFriendRequestRequest {
-  string from = 1;
-  string to = 2;
+  string id = 2;
 }
 
 message CancelFriendRequestResponse {
@@ -68,10 +66,19 @@ message CancelFriendRequestResponse {
 }
 
 message GetFriendRequestsRequest {
-  string userId = 1;
+  string to = 1;
 }
 
 message GetFriendRequestsResponse {
   Status status = 1;
-  repeated string requests = 2;
+  repeated FriendRequest requests = 2;
+}
+
+message GetSentFriendRequestsRequest {
+  string from = 1;
+}
+
+message GetSentFriendRequestsResponse {
+  Status status = 1;
+  repeated FriendRequest requests = 2;
 }
