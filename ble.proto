@@ -7,6 +7,7 @@ import "error.proto";
 service BLEService {
   rpc CreateBLERecord(CreateBLERecordRequest) returns (CreateBLERecordResponse) {}
   rpc CreateBLERecords(CreateBLERecordsRequest) returns (CreateBLERecordsResponse) {}
+  rpc GetBumpedCount(GetBumpedCountRequest) returns (GetBumpedCountResponse) {}
 }
 
 message CreateBLERecordRequest {
@@ -23,4 +24,14 @@ message CreateBLERecordsRequest {
 
 message CreateBLERecordsResponse {
   Status status = 1;
+}
+
+message GetBumpedCountRequest {
+  string targetUid = 1; // 일반유저 / 익명유저 / 짝사랑유저
+  optional int32 hours = 2; // 시간을 단위로 사용 / 24 -> 1일 / 720 -> 30일
+}
+
+message GetBumpedCountResponse {
+  Status status = 1;
+  int32 count = 2;
 }
