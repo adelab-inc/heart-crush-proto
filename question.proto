@@ -13,6 +13,7 @@ service QuestionService {
   rpc DeleteQuestion(DeleteQuestionRequest) returns (DeleteQuestionResponse);
   rpc GetRandomQuestion(GetRandomQuestionRequest) returns (GetRandomQuestionResponse);
   rpc GetQuestionTypeCount(GetQuestionTypeCountRequest) returns (GetQuestionTypeCountResponse);
+  rpc QuestionCategoryList(QuestionCategoryListRequest) returns (QuestionCategoryListResponse);
 }
 
 enum EQuestionType {
@@ -67,6 +68,16 @@ message Content {
 message Option {
   int32 idx = 1;
   string text = 2;
+}
+
+message CountOfQuestionType {
+  EQuestionType question_type = 1;
+  int32 count = 2;
+}
+
+message CategoryList {
+  EQuestionType question_type = 1;
+  repeated EQuestionCategory question_category = 2;
 }
 
 message CreateQuestionRequest {
@@ -139,7 +150,10 @@ message GetQuestionTypeCountResponse {
   optional string error = 3;
 }
 
-message CountOfQuestionType {
-  EQuestionType question_type = 1;
-  int32 count = 2;
+message QuestionCategoryListRequest {}
+
+message QuestionCategoryListResponse {
+  bool success = 1;
+  repeated CategoryList data = 2;
+  optional EError error = 3;
 }
