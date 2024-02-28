@@ -47,7 +47,8 @@ enum EErrorCode {
   EEC_MONGO_CREATE_USER_FAIL = 604;
 
   // common errors
-  EEC_INVALID_UUID = 10000;
+  EEC_INVALID_METADATA = 1000;
+  EEC_INVALID_UUID = 10001;
 
   // 2X,XXX - Health Check Service
   // common errors

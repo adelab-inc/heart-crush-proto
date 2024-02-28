@@ -97,7 +97,7 @@ message GetRandomNickRequest {}
 
 message GetRandomNickResponse {
   bool success = 1;
-  string random_nick = 2;
+  optional string random_nick = 2;
   optional EError error = 3;
 }
 
@@ -107,7 +107,7 @@ message GetUserByPhoneRequest {
 
 message GetUserByPhoneResponse {
   bool success = 1;
-  User user = 2;
+  optional User user = 2;
   optional EError error = 3;
 }
 
@@ -115,7 +115,7 @@ message GetUserByPhoneResponse {
 message CreateAnonymousProfileRequest {User user = 1;}
 message CreateAnonymousProfileResponse {
   bool success = 1;
-  User profile = 2;
+  optional User profile = 2;
   optional EError error = 3;
 }
 
@@ -127,21 +127,21 @@ message CreateCrushProfileRequest {
 }
 message CreateCrushProfileResponse {
   bool success = 1;
-  User profile = 2;
+  optional User profile = 2;
   optional EError error = 3;
 }
 
 message GetAnonymousProfileRequest {}
 message GetAnonymousProfileResponse {
   bool success = 1;
-  User profile = 2;
+  optional User profile = 2;
   optional EError error = 3;
 }
 
 message GetCrushProfileRequest {}
 message GetCrushProfileResponse {
   bool success = 1;
-  User profile = 2;
+  optional User profile = 2;
   optional EError error = 3;
 }
 

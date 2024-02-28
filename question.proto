@@ -125,7 +125,7 @@ message GetRandomQuestionRequest {
 
 message GetRandomQuestionResponse {
   bool success = 1;
-  Content content = 2;
+  optional Content content = 2;
   optional EError error = 3;
 }
 
