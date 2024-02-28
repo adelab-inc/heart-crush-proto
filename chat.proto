@@ -73,7 +73,7 @@ message CreateRoomRequest {
 
 message CreateRoomResponse {
   bool success = 1;
-  Room room = 2;
+  optional Room room = 2;
   optional EError error = 3;
 }
 
@@ -117,7 +117,7 @@ message GetMsgsRequest {
 message GetMsgsResponse {
   bool success = 1;
   repeated Message msgs = 2;
-  bool has_more = 3;
+  optional bool has_more = 3;
   optional EError error = 4;
 }
 

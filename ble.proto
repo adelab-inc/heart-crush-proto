@@ -35,6 +35,6 @@ message GetBumpedCountRequest {
 
 message GetBumpedCountResponse {
   bool success = 1;
-  int32 count = 2;
+  optional int32 count = 2;
   optional EError error = 3;
 }

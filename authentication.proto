@@ -68,8 +68,8 @@ message CreateAuthCodeRequest {string phone = 1;}
 
 message CreateAuthCodeResponse {
   bool success = 1;
-  bool is_locked = 2;
-  int32 locked_remained_tick = 3;
+  optional bool is_locked = 2;
+  optional int32 locked_remained_tick = 3;
   optional EError error = 4;
 }
 
@@ -99,7 +99,7 @@ message SignUpRequest {
 
 message SignUpResponse {
   bool success = 1;
-  string token = 2;
+  optional string token = 2;
   optional EError error = 3;
 }
 
@@ -115,9 +115,9 @@ message LoginWithPasswordRequest {
 
 message LoginResponse {
   bool success = 1;
-  bool isLocked = 2;            // user가 lock이 됐는지 확인
-  int32 locked_remained_tick = 3; // unit is second, 남은 시간
-  string token = 4;
+  optional bool isLocked = 2;            // user가 lock이 됐는지 확인
+  optional int32 locked_remained_tick = 3; // unit is second, 남은 시간
+  optional string token = 4;
   optional EError error = 5;
 }
 
@@ -142,8 +142,8 @@ message CreateEmailAuthCodeRequest {string email = 1;}
 
 message CreateEmailAuthCodeResponse {
   bool success = 1;
-  bool is_locked = 2;            // user가 lock이 됐는지 확인
-  int32 locked_remained_tick = 3; // unit is second, 남은 시간
+  optional bool is_locked = 2;            // user가 lock이 됐는지 확인
+  optional int32 locked_remained_tick = 3; // unit is second, 남은 시간
   optional EError error = 4;
 }
 
@@ -155,7 +155,7 @@ message ValidateEmailAuthCodeRequest {
 message ValidateEmailAuthCodeResponse {
   // ABNORMAL_APPROACH, UNEXPECTED_ERROR, AUTHENTICATE_FAILED, NO_ERROR
   bool success = 1;
-  string token = 2;
+  optional string token = 2;
   optional EError error = 3;
 }
 
@@ -179,8 +179,8 @@ message TestTokenRequest {string uid = 1;}
 
 message TestTokenResponse {
   bool success = 1;
-  string id_token = 2;
-  string refresh_token = 3;
+  optional string id_token = 2;
+  optional string refresh_token = 3;
   optional EError error = 4;
 }
 

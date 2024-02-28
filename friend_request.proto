@@ -45,7 +45,7 @@ message SendFriendRequestRequest {
 
 message SendFriendRequestResponse {
   bool success = 1;
-  EFriendRequestResult result = 2;
+  optional EFriendRequestResult result = 2;
   optional EError error = 3;
 }
 
