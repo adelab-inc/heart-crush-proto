@@ -37,8 +37,8 @@ enum EQuestionStatus {
 message QuestionCard {
   string question_id = 1;
   EQuestionType question_type = 2;
-  string targetUserId = 3; // 내가 sender면 -> receiver 정보 / 내가 receiver면 sender 정보
-  string targetUserName = 4;
+  string target_user_id = 3; // 내가 sender면 -> receiver 정보 / 내가 receiver면 sender 정보
+  string target_user_name = 4;
   EQuestionStatus question_status = 5;
   Content content = 6;
   optional Option answer = 7; // 답장이 없는 경우 null
@@ -91,8 +91,8 @@ message DeleteQuestionRequest { string question_id = 1; }
 message DeleteQuestionResponse { Status status = 1; }
 
 message GetRandomQuestionRequest {
-  EQuestionType questionType = 1;
-  string targetUid = 2;
+  EQuestionType question_type = 1;
+  string target_uid = 2;
 }
 
 message GetRandomQuestionResponse {
