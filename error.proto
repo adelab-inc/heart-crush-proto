@@ -4,45 +4,45 @@ option go_package = "telepathy-server/proto";
 
 message Status {
   bool success = 1;
-  Error errCode = 2;
+  EError errCode = 2;
 }
 
-enum Error {
-  NO_ERROR = 0; // 에러 없음
+enum EError {
+  EE_NO_ERROR = 0; // 에러 없음
 
   // 이미 유저가 등록되어 있는 경우 -> Login 유도 필요
-  USER_ALREADY_REGISTERED = 101;
+  EE_USER_ALREADY_REGISTERED = 101;
   // 유저가 등록되어 있지 않은 경우 -> register 유도 필요
-  USER_NOT_REGISTERED = 102;
-  USER_LOCKED = 103; // 유저가 lock이 되어있는 경우
+  EE_USER_NOT_REGISTERED = 102;
+  EE_USER_LOCKED = 103; // 유저가 lock이 되어있는 경우
 
-  AUTHENTICATE_FAILED = 300; // 인증 실패
-  ABNORMAL_APPROACH = 301;   // 비정상적인 접근
+  EE_AUTHENTICATE_FAILED = 300; // 인증 실패
+  EE_ABNORMAL_APPROACH = 301;   // 비정상적인 접근
 
-  REQUIREDFIELD_MISSING = 400; // 필수적인 데이터가 누락되어 전달된 경우
-  INVALID_UID = 401; // hex값인 uid를 ObjectId 타입으로 변환하지 못하는 경우
-  MAKE_UID_FAILED = 402;
+  EE_REQUIREDFIELD_MISSING = 400; // 필수적인 데이터가 누락되어 전달된 경우
+  EE_INVALID_UID = 401; // hex값인 uid를 ObjectId 타입으로 변환하지 못하는 경우
+  EE_MAKE_UID_FAILED = 402;
 
   // 만약 해당 error가 발생하면 꼭! 백엔드 쪽에 알려주세요!
-  UNEXPECTED_ERROR = 500;
+  EE_UNEXPECTED_ERROR = 500;
   // SMS 인증코드가 어떠한 이유로 보내지지 않았을 경우
-  SMS_SEND_ERROR = 501;
-  FILE_UPLOAD_ERROR = 502;
-  KST_FAILED = 503;
-  MAIL_SEND_ERROR = 504;
-  CUSTOM_TOKEN_GENERATE = 505;
-  FCM_SEND = 506;
-  E164_TO_PHONE = 507;
-  PHONE_TO_E164 = 508;
-  FB_DELETE_USER = 509;
-  CRUSH_NOT_SET = 510;
-  CRUSH_ALREADY_SET = 511;
-  MARSHAL_FAIL = 512;
-  ROOM_DOES_NOT_EXIST = 513;
+  EE_SMS_SEND_ERROR = 501;
+  EE_FILE_UPLOAD_ERROR = 502;
+  EE_KST_FAILED = 503;
+  EE_MAIL_SEND_ERROR = 504;
+  EE_CUSTOM_TOKEN_GENERATE = 505;
+  EE_FCM_SEND = 506;
+  EE_E164_TO_PHONE = 507;
+  EE_PHONE_TO_E164 = 508;
+  EE_FB_DELETE_USER = 509;
+  EE_CRUSH_NOT_SET = 510;
+  EE_CRUSH_ALREADY_SET = 511;
+  EE_MARSHAL_FAIL = 512;
+  EE_ROOM_DOES_NOT_EXIST = 513;
 
-  MONGO_INSERT = 600;
-  MONGO_READ = 601;
-  MONGO_UPDATE = 602;
-  MONGO_DELETE = 603;
-  MONGO_CREATE_USER_FAIL = 604;
+  EE_MONGO_INSERT = 600;
+  EE_MONGO_READ = 601;
+  EE_MONGO_UPDATE = 602;
+  EE_MONGO_DELETE = 603;
+  EE_MONGO_CREATE_USER_FAIL = 604;
 }
