@@ -10,9 +10,9 @@ service ContactService {
 }
 
 enum EContactType {
-  ECT_UNSPECIFIED = 0;
-  ECT_INQUIRY = 1;
-  ECT_REPORT = 2;
+  ECONTACT_UNSPECIFIED = 0;
+  ECONTACT_INQUIRY = 1;
+  ECONTACT_REPORT = 2;
 }
 
 enum EInquiryType {
@@ -25,12 +25,12 @@ enum EInquiryType {
 }
 
 enum EReportType {
-  ERT_UNSPECIFIED = 0;
-  ERT_CHEAT = 1;
-  ERT_VIOLENCE = 2;
-  ERT_SEXUAl_CRIME = 3;
-  ERT_BULLYING = 4;
-  ERT_ETC = 5;
+  EREPORT_UNSPECIFIED = 0;
+  EREPORT_CHEAT = 1;
+  EREPORT_VIOLENCE = 2;
+  EREPORT_SEXUAL_CRIME = 3;
+  EREPORT_BULLYING = 4;
+  EREPORT_ETC = 5;
 }
 
 enum ETargetType {
