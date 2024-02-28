@@ -3,6 +3,7 @@ syntax = "proto3";
 option go_package = "telepathy-server/proto";
 
 import "common.proto";
+import "error.proto";
 
 service FriendService {
   // 주기적으로(앱을 처음 키는 시점 정도로) 추천친구를 가져오는 서비스
@@ -40,7 +41,7 @@ message GetRecommendFriendsUIDRequest {repeated string phone_book_friends = 1;}
 message GetRecommendFriendsUIDResponse {
   bool success = 1;
   repeated string recommended_friends_uid = 2;
-  optional string error = 3;
+  optional EError error = 3;
 }
 
 message GetRecommendFriendsRequest {
@@ -50,7 +51,7 @@ message GetRecommendFriendsRequest {
 message GetRecommendFriendsResponse {
   bool success = 1;
   repeated User recommended_friends = 2;
-  optional string error = 3;
+  optional EError error = 3;
 }
 
 message GetBlockedFriendsRequest {}
@@ -58,21 +59,21 @@ message GetBlockedFriendsRequest {}
 message GetBlockedFriendsResponse {
   bool success = 1;
   repeated User blocked_friends = 2;
-  optional string error = 3;
+  optional EError error = 3;
 }
 
 message CreateBlockedFriendRequest {string friend_id = 1;}
 
 message CreateBlockedFriendResponse {
   bool success = 1;
-  optional string error = 2;
+  optional EError error = 2;
 }
 
 message DeleteBlockedFriendRequest {string friend_id = 2;}
 
 message DeleteBlockedFriendResponse {
   bool success = 1;
-  optional string error = 2;
+  optional EError error = 2;
 }
 
 message GetFriendsRequest {}
@@ -80,7 +81,7 @@ message GetFriendsRequest {}
 message GetFriendsResponse {
   bool success = 1;
   repeated User friends = 2;
-  optional string error = 3;
+  optional EError error = 3;
 }
 
 message GetBestFriendsRequest {}
@@ -88,14 +89,14 @@ message GetBestFriendsRequest {}
 message GetBestFriendsResponse {
   bool success = 1;
   repeated User best_friends = 2;
-  optional string error = 3;
+  optional EError error = 3;
 }
 
 message UpdateBestFriendsRequest {repeated BestFriendRequest best_friends = 2;}
 
 message UpdateBestFriendsResponse {
   bool success = 1;
-  optional string error = 2;
+  optional EError error = 2;
 }
 
 message CreateCrushRequest {
@@ -106,7 +107,7 @@ message CreateCrushRequest {
 
 message CreateCrushResponse {
   bool success = 1;
-  optional string error = 2;
+  optional EError error = 2;
 }
 
 message GetWhoCrushMeRequest {}
@@ -114,21 +115,21 @@ message GetWhoCrushMeRequest {}
 message GetWhoCrushMeResponse {
   bool success = 1;
   repeated User users = 2;
-  optional string error = 3;
+  optional EError error = 3;
 }
 
 message CreateBestFriendRequest {string friend_id = 1;}
 
 message CreateBestFriendResponse {
   bool success = 1;
-  optional string error = 2;
+  optional EError error = 2;
 }
 
 message DeleteBestFriendRequest {string friend_id = 1;}
 
 message DeleteBestFriendResponse {
   bool success = 1;
-  optional string error = 2;
+  optional EError error = 2;
 }
 
 message GetPhoneBookFriendRequest {
@@ -138,5 +139,5 @@ message GetPhoneBookFriendRequest {
 message GetPhoneBookFriendResponse {
   bool success = 1;
   User user = 2;
-  optional string error = 3;
+  optional EError error = 3;
 }
