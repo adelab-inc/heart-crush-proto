@@ -2,47 +2,90 @@ syntax = "proto3";
 
 option go_package = "telepathy-server/proto";
 
-message Status {
-  bool success = 1;
-  EError errCode = 2;
+message EError {
+  EErrorCode code = 1;
+  string message = 2;
 }
 
-enum EError {
-  EE_NO_ERROR = 0; // 에러 없음
+enum EErrorCode {
+  EEC_NO_ERROR = 0; // 에러 없음
 
   // 이미 유저가 등록되어 있는 경우 -> Login 유도 필요
-  EE_USER_ALREADY_REGISTERED = 101;
+  EEC_USER_ALREADY_REGISTERED = 101;
   // 유저가 등록되어 있지 않은 경우 -> register 유도 필요
-  EE_USER_NOT_REGISTERED = 102;
-  EE_USER_LOCKED = 103; // 유저가 lock이 되어있는 경우
+  EEC_USER_NOT_REGISTERED = 102;
+  EEC_USER_LOCKED = 103; // 유저가 lock이 되어있는 경우
 
-  EE_AUTHENTICATE_FAILED = 300; // 인증 실패
-  EE_ABNORMAL_APPROACH = 301;   // 비정상적인 접근
+  EEC_AUTHENTICATE_FAILED = 300; // 인증 실패
+  EEC_ABNORMAL_APPROACH = 301;   // 비정상적인 접근
 
-  EE_REQUIREDFIELD_MISSING = 400; // 필수적인 데이터가 누락되어 전달된 경우
-  EE_INVALID_UID = 401; // hex값인 uid를 ObjectId 타입으로 변환하지 못하는 경우
-  EE_MAKE_UID_FAILED = 402;
+  EEC_REQUIREDFIELD_MISSING = 400; // 필수적인 데이터가 누락되어 전달된 경우
+  EEC_INVALID_UID = 401; // hex값인 uid를 ObjectId 타입으로 변환하지 못하는 경우
+  EEC_MAKE_UID_FAILED = 402;
 
   // 만약 해당 error가 발생하면 꼭! 백엔드 쪽에 알려주세요!
-  EE_UNEXPECTED_ERROR = 500;
+  EEC_UNEXPECTED_ERROR = 500;
   // SMS 인증코드가 어떠한 이유로 보내지지 않았을 경우
-  EE_SMS_SEND_ERROR = 501;
-  EE_FILE_UPLOAD_ERROR = 502;
-  EE_KST_FAILED = 503;
-  EE_MAIL_SEND_ERROR = 504;
-  EE_CUSTOM_TOKEN_GENERATE = 505;
-  EE_FCM_SEND = 506;
-  EE_E164_TO_PHONE = 507;
-  EE_PHONE_TO_E164 = 508;
-  EE_FB_DELETE_USER = 509;
-  EE_CRUSH_NOT_SET = 510;
-  EE_CRUSH_ALREADY_SET = 511;
-  EE_MARSHAL_FAIL = 512;
-  EE_ROOM_DOES_NOT_EXIST = 513;
+  EEC_SMS_SEND_ERROR = 501;
+  EEC_FILE_UPLOAD_ERROR = 502;
+  EEC_KST_FAILED = 503;
+  EEC_MAIL_SEND_ERROR = 504;
+  EEC_CUSTOM_TOKEN_GENERATE = 505;
+  EEC_FCM_SEND = 506;
+  EEC_E164_TO_PHONE = 507;
+  EEC_PHONE_TO_E164 = 508;
+  EEC_FB_DELETE_USER = 509;
+  EEC_CRUSH_NOT_SET = 510;
+  EEC_CRUSH_ALREADY_SET = 511;
+  EEC_MARSHAL_FAIL = 512;
+  EEC_ROOM_DOES_NOT_EXIST = 513;
 
-  EE_MONGO_INSERT = 600;
-  EE_MONGO_READ = 601;
-  EE_MONGO_UPDATE = 602;
-  EE_MONGO_DELETE = 603;
-  EE_MONGO_CREATE_USER_FAIL = 604;
+  EEC_MONGO_INSERT = 600;
+  EEC_MONGO_READ = 601;
+  EEC_MONGO_UPDATE = 602;
+  EEC_MONGO_DELETE = 603;
+  EEC_MONGO_CREATE_USER_FAIL = 604;
+
+  // common errors
+  EEC_INVALID_UUID = 10000;
+
+  // 2X,XXX - Health Check Service
+  // common errors
+
+  // 3X,XXX - Authentication Service
+  // common errors
+
+  // 4X,XXX - User Service
+  // common errors
+
+  // 5X,XXX - Friend Service
+  // common errors
+
+  // 6X,XXX - Friend Request Service
+  // common errors
+
+  // SendFriendRequest
+  EEC_FAILED_TO_SEND_FRIEND_REQUEST = 60100;
+  EEC_EMPTY_TO = 60101;
+  EEC_FAILED_TO_FIND_USER_BY_UID_IN_MONGO = 60102;
+  EEC_INVALID_USER = 60103;
+  EEC_FAILED_TO_FIND_BLOCKED_UIDS_IN_MONGO = 60104;
+  EEC_FAILED_TO_FIND_MY_FRIEND_DOCS_IN_MONGO = 60105;
+  EEC_FAILED_TO_FIND_FRIEND_REQUEST_IN_MONGO = 60106;
+  EEC_FAILED_TO_UPSERT_FRIEND_REQUEST_DOC_IN_MONGO = 60107;
+
+  // 7X,XXX - School Service
+  // common errors
+
+  // 8X,XXX - Ble Service
+  // common errors
+
+  // 9X,XXX - Chat Service
+  // common errors
+
+  // 10,XXX - Alarm Service
+  // common errors
+
+  // 11,XXX - Question Service
+  // common errors
 }
