@@ -33,40 +33,41 @@ message AuthUser {
   string uid = 1;
   string phone = 2;
   string password = 3;
-  int64 createdAt = 4;      // UnixTime -> change to localtime (ex. kst)
-  int64 phoneUpdatedAt = 5; // UnixTime
-  int64 passwordUpdatedAt = 6;
+  int64 created_at = 4;      // UnixTime -> change to localtime (ex. kst)
+  int64 phone_updated_at = 5; // UnixTime
+  int64 password_updated_at = 6;
 }
 
 message Term {
   string uid = 1;
   bool agree = 2;
-  int64 createdAt = 3; // UnixTime -> change to localtime (ex. kst)
-  int64 updatedAt = 4; // UnixTime
+  int64 created_at = 3; // UnixTime -> change to localtime (ex. kst)
+  int64 updated_at = 4; // UnixTime
 }
 
 enum UserStatus {
+  EUS_UNSPECIFIED = 0;
   // 정상적인 유저
-  VALID = 0; // 정상적인 유저의 경우
+  EUS_VALID = 1; // 정상적인 유저의 경우
 
   // 기타 등등 1xx
-  INVALID = 100; // 가입되어있지 않은 유저의 경우
+  EUS_INVALID = 100; // 가입되어있지 않은 유저의 경우
 
   // 시스템 관련 2xx
-  SYSTEM_MAINTENANCE = 200; // 시스템 점검 관련
-  NEED_UPDATE = 201;        // 업데이트가 필요한 유저의 경우
+  EUS_SYSTEM_MAINTENANCE = 200; // 시스템 점검 관련
+  EUS_NEED_UPDATE = 201;        // 업데이트가 필요한 유저의 경우
 
   // 이용 제한 관련 3xx
-  BANNED = 300;    // 유저가 이용제한(임시 정지)된 경우
-  FORBBIDEN = 301; // 유저가 이용정지(영구 정지)된 경우
+  EUS_BANNED = 300;    // 유저가 이용제한(임시 정지)된 경우
+  EUS_FORBBIDEN = 301; // 유저가 이용정지(영구 정지)된 경우
 }
 
-message CreateAuthCodeRequest { string phone = 1; }
+message CreateAuthCodeRequest {string phone = 1;}
 
 message CreateAuthCodeResponse {
   Status status = 1;
-  bool isLocked = 2;
-  int32 lockedRemainedTick = 3;
+  bool is_locked = 2;
+  int32 locked_remained_tick = 3;
 }
 
 message ValidateAuthCodeRequest {
@@ -74,15 +75,15 @@ message ValidateAuthCodeRequest {
   string code = 2;
 }
 
-message ValidateAuthCodeResponse { Status status = 1; }
+message ValidateAuthCodeResponse {Status status = 1;}
 
 message SignUpRequestUser {
   string name = 1;
   EGender gender = 2;
   string birth = 3;       // 20030407
-  string phoneNumber = 4; // 01041948536
-  string profileImgURL = 5;
-  string thumbnailImgURL = 6;
+  string phone_number = 4; // 01041948536
+  string profile_img_url = 5;
+  string thumbnail_img_url = 6;
 }
 
 message SignUpRequest {
@@ -109,11 +110,11 @@ message LoginResponse {
   Status status =
       1; // USER_NOT_REGISTERED, UNEXPECTED_ERROR, AUTHENTICATE_FAILED, NO_ERROR
   bool isLocked = 2;            // user가 lock이 됐는지 확인
-  int32 lockedRemainedTick = 3; // unit is second, 남은 시간
+  int32 locked_remained_tick = 3; // unit is second, 남은 시간
   string token = 4;
 }
 
-message LockUserRequest { // all fields required
+message LockUserRequest {// all fields required
   string phone = 1;
   int32 tick = 2; // unit is second
 }
@@ -122,16 +123,16 @@ message LockUserResponse {
   Status status = 1; // UNEXPECTED_ERROR, NO_ERROR
 }
 
-message EmailRegisterRequest { string email = 1; }
+message EmailRegisterRequest {string email = 1;}
 
-message EmailRegisterResponse { Status status = 1; }
+message EmailRegisterResponse {Status status = 1;}
 
-message CreateEmailAuthCodeRequest { string email = 1; }
+message CreateEmailAuthCodeRequest {string email = 1;}
 
 message CreateEmailAuthCodeResponse {
   Status status = 1;
-  bool isLocked = 2;            // user가 lock이 됐는지 확인
-  int32 lockedRemainedTick = 3; // unit is second, 남은 시간
+  bool is_locked = 2;            // user가 lock이 됐는지 확인
+  int32 locked_remained_tick = 3; // unit is second, 남은 시간
 }
 
 message ValidateEmailAuthCodeRequest {
@@ -149,35 +150,35 @@ message LockEmailUserRequest {
   string email = 1;
   int32 tick = 2;
 }
-message LockEmailUserResponse { Status status = 1; }
+message LockEmailUserResponse {Status status = 1;}
 
-message UpdatePhoneNumberRequest { string phone = 1; }
+message UpdatePhoneNumberRequest {string phone = 1;}
 
-message UpdatePhoneNumberResponse { Status status = 1; }
+message UpdatePhoneNumberResponse {Status status = 1;}
 
-message TestTokenRequest { string uid = 1; }
+message TestTokenRequest {string uid = 1;}
 
 message TestTokenResponse {
-  string idToken = 1;
-  string refreshToken = 2;
+  string id_token = 1;
+  string refresh_token = 2;
 }
 
-message BanUser {
-  bool isForbid = 1;  // true -> 영구 정지 // false -> 임시 정지
+message BannedUser {
+  bool forbidden = 1;  // true -> 영구 정지 // false -> 임시 정지
   string content = 2; // 제한 내용 // ex. 하트크러시 이용제한 7일
   string reason = 3;  // 제한 사유 // ex. 이용약관 위반
-  google.protobuf.Timestamp createdAt = 4; // 언제부터 정지인지 명시
-  optional google.protobuf.Timestamp expiredAt =
+  google.protobuf.Timestamp created_it = 4; // 언제부터 정지인지 명시
+  optional google.protobuf.Timestamp expire_at =
       5; // 언제까지 정지인지 명시 // 영구정지시 안보내주거나, null값을
-         // 보내주시면 됩니다.
+  // 보내주시면 됩니다.
 }
 
 message BanUserRequest {
   string uid = 1;
-  BanUser banUser = 2;
+  BannedUser ban_user = 2;
 }
 
-message BanUserResponse { Status status = 1; }
+message BanUserResponse {Status status = 1;}
 
 message CheckUserStatusRequest {
   // string version = 2; // unimplement yet
@@ -185,6 +186,6 @@ message CheckUserStatusRequest {
 
 message CheckUserStatusResponse {
   Status status = 1;
-  optional UserStatus userStatus = 2;
-  optional BanUser banUser = 3;
+  optional UserStatus user_status = 2;
+  optional BannedUser ban_user = 3;
 }

@@ -25,6 +25,7 @@ service UserService {
   rpc GetReceivedHeart(GetReceivedHeartRequest)
       returns (GetReceivedHeartResponse) {}
   rpc DeleteProfile(DeleteProfileRequest) returns (DeleteProfileResponse) {}
+  rpc SearchUsers(SearchUsersRequest) returns (SearchUsersResponse) {}
 }
 
 /*
@@ -38,17 +39,17 @@ profile을 업데이트하는 서비스 -> 기존의 정보와 바뀐 정보를 
 message UpdateUserRequest {
   optional string name = 1;
   optional string description = 2;
-  optional string schoolCode = 3;
+  optional string school_code = 3;
 
-  optional string schoolName = 12; // 학교 풀네임 이동
+  optional string school_name = 12; // 학교 풀네임 이동
 
   repeated ChipItem chips = 4;
-  optional string profileImgURL = 5;
-  optional string thumbnailImgURL = 6;
-  optional string fcmToken = 7; // 서버에만 업데이트 함
+  optional string profile_img_url = 5;
+  optional string thumbnail_img_url = 6;
+  optional string fcm_token = 7; // 서버에만 업데이트 함
   optional string birth = 8;
   optional EGender gender = 9;
-  optional bool isInitialized = 10;
+  optional bool is_initialized = 10;
   optional Config config = 11;
 }
 
@@ -57,7 +58,7 @@ message UpdateUserResponse {
   optional User user = 2;
 }
 
-message DeleteUserRequest { string reason = 2; }
+message DeleteUserRequest {string reason = 2;}
 
 message DeleteUserResponse {
   // Error_INVALID_UID,Error_MONGO_DELETE, Error_MONGO_INSERT, Error_NO_ERROR
@@ -70,7 +71,7 @@ message StudentsInGrade {
 }
 
 message GetStudentsRequest {
-  optional string schoolCode = 1;
+  optional string school_code = 1;
   optional string name = 2;
 }
 
@@ -83,7 +84,7 @@ message GetRandomNickRequest {}
 
 message GetRandomNickResponse {
   Status status = 1;
-  string randomNick = 2;
+  string random_nick = 2;
 }
 
 message SearchUsersRequest { 
@@ -97,7 +98,7 @@ message SearchUsersResponse {
 }
 
 // * 익명 프로필 서비스
-message CreateAnonymousProfileRequest { User user = 1; }
+message CreateAnonymousProfileRequest {User user = 1;}
 message CreateAnonymousProfileResponse {
   Status status = 1;
   User profile = 2;
@@ -129,14 +130,25 @@ message GetCrushProfileResponse {
 message GetSentHeartRequest {}
 message GetSentHeartResponse {
   Status status = 1;
-  User sentHeart = 2;
+  User sent_heart = 2;
 }
 
 message GetReceivedHeartRequest {}
 message GetReceivedHeartResponse {
   Status status = 1;
-  repeated User receivedHeart = 2;
+  repeated User received_heart = 2;
 }
 
-message DeleteProfileRequest { string profile_id = 1; }
-message DeleteProfileResponse { Status status = 1; }
+message DeleteProfileRequest {string profile_id = 1;}
+message DeleteProfileResponse {Status status = 1;}
+
+
+message SearchUsersRequest {
+  repeated string uuids = 1;
+  repeated string phone_number_hashes = 2;
+}
+
+message SearchUsersResponse {
+  Status status = 1;
+  repeated User users = 2;
+}

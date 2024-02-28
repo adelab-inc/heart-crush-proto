@@ -12,6 +12,7 @@ service FriendService {
       returns (CreateBlockedFriendResponse) {}
   rpc DeleteBlockedFriend(DeleteBlockedFriendRequest)
       returns (DeleteBlockedFriendResponse) {}
+  rpc GetFriends(GetFriendsRequest) returns (GetFriendsResponse) {}
   rpc GetBestFriends(GetBestFriendsRequest) returns (GetBestFriendsResponse) {}
   rpc UpdateBestFriends(UpdateBestFriendsRequest)
       returns (UpdateBestFriendsResponse) {}
@@ -31,31 +32,38 @@ message GetBlockedFriendsRequest {}
 
 message GetBlockedFriendsResponse {
   Status status = 1;
-  repeated User blockedFriends = 2;
+  repeated User blocked_friends = 2;
 }
 
-message CreateBlockedFriendRequest {string friendId = 1;}
+message CreateBlockedFriendRequest {string friend_id = 1;}
 
 message CreateBlockedFriendResponse {Status status = 1;}
 
-message DeleteBlockedFriendRequest {string friendId = 2;}
+message DeleteBlockedFriendRequest {string friend_id = 2;}
 
 message DeleteBlockedFriendResponse {Status status = 1;}
+
+message GetFriendsRequest {}
+
+message GetFriendsResponse {
+  Status status = 1;
+  repeated User friends = 2;
+}
 
 message GetBestFriendsRequest {}
 
 message GetBestFriendsResponse {
   Status status = 1;
-  repeated User bestFriends = 2;
+  repeated User best_friends = 2;
 }
 
-message UpdateBestFriendsRequest {repeated BestFriendRequest bestFriends = 2;}
+message UpdateBestFriendsRequest {repeated BestFriendRequest best_friends = 2;}
 
 message UpdateBestFriendsResponse {Status status = 1;}
 
 message CreateCrushRequest {
-  string friendId = 2;
-  string displayName = 3;
+  string friend_id = 2;
+  string display_name = 3;
   string reason = 4;
 }
 
@@ -68,10 +76,10 @@ message GetWhoCrushMeResponse {
   repeated User users = 2;
 }
 
-message CreateBestFriendRequest {string friendId = 1;}
+message CreateBestFriendRequest {string friend_id = 1;}
 
 message CreateBestFriendResponse {Status status = 1;}
 
-message DeleteBestFriendRequest {string friendId = 1;}
+message DeleteBestFriendRequest {string friend_id = 1;}
 
 message DeleteBestFriendResponse {Status status = 1;}

@@ -14,7 +14,7 @@ service SchoolService {
 message School {
   string code = 1;
   string name = 2;
-  string shortName = 3;
+  string short_name = 3;
   string address = 4;
 }
 
@@ -25,7 +25,7 @@ message GetAllSchoolResponse {
   repeated School schools = 2;
 }
 
-message GetNearBySchoolsRequest { string schoolCode = 1; }
+message GetNearBySchoolsRequest { string school_code = 1; }
 
 message GetNearBySchoolsResponse {
   Status status = 1;
