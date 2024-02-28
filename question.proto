@@ -12,6 +12,7 @@ service QuestionService {
       returns (UpdateQuestionReadResponse) {}
   rpc DeleteQuestion(DeleteQuestionRequest) returns (DeleteQuestionResponse) {}
   rpc GetRandomQuestion(GetRandomQuestionRequest) returns (GetRandomQuestionResponse) {}
+  rpc GetQuestionTypeCount(GetQuestionTypeCountRequest) returns (GetQuestionTypeCountResponse) {}
 }
 
 enum EQuestionType {
@@ -112,4 +113,19 @@ message GetRandomQuestionResponse {
   bool success = 1;
   Content content = 2;
   optional string error = 3;
+}
+
+message GetQuestionTypeCountRequest {
+  string target_uid = 1;
+}
+
+message GetQuestionTypeCountResponse {
+  bool success = 1;
+  repeated CountOfQuestionType count = 2; 
+  optional string error = 3;
+}
+
+message CountOfQuestionType {
+  EQuestionType question_type = 1;
+  int32 count = 2;
 }
