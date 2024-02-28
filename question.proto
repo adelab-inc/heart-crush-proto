@@ -4,8 +4,6 @@ option go_package = "telepathy-server/proto";
 
 import "google/protobuf/timestamp.proto";
 
-import "error.proto";
-
 service QuestionService {
   rpc CreateQuestion(CreateQuestionRequest) returns (CreateQuestionResponse) {}
   rpc GetQuestions(GetQuestionsRequest) returns (GetQuestionsResponse) {}
@@ -65,16 +63,20 @@ message CreateQuestionRequest {
   Content content = 4;
 }
 
-message CreateQuestionResponse { Status status = 1; }
+message CreateQuestionResponse {
+  bool success = 1;
+  optional string error = 2;
+}
 
 message GetQuestionsRequest {
   string uid = 1; // 사용자 / 익명 / 짝사랑 익명 중 선택 1
 }
 
 message GetQuestionsResponse {
-  Status status = 1;
+  bool success = 1;
   repeated QuestionCard sent_card = 2;
   repeated QuestionCard received_card = 3;
+  optional string error = 4;
 }
 
 message UpdateReplyRequest {
@@ -82,15 +84,24 @@ message UpdateReplyRequest {
   Option answer = 2;
 }
 
-message UpdateReplyResponse { Status status = 1; }
+message UpdateReplyResponse {
+  bool success = 1;
+  optional string error = 2;
+}
 
 message UpdateQuestionReadRequest { string question_id = 1; }
 
-message UpdateQuestionReadResponse { Status status = 1; }
+message UpdateQuestionReadResponse {
+  bool success = 1;
+  optional string error = 2;
+}
 
 message DeleteQuestionRequest { string question_id = 1; }
 
-message DeleteQuestionResponse { Status status = 1; }
+message DeleteQuestionResponse {
+  bool success = 1;
+  optional string error = 2;
+}
 
 message GetRandomQuestionRequest {
   EQuestionType question_type = 1;
@@ -98,6 +109,7 @@ message GetRandomQuestionRequest {
 }
 
 message GetRandomQuestionResponse {
-  Status status = 1;
+  bool success = 1;
   Content content = 2;
+  optional string error = 3;
 }

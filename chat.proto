@@ -1,7 +1,6 @@
 syntax = "proto3";
 
 option go_package = "telepathy-server/proto";
-import "error.proto";
 import "google/protobuf/timestamp.proto";
 
 enum EFileType {
@@ -72,8 +71,9 @@ message CreateRoomRequest {
 }
 
 message CreateRoomResponse {
-  Status status = 1;
+  bool success = 1;
   Room room = 2;
+  optional string error = 3;
 }
 
 message GetRoomsRequest {
@@ -81,8 +81,9 @@ message GetRoomsRequest {
 }
 
 message GetRoomsResponse {
-  Status status = 1;
+  bool success = 1;
   repeated Room rooms = 2;
+  optional string error = 3;
 }
 
 message MessageFile {
@@ -100,8 +101,9 @@ message SendMsgRequest {
 }
 
 message SendMsgResponse {
-  Status status = 1;
+  bool success = 1;
   optional Message message = 2;
+  optional string error = 3;
 }
 
 message GetMsgsRequest {
@@ -112,9 +114,10 @@ message GetMsgsRequest {
 }
 
 message GetMsgsResponse {
-  Status status = 1;
+  bool success = 1;
   repeated Message msgs = 2;
   bool has_more = 3;
+  optional string error = 4;
 }
 
 //message UpdateReadRequest {

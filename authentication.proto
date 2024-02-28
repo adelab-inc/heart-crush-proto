@@ -5,7 +5,6 @@ option go_package = "telepathy-server/proto";
 
 import "common.proto";
 import "google/protobuf/timestamp.proto";
-import "error.proto";
 
 service AuthService {
   rpc CreateAuthCode(CreateAuthCodeRequest) returns (CreateAuthCodeResponse) {}
@@ -65,9 +64,10 @@ enum UserStatus {
 message CreateAuthCodeRequest {string phone = 1;}
 
 message CreateAuthCodeResponse {
-  Status status = 1;
+  bool success = 1;
   bool is_locked = 2;
   int32 locked_remained_tick = 3;
+  optional string error = 4;
 }
 
 message ValidateAuthCodeRequest {
@@ -75,7 +75,10 @@ message ValidateAuthCodeRequest {
   string code = 2;
 }
 
-message ValidateAuthCodeResponse {Status status = 1;}
+message ValidateAuthCodeResponse {
+  bool success = 1;
+  optional string error = 2;
+}
 
 message SignUpRequestUser {
   string name = 1;
@@ -92,8 +95,9 @@ message SignUpRequest {
 }
 
 message SignUpResponse {
-  Status status = 1;
+  bool success = 1;
   string token = 2;
+  optional string error = 3;
 }
 
 message LoginWithCodeRequest {
@@ -107,11 +111,11 @@ message LoginWithPasswordRequest {
 }
 
 message LoginResponse {
-  Status status =
-      1; // USER_NOT_REGISTERED, UNEXPECTED_ERROR, AUTHENTICATE_FAILED, NO_ERROR
+  bool success = 1;
   bool isLocked = 2;            // user가 lock이 됐는지 확인
   int32 locked_remained_tick = 3; // unit is second, 남은 시간
   string token = 4;
+  optional string error = 5;
 }
 
 message LockUserRequest {// all fields required
@@ -120,19 +124,24 @@ message LockUserRequest {// all fields required
 }
 
 message LockUserResponse {
-  Status status = 1; // UNEXPECTED_ERROR, NO_ERROR
+  bool success = 1;
+  optional string error = 2;
 }
 
 message EmailRegisterRequest {string email = 1;}
 
-message EmailRegisterResponse {Status status = 1;}
+message EmailRegisterResponse {
+  bool success = 1;
+  optional string error = 2;
+}
 
 message CreateEmailAuthCodeRequest {string email = 1;}
 
 message CreateEmailAuthCodeResponse {
-  Status status = 1;
+  bool success = 1;
   bool is_locked = 2;            // user가 lock이 됐는지 확인
   int32 locked_remained_tick = 3; // unit is second, 남은 시간
+  optional string error = 4;
 }
 
 message ValidateEmailAuthCodeRequest {
@@ -142,25 +151,34 @@ message ValidateEmailAuthCodeRequest {
 
 message ValidateEmailAuthCodeResponse {
   // ABNORMAL_APPROACH, UNEXPECTED_ERROR, AUTHENTICATE_FAILED, NO_ERROR
-  Status status = 1;
+  bool success = 1;
   string token = 2;
+  optional string error = 3;
 }
 
 message LockEmailUserRequest {
   string email = 1;
   int32 tick = 2;
 }
-message LockEmailUserResponse {Status status = 1;}
+message LockEmailUserResponse {
+  bool success = 1;
+  optional string error = 2;
+}
 
 message UpdatePhoneNumberRequest {string phone = 1;}
 
-message UpdatePhoneNumberResponse {Status status = 1;}
+message UpdatePhoneNumberResponse {
+  bool success = 1;
+  optional string error = 2;
+}
 
 message TestTokenRequest {string uid = 1;}
 
 message TestTokenResponse {
-  string id_token = 1;
-  string refresh_token = 2;
+  bool success = 1;
+  string id_token = 2;
+  string refresh_token = 3;
+  optional string error = 4;
 }
 
 message BannedUser {
@@ -178,14 +196,18 @@ message BanUserRequest {
   BannedUser ban_user = 2;
 }
 
-message BanUserResponse {Status status = 1;}
+message BanUserResponse {
+  bool success = 1;
+  optional string error = 2;
+}
 
 message CheckUserStatusRequest {
   // string version = 2; // unimplement yet
 }
 
 message CheckUserStatusResponse {
-  Status status = 1;
+  bool success = 1;
   optional UserStatus user_status = 2;
   optional BannedUser ban_user = 3;
+  optional string error = 4;
 }

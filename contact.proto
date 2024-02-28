@@ -2,8 +2,6 @@ syntax = "proto3";
 
 option go_package = "telepathy-server/proto";
 
-import "error.proto";
-
 service ContactService {
   rpc CreateInquiry(CreateInquiryRequest) returns (CreateInquiryResponse) {}
   rpc CreateReport(CreateReportRequest) returns (CreateReportResponse) {}
@@ -49,7 +47,10 @@ message CreateInquiryRequest {
   bool agreement = 7;
 }
 
-message CreateInquiryResponse { Status status = 1; }
+message CreateInquiryResponse {
+  bool success = 1;
+  optional string error = 2;
+}
 
 message CreateReportRequest {
   EContactType contact_type = 1;
@@ -58,4 +59,7 @@ message CreateReportRequest {
   string target_id = 4;
   string detail = 5;
 }
-message CreateReportResponse { Status status = 1; }
+message CreateReportResponse {
+  bool success = 1;
+  optional string error = 2;
+}

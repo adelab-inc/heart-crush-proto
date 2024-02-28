@@ -3,7 +3,6 @@ syntax = "proto3";
 option go_package = "telepathy-server/proto";
 
 import "common.proto";
-import "error.proto";
 
 service FriendService {
   // 주기적으로(앱을 처음 키는 시점 정도로) 추천친구를 가져오는 서비스
@@ -39,8 +38,9 @@ message BestFriendRequest {
 message GetRecommendFriendsUIDRequest {repeated string phone_book_friends = 1;}
 
 message GetRecommendFriendsUIDResponse {
-  Status status = 1;
+  bool success = 1;
   repeated string recommended_friends_uid = 2;
+  optional string error = 3;
 }
 
 message GetRecommendFriendsRequest {
@@ -48,42 +48,55 @@ message GetRecommendFriendsRequest {
 }
 
 message GetRecommendFriendsResponse {
-  Status status = 1;
+  bool success = 1;
   repeated User recommended_friends = 2;
+  optional string error = 3;
 }
 
 message GetBlockedFriendsRequest {}
 
 message GetBlockedFriendsResponse {
-  Status status = 1;
+  bool success = 1;
   repeated User blocked_friends = 2;
+  optional string error = 3;
 }
 
 message CreateBlockedFriendRequest {string friend_id = 1;}
 
-message CreateBlockedFriendResponse {Status status = 1;}
+message CreateBlockedFriendResponse {
+  bool success = 1;
+  optional string error = 2;
+}
 
 message DeleteBlockedFriendRequest {string friend_id = 2;}
 
-message DeleteBlockedFriendResponse {Status status = 1;}
+message DeleteBlockedFriendResponse {
+  bool success = 1;
+  optional string error = 2;
+}
 
 message GetFriendsRequest {}
 
 message GetFriendsResponse {
-  Status status = 1;
+  bool success = 1;
   repeated User friends = 2;
+  optional string error = 3;
 }
 
 message GetBestFriendsRequest {}
 
 message GetBestFriendsResponse {
-  Status status = 1;
+  bool success = 1;
   repeated User best_friends = 2;
+  optional string error = 3;
 }
 
 message UpdateBestFriendsRequest {repeated BestFriendRequest best_friends = 2;}
 
-message UpdateBestFriendsResponse {Status status = 1;}
+message UpdateBestFriendsResponse {
+  bool success = 1;
+  optional string error = 2;
+}
 
 message CreateCrushRequest {
   string friend_id = 2;
@@ -91,28 +104,39 @@ message CreateCrushRequest {
   string reason = 4;
 }
 
-message CreateCrushResponse {Status status = 1;}
+message CreateCrushResponse {
+  bool success = 1;
+  optional string error = 2;
+}
 
 message GetWhoCrushMeRequest {}
 
 message GetWhoCrushMeResponse {
-  Status status = 1;
+  bool success = 1;
   repeated User users = 2;
+  optional string error = 3;
 }
 
 message CreateBestFriendRequest {string friend_id = 1;}
 
-message CreateBestFriendResponse {Status status = 1;}
+message CreateBestFriendResponse {
+  bool success = 1;
+  optional string error = 2;
+}
 
 message DeleteBestFriendRequest {string friend_id = 1;}
 
-message DeleteBestFriendResponse {Status status = 1;}
+message DeleteBestFriendResponse {
+  bool success = 1;
+  optional string error = 2;
+}
 
 message GetPhoneBookFriendRequest {
   string phone_number_hash = 1;
 }
 
 message GetPhoneBookFriendResponse {
-  Status status = 1;
+  bool success = 1;
   User user = 2;
+  optional string error = 3;
 }

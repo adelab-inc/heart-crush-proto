@@ -2,8 +2,6 @@ syntax = "proto3";
 
 option go_package = "telepathy-server/proto";
 
-import "error.proto";
-
 service BLEService {
   rpc CreateBLERecord(CreateBLERecordRequest) returns (CreateBLERecordResponse) {}
   rpc CreateBLERecords(CreateBLERecordsRequest) returns (CreateBLERecordsResponse) {}
@@ -15,7 +13,8 @@ message CreateBLERecordRequest {
 }
 
 message CreateBLERecordResponse {
-  Status status = 1;
+  bool success = 1;
+  optional string error = 2;
 }
 
 message CreateBLERecordsRequest {
@@ -23,7 +22,8 @@ message CreateBLERecordsRequest {
 }
 
 message CreateBLERecordsResponse {
-  Status status = 1;
+  bool success = 1;
+  optional string error = 2;
 }
 
 message GetBumpedCountRequest {
@@ -32,6 +32,7 @@ message GetBumpedCountRequest {
 }
 
 message GetBumpedCountResponse {
-  Status status = 1;
+  bool success = 1;
   int32 count = 2;
+  optional string error = 3;
 }

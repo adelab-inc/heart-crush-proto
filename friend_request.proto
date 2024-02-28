@@ -3,7 +3,6 @@ syntax = "proto3";
 option go_package = "telepathy-server/proto";
 
 import "google/protobuf/timestamp.proto";
-import "error.proto";
 
 service FriendRequestService {
   rpc SendFriendRequest(SendFriendRequestRequest) returns (SendFriendRequestResponse);
@@ -36,7 +35,8 @@ message SendFriendRequestRequest {
 }
 
 message SendFriendRequestResponse {
-  Status status = 1;
+  bool success = 1;
+  optional string error = 2;
 }
 
 message UpdateFriendRequestStatusRequest {
@@ -45,7 +45,8 @@ message UpdateFriendRequestStatusRequest {
 }
 
 message UpdateFriendRequestStatusResponse {
-  Status status = 1;
+  bool success = 1;
+  optional string error = 2;
 }
 
 message GetFriendRequestsRequest {
@@ -53,8 +54,9 @@ message GetFriendRequestsRequest {
 }
 
 message GetFriendRequestsResponse {
-  Status status = 1;
+  bool success = 1;
   repeated FriendRequest requests = 2;
+  optional string error = 3;
 }
 
 message GetSentFriendRequestsRequest {
@@ -62,6 +64,7 @@ message GetSentFriendRequestsRequest {
 }
 
 message GetSentFriendRequestsResponse {
-  Status status = 1;
+  bool success = 1;
   repeated FriendRequest requests = 2;
+  optional string error = 3;
 }
