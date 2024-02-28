@@ -4,6 +4,7 @@ option go_package = "telepathy-server/proto";
 
 // import "common.proto";
 import "google/protobuf/timestamp.proto";
+import "error.proto";
 
 enum EAlarmType {
   EAT_UNSPECIFIED = 0;
@@ -34,11 +35,11 @@ message GetAlarmsRequest {}
 message GetAlarmsResponse {
   bool success = 1;
   repeated Alarm alarms = 2;
-  optional string error = 3;
+  optional EError error = 3;
 }
 
 message UpdateAlarmsRequest { repeated Alarm alarms = 1; }
 message UpdateAlarmsResponse {
   bool success = 1;
-  optional string error = 2;
+  optional EError error = 2;
 }

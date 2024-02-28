@@ -3,6 +3,7 @@ syntax = "proto3";
 // package user;
 option go_package = "telepathy-server/proto";
 
+import "error.proto";
 import "common.proto";
 import "google/protobuf/timestamp.proto";
 
@@ -67,7 +68,7 @@ message CreateAuthCodeResponse {
   bool success = 1;
   bool is_locked = 2;
   int32 locked_remained_tick = 3;
-  optional string error = 4;
+  optional EError error = 4;
 }
 
 message ValidateAuthCodeRequest {
@@ -77,7 +78,7 @@ message ValidateAuthCodeRequest {
 
 message ValidateAuthCodeResponse {
   bool success = 1;
-  optional string error = 2;
+  optional EError error = 2;
 }
 
 message SignUpRequestUser {
@@ -97,7 +98,7 @@ message SignUpRequest {
 message SignUpResponse {
   bool success = 1;
   string token = 2;
-  optional string error = 3;
+  optional EError error = 3;
 }
 
 message LoginWithCodeRequest {
@@ -115,7 +116,7 @@ message LoginResponse {
   bool isLocked = 2;            // user가 lock이 됐는지 확인
   int32 locked_remained_tick = 3; // unit is second, 남은 시간
   string token = 4;
-  optional string error = 5;
+  optional EError error = 5;
 }
 
 message LockUserRequest {// all fields required
@@ -125,14 +126,14 @@ message LockUserRequest {// all fields required
 
 message LockUserResponse {
   bool success = 1;
-  optional string error = 2;
+  optional EError error = 2;
 }
 
 message EmailRegisterRequest {string email = 1;}
 
 message EmailRegisterResponse {
   bool success = 1;
-  optional string error = 2;
+  optional EError error = 2;
 }
 
 message CreateEmailAuthCodeRequest {string email = 1;}
@@ -141,7 +142,7 @@ message CreateEmailAuthCodeResponse {
   bool success = 1;
   bool is_locked = 2;            // user가 lock이 됐는지 확인
   int32 locked_remained_tick = 3; // unit is second, 남은 시간
-  optional string error = 4;
+  optional EError error = 4;
 }
 
 message ValidateEmailAuthCodeRequest {
@@ -153,7 +154,7 @@ message ValidateEmailAuthCodeResponse {
   // ABNORMAL_APPROACH, UNEXPECTED_ERROR, AUTHENTICATE_FAILED, NO_ERROR
   bool success = 1;
   string token = 2;
-  optional string error = 3;
+  optional EError error = 3;
 }
 
 message LockEmailUserRequest {
@@ -162,14 +163,14 @@ message LockEmailUserRequest {
 }
 message LockEmailUserResponse {
   bool success = 1;
-  optional string error = 2;
+  optional EError error = 2;
 }
 
 message UpdatePhoneNumberRequest {string phone = 1;}
 
 message UpdatePhoneNumberResponse {
   bool success = 1;
-  optional string error = 2;
+  optional EError error = 2;
 }
 
 message TestTokenRequest {string uid = 1;}
@@ -178,7 +179,7 @@ message TestTokenResponse {
   bool success = 1;
   string id_token = 2;
   string refresh_token = 3;
-  optional string error = 4;
+  optional EError error = 4;
 }
 
 message BannedUser {
@@ -198,7 +199,7 @@ message BanUserRequest {
 
 message BanUserResponse {
   bool success = 1;
-  optional string error = 2;
+  optional EError error = 2;
 }
 
 message CheckUserStatusRequest {
@@ -209,5 +210,5 @@ message CheckUserStatusResponse {
   bool success = 1;
   optional UserStatus user_status = 2;
   optional BannedUser ban_user = 3;
-  optional string error = 4;
+  optional EError error = 4;
 }

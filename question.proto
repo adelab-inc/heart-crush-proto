@@ -3,6 +3,7 @@ syntax = "proto3";
 option go_package = "telepathy-server/proto";
 
 import "google/protobuf/timestamp.proto";
+import "error.proto";
 
 service QuestionService {
   rpc CreateQuestion(CreateQuestionRequest) returns (CreateQuestionResponse);
@@ -75,7 +76,7 @@ message CreateQuestionRequest {
 
 message CreateQuestionResponse {
   bool success = 1;
-  optional string error = 2;
+  optional EError error = 2;
 }
 
 message GetQuestionsRequest {
@@ -86,7 +87,7 @@ message GetQuestionsResponse {
   bool success = 1;
   repeated QuestionCard sent_card = 2;
   repeated QuestionCard received_card = 3;
-  optional string error = 4;
+  optional EError error = 4;
 }
 
 message UpdateReplyRequest {
@@ -96,21 +97,21 @@ message UpdateReplyRequest {
 
 message UpdateReplyResponse {
   bool success = 1;
-  optional string error = 2;
+  optional EError error = 2;
 }
 
 message UpdateQuestionReadRequest {string question_id = 1;}
 
 message UpdateQuestionReadResponse {
   bool success = 1;
-  optional string error = 2;
+  optional EError error = 2;
 }
 
 message DeleteQuestionRequest {string question_id = 1;}
 
 message DeleteQuestionResponse {
   bool success = 1;
-  optional string error = 2;
+  optional EError error = 2;
 }
 
 message GetRandomQuestionRequest {
@@ -121,5 +122,5 @@ message GetRandomQuestionRequest {
 message GetRandomQuestionResponse {
   bool success = 1;
   Content content = 2;
-  optional string error = 3;
+  optional EError error = 3;
 }
