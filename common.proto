@@ -10,12 +10,13 @@ import "google/protobuf/timestamp.proto";
 // width: 360, height: 360,
 
 enum EChipType {
-  ECT_OTHER = 0;
-  ECT_SCHOOL_SHORT_NAME = 1;
-  ECT_GRADE = 2;
-  ECT_INSTA_ACCOUNT = 3;
-  ECT_TIKTOK_ACCOUNT = 4;
-  ECT_MBTI = 5;
+  ECT_UNSPECIFIED = 0;
+  ECT_OTHER = 1;
+  ECT_SCHOOL_SHORT_NAME = 2;
+  ECT_GRADE = 3;
+  ECT_INSTA_ACCOUNT = 4;
+  ECT_TIKTOK_ACCOUNT = 5;
+  ECT_MBTI = 6;
 }
 
 enum EGender {
@@ -38,10 +39,11 @@ message Config {
 }
 
 enum EUserType {
-  EUT_USER = 0; // 일반 유저
-  EUT_ANONYMOUS = 1; // 익명 유저
-  EUT_CRUSH = 2; // 짝사랑 익명 유저
-  EUT_UNREGISTERED = 3; // 등록되지 않은 유저
+  EUT_UNSPECIFIED = 0;
+  EUT_USER = 1; // 일반 유저
+  EUT_ANONYMOUS = 2; // 익명 유저
+  EUT_CRUSH = 3; // 짝사랑 익명 유저
+  EUT_UNREGISTERED = 4; // 등록되지 않은 유저
 }
 
 message User {

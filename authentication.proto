@@ -46,19 +46,20 @@ message Term {
 }
 
 enum UserStatus {
+  EUS_UNSPECIFIED = 0;
   // 정상적인 유저
-  VALID = 0; // 정상적인 유저의 경우
+  EUS_VALID = 1; // 정상적인 유저의 경우
 
   // 기타 등등 1xx
-  INVALID = 100; // 가입되어있지 않은 유저의 경우
+  EUS_INVALID = 100; // 가입되어있지 않은 유저의 경우
 
   // 시스템 관련 2xx
-  SYSTEM_MAINTENANCE = 200; // 시스템 점검 관련
-  NEED_UPDATE = 201;        // 업데이트가 필요한 유저의 경우
+  EUS_SYSTEM_MAINTENANCE = 200; // 시스템 점검 관련
+  EUS_NEED_UPDATE = 201;        // 업데이트가 필요한 유저의 경우
 
   // 이용 제한 관련 3xx
-  BANNED = 300;    // 유저가 이용제한(임시 정지)된 경우
-  FORBBIDEN = 301; // 유저가 이용정지(영구 정지)된 경우
+  EUS_BANNED = 300;    // 유저가 이용제한(임시 정지)된 경우
+  EUS_FORBBIDEN = 301; // 유저가 이용정지(영구 정지)된 경우
 }
 
 message CreateAuthCodeRequest {string phone = 1;}

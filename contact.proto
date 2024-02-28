@@ -10,29 +10,33 @@ service ContactService {
 }
 
 enum EContactType {
-  ECT_INQUIRY = 0;
-  ECT_REPORT = 1;
+  ECT_UNSPECIFIED = 0;
+  ECT_INQUIRY = 1;
+  ECT_REPORT = 2;
 }
 
 enum EInquiryType {
-  EIT_SERVICE_MANUAL = 0;
-  EIT_SERVICE_ERROR = 1;
-  EIT_ACCOUNT_ERROR = 2;
-  EIT_PROPOSAL = 3;
-  EIT_ETC = 4;
+  EIT_UNSPECIFIED = 0;
+  EIT_SERVICE_MANUAL = 1;
+  EIT_SERVICE_ERROR = 2;
+  EIT_ACCOUNT_ERROR = 3;
+  EIT_PROPOSAL = 4;
+  EIT_ETC = 5;
 }
 
 enum EReportType {
-  ERT_CHEAT = 0;
-  ERT_VIOLENCE = 1;
-  ERT_SEXUAl_CRIME = 2;
-  ERT_BULLYING = 3;
-  ERT_ETC = 4;
+  ERT_UNSPECIFIED = 0;
+  ERT_CHEAT = 1;
+  ERT_VIOLENCE = 2;
+  ERT_SEXUAl_CRIME = 3;
+  ERT_BULLYING = 4;
+  ERT_ETC = 5;
 }
 
 enum ETargetType {
-  ETT_USER = 0;
-  ETT_MESSAGE = 1;
+  ETT_UNSPECIFIED = 0;
+  ETT_USER = 1;
+  ETT_MESSAGE = 2;
 }
 
 message CreateInquiryRequest {

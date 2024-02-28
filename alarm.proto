@@ -7,10 +7,11 @@ import "google/protobuf/timestamp.proto";
 import "error.proto";
 
 enum EAlarmType {
-  EAT_BLUETOOTH = 0;
-  EAT_LIKE = 1;
-  EAT_SYSTEM = 2;
-  EAT_QUESTION = 3;
+  EAT_UNSPECIFIED = 0;
+  EAT_BLUETOOTH = 1;
+  EAT_LIKE = 2;
+  EAT_SYSTEM = 3;
+  EAT_QUESTION = 4;
 }
 
 service AlarmService {

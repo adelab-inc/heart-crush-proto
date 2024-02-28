@@ -17,21 +17,23 @@ service QuestionService {
 }
 
 enum EQuestionType {
-  EQT_GETTOKNOW = 0;
-  EQT_BALANCE = 1;
-  EQT_CHOOSE = 2;
+  EQT_UNSPECIFIED = 0;
+  EQT_GETTOKNOW = 1;
+  EQT_BALANCE = 2;
+  EQT_CHOOSE = 3;
 }
 
 enum EQuestionStatus {
   // 보낸 카드
-  EQS_SENDER_SENT = 0; // 카드를 보냈지만, 아직 답장이 안온 카드
-  EQS_SENDER_REPLY_CAME = 1; // 답장이 왔지만, 아직 읽지 않은 카드
-  EQS_SENDER_CHECKED = 2; // 답장까지 읽은 카드
+  EQS_UNSPECIFIED = 0;
+  EQS_SENDER_SENT = 1; // 카드를 보냈지만, 아직 답장이 안온 카드
+  EQS_SENDER_REPLY_CAME = 2; // 답장이 왔지만, 아직 읽지 않은 카드
+  EQS_SENDER_CHECKED = 3; // 답장까지 읽은 카드
 
   // 받은 카드
-  EQS_RECEIVER_RECEIVED = 3; // 새로 전달 받았지만, 아직 읽지 않은 카드
-  EQS_RECEIVER_CHECKED = 4; // 전달받은 카드를 읽었지만, 아직 답장을 보내지 않은 카드
-  EQS_RECEIVER_REPLIED = 5; // 답장까지 보낸 카드
+  EQS_RECEIVER_RECEIVED = 4; // 새로 전달 받았지만, 아직 읽지 않은 카드
+  EQS_RECEIVER_CHECKED = 5; // 전달받은 카드를 읽었지만, 아직 답장을 보내지 않은 카드
+  EQS_RECEIVER_REPLIED = 6; // 답장까지 보낸 카드
 }
 
 message QuestionCard {
