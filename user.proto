@@ -3,6 +3,7 @@ syntax = "proto3";
 option go_package = "telepathy-server/proto";
 
 import "common.proto";
+import "error.proto";
 
 service UserService {
   rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse) {}
@@ -57,7 +58,7 @@ message UpdateUserRequest {
 message UpdateUserResponse {
   bool success = 1;
   optional User user = 2;
-  optional string error = 3;
+  optional EError error = 3;
 }
 
 message DeleteUserRequest {string reason = 2;}
@@ -65,7 +66,7 @@ message DeleteUserRequest {string reason = 2;}
 message DeleteUserResponse {
   // Error_INVALID_UID,Error_MONGO_DELETE, Error_MONGO_INSERT, Error_NO_ERROR
   bool success = 1;
-  optional string error = 2;
+  optional EError error = 2;
 }
 
 message StudentsInGrade {
@@ -81,7 +82,7 @@ message GetStudentsRequest {
 message GetStudentsResponse {
   bool success = 1;
   repeated User students = 2;
-  optional string error = 3;
+  optional EError error = 3;
 }
 
 message GetUsersByUuidsRequest {repeated string uuids = 1;}
@@ -89,7 +90,7 @@ message GetUsersByUuidsRequest {repeated string uuids = 1;}
 message GetUsersByUuidsResponse {
   bool success = 1;
   repeated User users = 2;
-  optional string error = 3;
+  optional EError error = 3;
 }
 
 message GetRandomNickRequest {}
@@ -97,7 +98,7 @@ message GetRandomNickRequest {}
 message GetRandomNickResponse {
   bool success = 1;
   string random_nick = 2;
-  optional string error = 3;
+  optional EError error = 3;
 }
 
 message GetUserByPhoneRequest {
@@ -107,7 +108,7 @@ message GetUserByPhoneRequest {
 message GetUserByPhoneResponse {
   bool success = 1;
   User user = 2;
-  optional string error = 3;
+  optional EError error = 3;
 }
 
 // * 익명 프로필 서비스
@@ -115,7 +116,7 @@ message CreateAnonymousProfileRequest {User user = 1;}
 message CreateAnonymousProfileResponse {
   bool success = 1;
   User profile = 2;
-  optional string error = 3;
+  optional EError error = 3;
 }
 
 message CreateCrushProfileRequest {
@@ -127,41 +128,41 @@ message CreateCrushProfileRequest {
 message CreateCrushProfileResponse {
   bool success = 1;
   User profile = 2;
-  optional string error = 3;
+  optional EError error = 3;
 }
 
 message GetAnonymousProfileRequest {}
 message GetAnonymousProfileResponse {
   bool success = 1;
   User profile = 2;
-  optional string error = 3;
+  optional EError error = 3;
 }
 
 message GetCrushProfileRequest {}
 message GetCrushProfileResponse {
   bool success = 1;
   User profile = 2;
-  optional string error = 3;
+  optional EError error = 3;
 }
 
 message GetSentHeartRequest {}
 message GetSentHeartResponse {
   bool success = 1;
   User sent_heart = 2;
-  optional string error = 3;
+  optional EError error = 3;
 }
 
 message GetReceivedHeartRequest {}
 message GetReceivedHeartResponse {
   bool success = 1;
   repeated User received_heart = 2;
-  optional string error = 3;
+  optional EError error = 3;
 }
 
 message DeleteProfileRequest {string profile_id = 1;}
 message DeleteProfileResponse {
   bool success = 1;
-  optional string error = 2;
+  optional EError error = 2;
 }
 
 
@@ -173,5 +174,5 @@ message SearchUsersRequest {
 message SearchUsersResponse {
   bool success = 1;
   repeated User users = 2;
-  optional string error = 3;
+  optional EError error = 3;
 }

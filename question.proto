@@ -3,22 +3,34 @@ syntax = "proto3";
 option go_package = "telepathy-server/proto";
 
 import "google/protobuf/timestamp.proto";
+import "error.proto";
 
 service QuestionService {
-  rpc CreateQuestion(CreateQuestionRequest) returns (CreateQuestionResponse) {}
-  rpc GetQuestions(GetQuestionsRequest) returns (GetQuestionsResponse) {}
-  rpc UpdateReply(UpdateReplyRequest) returns (UpdateReplyResponse) {}
-  rpc UpdateQuestionRead(UpdateQuestionReadRequest)
-      returns (UpdateQuestionReadResponse) {}
-  rpc DeleteQuestion(DeleteQuestionRequest) returns (DeleteQuestionResponse) {}
-  rpc GetRandomQuestion(GetRandomQuestionRequest) returns (GetRandomQuestionResponse) {}
+  rpc CreateQuestion(CreateQuestionRequest) returns (CreateQuestionResponse);
+  rpc GetQuestions(GetQuestionsRequest) returns (GetQuestionsResponse);
+  rpc UpdateReply(UpdateReplyRequest) returns (UpdateReplyResponse);
+  rpc UpdateQuestionRead(UpdateQuestionReadRequest) returns (UpdateQuestionReadResponse);
+  rpc DeleteQuestion(DeleteQuestionRequest) returns (DeleteQuestionResponse);
+  rpc GetRandomQuestion(GetRandomQuestionRequest) returns (GetRandomQuestionResponse);
+  rpc GetQuestionTypeCount(GetQuestionTypeCountRequest) returns (GetQuestionTypeCountResponse);
 }
 
 enum EQuestionType {
-  EQT_UNSPECIFIED = 0;
-  EQT_GETTOKNOW = 1;
-  EQT_BALANCE = 2;
-  EQT_CHOOSE = 3;
+  EQT_UNSPECIFIED = 0;    // 미지정
+  EQT_GETTOKNOW = 1;      // 알아가기
+  EQT_BALANCE = 2;        // 밸런스게임
+  EQT_CHOOSE = 3;         // 골라보기
+}
+
+enum EQuestionCategory {
+  EQC_UNSPECIFIED = 0;       // 미지정
+  EQC_HOW_ABOUT_YOU = 1;     // 너는어때?
+  EQC_RELATIONSHIP = 2;      // 썸·연애
+  EQC_OUR_SCHOOL = 3;        // 우리학교
+  EQC_PERSONALITY = 4;       // 성격
+  EQC_TRY_IT_OUT = 5;        // 맞춰봐
+  EQC_WHAT_IF = 6;           // 만약에
+  EQC_PREFERENCES = 7;       // 취향
 }
 
 enum EQuestionStatus {
@@ -37,11 +49,12 @@ enum EQuestionStatus {
 message QuestionCard {
   string question_id = 1;
   EQuestionType question_type = 2;
-  string target_user_id = 3; // 내가 sender면 -> receiver 정보 / 내가 receiver면 sender 정보
-  string target_user_name = 4;
-  EQuestionStatus question_status = 5;
-  Content content = 6;
-  optional Option answer = 7; // 답장이 없는 경우 null
+  EQuestionCategory question_category = 3;
+  string target_user_id = 4; // 내가 sender면 -> receiver 정보 / 내가 receiver면 sender 정보
+  string target_user_name = 5;
+  EQuestionStatus question_status = 6;
+  Content content = 7;
+  optional Option answer = 8; // 답장이 없는 경우 null
   google.protobuf.Timestamp created_at = 10;
   optional google.protobuf.Timestamp replied_at = 11; // 답장이 없는 경우 null
 }
@@ -60,12 +73,13 @@ message CreateQuestionRequest {
   string sender_id = 1; // 자신의 uid 혹은 자신의 익명 uid
   string receiver_id = 2;
   EQuestionType question_type = 3;
-  Content content = 4;
+  EQuestionCategory question_category = 4;
+  Content content = 5;
 }
 
 message CreateQuestionResponse {
   bool success = 1;
-  optional string error = 2;
+  optional EError error = 2;
 }
 
 message GetQuestionsRequest {
@@ -76,7 +90,7 @@ message GetQuestionsResponse {
   bool success = 1;
   repeated QuestionCard sent_card = 2;
   repeated QuestionCard received_card = 3;
-  optional string error = 4;
+  optional EError error = 4;
 }
 
 message UpdateReplyRequest {
@@ -86,30 +100,46 @@ message UpdateReplyRequest {
 
 message UpdateReplyResponse {
   bool success = 1;
-  optional string error = 2;
+  optional EError error = 2;
 }
 
-message UpdateQuestionReadRequest { string question_id = 1; }
+message UpdateQuestionReadRequest {string question_id = 1;}
 
 message UpdateQuestionReadResponse {
   bool success = 1;
-  optional string error = 2;
+  optional EError error = 2;
 }
 
-message DeleteQuestionRequest { string question_id = 1; }
+message DeleteQuestionRequest {string question_id = 1;}
 
 message DeleteQuestionResponse {
   bool success = 1;
-  optional string error = 2;
+  optional EError error = 2;
 }
 
 message GetRandomQuestionRequest {
   EQuestionType question_type = 1;
-  string target_uid = 2;
+  EQuestionCategory question_category = 2;
+  string target_uid = 3;
 }
 
 message GetRandomQuestionResponse {
   bool success = 1;
   Content content = 2;
+  optional EError error = 3;
+}
+
+message GetQuestionTypeCountRequest {
+  string target_uid = 1;
+}
+
+message GetQuestionTypeCountResponse {
+  bool success = 1;
+  repeated CountOfQuestionType count = 2; 
   optional string error = 3;
+}
+
+message CountOfQuestionType {
+  EQuestionType question_type = 1;
+  int32 count = 2;
 }
