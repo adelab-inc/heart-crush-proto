@@ -167,8 +167,8 @@ message BannedUser {
   bool forbidden = 1;  // true -> 영구 정지 // false -> 임시 정지
   string content = 2; // 제한 내용 // ex. 하트크러시 이용제한 7일
   string reason = 3;  // 제한 사유 // ex. 이용약관 위반
-  google.protobuf.Timestamp created_it = 4; // 언제부터 정지인지 명시
-  optional google.protobuf.Timestamp expire_at =
+  google.protobuf.Timestamp created_at = 4; // 언제부터 정지인지 명시
+  optional google.protobuf.Timestamp expired_at =
       5; // 언제까지 정지인지 명시 // 영구정지시 안보내주거나, null값을
   // 보내주시면 됩니다.
 }
