@@ -5,13 +5,12 @@ option go_package = "telepathy-server/proto";
 import "google/protobuf/timestamp.proto";
 
 service QuestionService {
-  rpc CreateQuestion(CreateQuestionRequest) returns (CreateQuestionResponse) {}
-  rpc GetQuestions(GetQuestionsRequest) returns (GetQuestionsResponse) {}
-  rpc UpdateReply(UpdateReplyRequest) returns (UpdateReplyResponse) {}
-  rpc UpdateQuestionRead(UpdateQuestionReadRequest)
-      returns (UpdateQuestionReadResponse) {}
-  rpc DeleteQuestion(DeleteQuestionRequest) returns (DeleteQuestionResponse) {}
-  rpc GetRandomQuestion(GetRandomQuestionRequest) returns (GetRandomQuestionResponse) {}
+  rpc CreateQuestion(CreateQuestionRequest) returns (CreateQuestionResponse);
+  rpc GetQuestions(GetQuestionsRequest) returns (GetQuestionsResponse);
+  rpc UpdateReply(UpdateReplyRequest) returns (UpdateReplyResponse);
+  rpc UpdateQuestionRead(UpdateQuestionReadRequest) returns (UpdateQuestionReadResponse);
+  rpc DeleteQuestion(DeleteQuestionRequest) returns (DeleteQuestionResponse);
+  rpc GetRandomQuestion(GetRandomQuestionRequest) returns (GetRandomQuestionResponse);
 }
 
 enum EQuestionType {
@@ -19,6 +18,17 @@ enum EQuestionType {
   EQT_GETTOKNOW = 1;
   EQT_BALANCE = 2;
   EQT_CHOOSE = 3;
+}
+
+enum EQuestionCategory {
+  EQC_UNSPECIFIED = 0;       // 상태 미지정
+  EQC_HOW_ABOUT_YOU = 1;     // 너는 어때?
+  EQC_RELATIONSHIP = 2;      // 썸·연애
+  EQC_OUR_SCHOOL = 3;        // 우리학교
+  EQC_PERSONALITY = 4;       // 성격
+  EQC_TRY_IT_OUT = 5;        // 맞춰봐
+  EQC_WHAT_IF = 6;           // 만약에
+  EQC_PREFERENCES = 7;       // 취향
 }
 
 enum EQuestionStatus {
@@ -89,14 +99,14 @@ message UpdateReplyResponse {
   optional string error = 2;
 }
 
-message UpdateQuestionReadRequest { string question_id = 1; }
+message UpdateQuestionReadRequest {string question_id = 1;}
 
 message UpdateQuestionReadResponse {
   bool success = 1;
   optional string error = 2;
 }
 
-message DeleteQuestionRequest { string question_id = 1; }
+message DeleteQuestionRequest {string question_id = 1;}
 
 message DeleteQuestionResponse {
   bool success = 1;
