@@ -77,7 +77,7 @@ message CountOfQuestionType {
 
 message CategoryList {
   QuestionTypeWithTitle type = 1;
-  repeated EQuestionCategory category = 2;
+  repeated QuestionCategoryWithContent categories = 2;
 }
 
 message QuestionTypeWithTitle {
@@ -87,8 +87,7 @@ message QuestionTypeWithTitle {
 
 message QuestionCategoryWithContent {
   EQuestionType question_type = 1;
-  string title = 2;
-  repeated string options = 3;
+  Content content = 2;
 }
 
 message CreateQuestionRequest {
