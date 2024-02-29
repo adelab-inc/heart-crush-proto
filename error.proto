@@ -2,12 +2,7 @@ syntax = "proto3";
 
 option go_package = "telepathy-server/proto";
 
-message EError {
-  EErrorCode code = 1;
-  string message = 2;
-}
-
-enum EErrorCode {
+enum EError {
   EEC_NO_ERROR = 0; // 에러 없음
 
   // 이미 유저가 등록되어 있는 경우 -> Login 유도 필요
