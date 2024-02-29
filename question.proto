@@ -76,8 +76,19 @@ message CountOfQuestionType {
 }
 
 message CategoryList {
+  QuestionTypeWithTitle type = 1;
+  repeated EQuestionCategory category = 2;
+}
+
+message QuestionTypeWithTitle {
   EQuestionType question_type = 1;
-  repeated EQuestionCategory question_category = 2;
+  string title = 2;
+}
+
+message QuestionCategoryWithContent {
+  EQuestionType question_type = 1;
+  string title = 2;
+  repeated string options = 3;
 }
 
 message CreateQuestionRequest {
@@ -146,7 +157,7 @@ message GetQuestionTypeCountRequest {
 
 message GetQuestionTypeCountResponse {
   bool success = 1;
-  repeated CountOfQuestionType count = 2; 
+  repeated CountOfQuestionType count = 2;
   optional string error = 3;
 }
 
