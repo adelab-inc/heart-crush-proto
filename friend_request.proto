@@ -26,6 +26,7 @@ enum EFriendRequestResult {
   EFRR_BLOCKED_FRIEND = 2; // 내가 상대방을 차단한 경우
   EFRR_ALREADY_FRIEND = 3; // 이미 친구인 경우
   EFRR_ALREADY_REQUESTED = 4; // 이미 요청을 보낸 경우
+  EFRR_INVALID_REQUEST = 5; // 요청이 잘못된 경우 (ex. 나에게 요청을 보낸 경우)
 }
 
 message FriendRequest {
