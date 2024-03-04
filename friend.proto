@@ -36,8 +36,8 @@ service FriendService {
       returns (UnblockUsersResponse) {}
   rpc DeleteBestFriends(DeleteBestFriendsRequest)
       returns (DeleteBestFriendsResponse) {}
-  rpc CreateBestFriend(CreateBestFriendRequest)
-      returns (CreateBestFriendResponse) {}
+  rpc AddBestFriend(AddBestFriendRequest)
+      returns (AddBestFriendResponse) {}
   rpc GetWhoCrushMe(GetWhoCrushMeRequest) returns (GetWhoCrushMeResponse) {}
   rpc GetPhoneBookFriend(GetPhoneBookFriendRequest)
       returns (GetPhoneBookFriendResponse) {}
@@ -110,17 +110,17 @@ message GetWhoCrushMeResponse {
   optional EError error = 3;
 }
 
-message CreateBestFriendRequest{
+message AddBestFriendRequest{
   repeated string uuids = 1;
 }
 
-message CreateBestFriendResponse {
+message AddBestFriendResponse {
   bool success = 1;
   optional EError error = 2;
 }
 
 message DeleteBestFriendsRequest {
-  repeated string uuid = 1;
+  repeated string uuids = 1;
 }
 
 message DeleteBestFriendsResponse {
