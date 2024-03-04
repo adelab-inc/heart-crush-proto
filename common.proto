@@ -60,7 +60,7 @@ message User {
   optional Config config = 10;      // only EUT_USER // only me
   string profile_img_url = 11;
   string thumbnail_img_url = 12;
-  optional User friends = 13;                   // only EUT_USER // only me
+  repeated User friends = 13;                   // only EUT_USER // only me
   bool is_best_friend = 14;
   optional bool is_initialized = 15;                  // only EUT_USER // only me
   optional google.protobuf.Timestamp created_at = 16; // only EUT_USER, EUT_ANONYMOUS, EUT_CRUSH // only me
