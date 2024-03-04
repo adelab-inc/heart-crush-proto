@@ -82,7 +82,9 @@ message CreateBlockedFriendResponse {
   optional EError error = 2;
 }
 
-message UnblockUsersRequest {string uuid = 2;}
+message UnblockUsersRequest {
+  repeated string uuid = 2;
+}
 
 message UnblockUsersResponse {
   bool success = 1;
