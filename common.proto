@@ -73,3 +73,11 @@ message User {
   optional google.protobuf.Timestamp crush_ended_at = 23; // only EUT_CRUSH
   bool blocked = 24; // blocked by me
 }
+
+
+message School {
+  string code = 1;
+  string name = 2;
+  string short_name = 3;
+  string address = 4;
+}
