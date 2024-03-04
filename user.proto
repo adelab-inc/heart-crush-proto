@@ -11,6 +11,11 @@ service UserService {
   rpc GetRandomNick(GetRandomNickRequest) returns (GetRandomNickResponse) {}
   //  rpc GetUserByPhone(GetUserByPhoneRequest) returns (GetUserByPhoneResponse) {}
 
+  //  차단
+  rpc GetBlockedUsers(GetBlockedUsersRequest) returns (GetBlockedUsersResponse) {}
+  rpc BlockUsers(BlockUsersRequest) returns (BlockUsersResponse) {}
+  rpc UnblockUsers(UnblockUsersRequest) returns (UnblockUsersResponse) {}
+
   // * 익명 프로필 서비스
   rpc CreateAnonymousProfile(CreateAnonymousProfileRequest)
       returns (CreateAnonymousProfileResponse) {}
@@ -169,4 +174,32 @@ message SearchUsersResponse {
   bool success = 1;
   repeated User users = 2;
   optional EError error = 3;
+}
+
+
+message GetBlockedUsersRequest {}
+
+message GetBlockedUsersResponse {
+  bool success = 1;
+  repeated User blocked_users = 2;
+  optional EError error = 3;
+}
+
+
+message BlockUsersRequest {
+  repeated string uuids = 1;
+}
+
+message BlockUsersResponse {
+  bool success = 1;
+  optional EError error = 2;
+}
+
+message UnblockUsersRequest {
+  repeated string uuids = 2;
+}
+
+message UnblockUsersResponse {
+  bool success = 1;
+  optional EError error = 2;
 }
