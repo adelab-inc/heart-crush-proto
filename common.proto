@@ -71,4 +71,5 @@ message User {
   optional string referenced_uid = 21;                  // only EUT_ANONYMOUS // only me
   optional string target_uid = 22;                      // only EUT_CRUSH
   optional google.protobuf.Timestamp crush_ended_at = 23; // only EUT_CRUSH
+  bool blocked = 24; // blocked by me
 }
