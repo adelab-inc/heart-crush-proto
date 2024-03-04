@@ -28,20 +28,14 @@ service FriendService {
   rpc GetRecommendFriendsUID(GetRecommendFriendsUIDRequest)
       returns (GetRecommendFriendsUIDResponse) {}
   // 제공된 추천친구 uid들을 기반으로 친구정보를 가져오는 서비스
-  rpc GetRecommendFriends(GetRecommendFriendsRequest)
-      returns (GetRecommendFriendsResponse) {}
-  rpc GetBlockedFriends(GetBlockedFriendsRequest)
-      returns (GetBlockedFriendsResponse) {}
+  rpc GetBlockedUsers(GetBlockedUsersRequest)
+      returns (GetBlockedUsersResponse) {}
   rpc CreateBlockedFriend(CreateBlockedFriendRequest)
       returns (CreateBlockedFriendResponse) {}
-  rpc DeleteBlockedFriend(DeleteBlockedFriendRequest)
-      returns (DeleteBlockedFriendResponse) {}
-  rpc GetFriends(GetFriendsRequest) returns (GetFriendsResponse) {}
-  rpc GetBestFriends(GetBestFriendsRequest) returns (GetBestFriendsResponse) {}
-  rpc UpdateBestFriends(UpdateBestFriendsRequest)
-      returns (UpdateBestFriendsResponse) {}
-  rpc DeleteBestFriend(DeleteBestFriendRequest)
-      returns (DeleteBestFriendResponse) {}
+  rpc UnblockUsers(UnblockUsersRequest)
+      returns (UnblockUsersResponse) {}
+  rpc DeleteBestFriends(DeleteBestFriendsRequest)
+      returns (DeleteBestFriendsResponse) {}
   rpc CreateBestFriend(CreateBestFriendRequest)
       returns (CreateBestFriendResponse) {}
   rpc GetWhoCrushMe(GetWhoCrushMeRequest) returns (GetWhoCrushMeResponse) {}
@@ -54,10 +48,6 @@ service FriendService {
 
 }
 
-message BestFriendRequest {
-  string uid = 1;
-  bool alarm = 2;
-}
 
 message GetRecommendFriendsUIDRequest {repeated string phone_book_friends = 1;}
 
@@ -77,11 +67,11 @@ message GetRecommendFriendsResponse {
   optional EError error = 3;
 }
 
-message GetBlockedFriendsRequest {}
+message GetBlockedUsersRequest {}
 
-message GetBlockedFriendsResponse {
+message GetBlockedUsersResponse {
   bool success = 1;
-  repeated User blocked_friends = 2;
+  repeated User blocked_users = 2;
   optional EError error = 3;
 }
 
@@ -92,32 +82,9 @@ message CreateBlockedFriendResponse {
   optional EError error = 2;
 }
 
-message DeleteBlockedFriendRequest {string friend_id = 2;}
+message UnblockUsersRequest {string uuid = 2;}
 
-message DeleteBlockedFriendResponse {
-  bool success = 1;
-  optional EError error = 2;
-}
-
-message GetFriendsRequest {}
-
-message GetFriendsResponse {
-  bool success = 1;
-  repeated User friends = 2;
-  optional EError error = 3;
-}
-
-message GetBestFriendsRequest {}
-
-message GetBestFriendsResponse {
-  bool success = 1;
-  repeated User best_friends = 2;
-  optional EError error = 3;
-}
-
-message UpdateBestFriendsRequest {repeated BestFriendRequest best_friends = 2;}
-
-message UpdateBestFriendsResponse {
+message UnblockUsersResponse {
   bool success = 1;
   optional EError error = 2;
 }
@@ -141,16 +108,20 @@ message GetWhoCrushMeResponse {
   optional EError error = 3;
 }
 
-message CreateBestFriendRequest {string friend_id = 1;}
+message CreateBestFriendRequest{
+  repeated string uuids = 1;
+}
 
 message CreateBestFriendResponse {
   bool success = 1;
   optional EError error = 2;
 }
 
-message DeleteBestFriendRequest {string friend_id = 1;}
+message DeleteBestFriendsRequest {
+  repeated string uuid = 1;
+}
 
-message DeleteBestFriendResponse {
+message DeleteBestFriendsResponse {
   bool success = 1;
   optional EError error = 2;
 }
