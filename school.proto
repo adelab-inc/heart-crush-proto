@@ -40,3 +40,4 @@ message SearchSchoolResponse {
   repeated School schools = 2;
   optional EError error = 3;
 }
+

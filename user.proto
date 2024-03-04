@@ -169,6 +169,7 @@ message DeleteProfileResponse {
 message SearchUsersRequest {
   repeated string uuids = 1;
   repeated string phone_number_hashes = 2;
+  optional string school_code = 3;
 }
 
 message SearchUsersResponse {

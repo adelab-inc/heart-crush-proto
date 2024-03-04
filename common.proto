@@ -3,6 +3,7 @@ syntax = "proto3";
 option go_package = "telepathy-server/proto";
 
 import "google/protobuf/timestamp.proto";
+import "school.proto";
 
 // Profile image size
 // width: 1600, height: 1600,
@@ -63,8 +64,9 @@ message User {
   optional bool is_initialized = 14;                  // only EUT_USER // only me
   optional google.protobuf.Timestamp created_at = 15; // only EUT_USER, EUT_ANONYMOUS, EUT_CRUSH // only me
   optional google.protobuf.Timestamp updated_at = 16; // only EUT_USER, EUT_ANONYMOUS, EUT_CRUSH // only me, UnixTime
-  optional string school_code = 17;                   // only EUT_USER // only me
-  string school_name = 18;                            // only EUT_USER
+  optional School school = 17;                        // only EUT_USER
+//  optional string school_code = 17;                   // only EUT_USER // only me
+//  string school_name = 18;                            // only EUT_USER
   string school_grade = 19;                           // only EUT_USER
   EUserType user_type = 20;
   optional string referenced_uid = 21;                  // only EUT_ANONYMOUS // only me
