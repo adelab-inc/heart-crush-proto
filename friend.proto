@@ -83,7 +83,7 @@ message CreateBlockedFriendResponse {
 }
 
 message UnblockUsersRequest {
-  repeated string uuid = 2;
+  repeated string uuids = 2;
 }
 
 message UnblockUsersResponse {
