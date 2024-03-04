@@ -3,7 +3,6 @@ syntax = "proto3";
 option go_package = "telepathy-server/proto";
 
 import "google/protobuf/timestamp.proto";
-import "school.proto";
 
 // Profile image size
 // width: 1600, height: 1600,
