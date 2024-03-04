@@ -86,7 +86,7 @@ message QuestionTypeWithTitle {
 }
 
 message QuestionCategoryWithContent {
-  EQuestionType question_type = 1;
+  EQuestionCategory question_category = 1;
   Content content = 2;
 }
 
