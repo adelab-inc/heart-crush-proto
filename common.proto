@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option go_package = "telepathy-server/proto";
+option go_package = "heart-crush-server/proto";
 
 import "google/protobuf/timestamp.proto";
 
