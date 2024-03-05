@@ -9,6 +9,14 @@ import "google/protobuf/timestamp.proto";
 // thumb size
 // width: 360, height: 360,
 
+enum ESchoolType {
+  EST_UNSPECIFIED = 0;
+  EST_ELEMENTARY = 1;
+  EST_MIDDLE = 2;
+  EST_HIGH = 3;
+  EST_UNIVERSITY = 4;
+}
+
 enum EChipType {
   ECT_UNSPECIFIED = 0;
   ECT_OTHER = 1;
@@ -79,4 +87,5 @@ message School {
   string name = 2;
   string short_name = 3;
   string address = 4;
+  ESchoolType type = 5;
 }
