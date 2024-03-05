@@ -124,14 +124,18 @@ message UpdateReplyResponse {
   optional EError error = 2;
 }
 
-message UpdateQuestionReadRequest {string question_id = 1;}
+message UpdateQuestionReadRequest {
+  string question_id = 1;
+}
 
 message UpdateQuestionReadResponse {
   bool success = 1;
   optional EError error = 2;
 }
 
-message DeleteQuestionRequest {string question_id = 1;}
+message DeleteQuestionRequest {
+  string question_id = 1;
+}
 
 message DeleteQuestionResponse {
   bool success = 1;
@@ -160,7 +164,8 @@ message GetQuestionTypeCountResponse {
   optional string error = 3;
 }
 
-message QuestionCategoryListRequest {}
+message QuestionCategoryListRequest {
+}
 
 message QuestionCategoryListResponse {
   bool success = 1;
