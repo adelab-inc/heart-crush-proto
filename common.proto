@@ -73,7 +73,7 @@ message User {
   optional google.protobuf.Timestamp created_at = 16; // only EUT_USER, EUT_ANONYMOUS, EUT_CRUSH // only me
   optional google.protobuf.Timestamp updated_at = 17; // only EUT_USER, EUT_ANONYMOUS, EUT_CRUSH // only me, UnixTime
   optional School school = 18;                        // only EUT_USER
-  int32 school_grade = 19;                            // only EUT_USER, 몇학년인지
+  int32 school_grade = 19;                            // only EUT_USER, 몇학년인지, -1: 졸업생
   EUserType type = 20;
   optional string referenced_uid = 21;                  // only EUT_ANONYMOUS // only me
   optional string target_uid = 22;                      // only EUT_CRUSH
