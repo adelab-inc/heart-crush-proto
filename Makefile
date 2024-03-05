@@ -5,8 +5,8 @@ PROTOC_GEN_GO_GRPC=$(GOBIN)/protoc-gen-go-grpc
 
 REMOTE_DIR=.
 REMOTE_FILES=$(wildcard $(REMOTE_DIR)/*.proto)
-REMOTE_OUT=../telepathy-server/proto/generated
-REMOTE_GRPC_OUT=../telepathy-server/proto/generated
+REMOTE_OUT=../heart-crush-server/proto/generated
+REMOTE_GRPC_OUT=../heart-crush-server/proto/generated
 
 
 REMOTE_FLUTTER_OUT=../ble-app/lib/utils/grpc/proto
