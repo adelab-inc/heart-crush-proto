@@ -17,12 +17,6 @@ enum EInquiryType {
   EIT_ETC = 5;
 }
 
-enum ETargetType {
-  ETT_UNSPECIFIED = 0;
-  ETT_USER = 1;
-  ETT_MESSAGE = 2;
-}
-
 message CreateInquiryRequest {
   EInquiryType inquiry_type = 1;
   string title = 2;
