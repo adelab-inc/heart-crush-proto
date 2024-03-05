@@ -6,7 +6,7 @@ option go_package = "heart-crush-server/proto";
 import "google/protobuf/timestamp.proto";
 import "error.proto";
 
-enum EAlarmType {
+enum ENotificationType {
   EAT_UNSPECIFIED = 0;
   EAT_BLUETOOTH = 1;
   EAT_LIKE = 2;
@@ -14,15 +14,15 @@ enum EAlarmType {
   EAT_QUESTION = 4;
 }
 
-service AlarmService {
-  rpc GetAlarms(GetAlarmsRequest) returns (GetAlarmsResponse) {}
-  rpc UpdateAlarms(UpdateAlarmsRequest) returns (UpdateAlarmsResponse) {}
+service NotificationService {
+  rpc GetNotifications(GetNotificationsRequest) returns (GetNotificationsResponse) {}
+  rpc UpdateNotifications(UpdateNotificationsRequest) returns (UpdateNotificationsResponse) {}
 }
 
 // * Entity
-message Alarm {
+message Notification {
   string id = 1;
-  optional EAlarmType type = 2;
+  optional ENotificationType type = 2;
   optional string title = 3;
   optional string body = 4;
   optional bool is_read = 5;
@@ -31,15 +31,15 @@ message Alarm {
 }
 
 // * Request & Response
-message GetAlarmsRequest {}
-message GetAlarmsResponse {
+message GetNotificationsRequest {}
+message GetNotificationsResponse {
   bool success = 1;
-  repeated Alarm alarms = 2;
+  repeated Notification notifications = 2;
   optional EError error = 3;
 }
 
-message UpdateAlarmsRequest { repeated Alarm alarms = 1; }
-message UpdateAlarmsResponse {
+message UpdateNotificationsRequest { repeated Notification notifications = 1; }
+message UpdateNotificationsResponse {
   bool success = 1;
   optional EError error = 2;
 }

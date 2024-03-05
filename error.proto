@@ -83,7 +83,7 @@ enum EError {
   // 9X,XXX - Chat Service
   // common errors
 
-  // 10,XXX - Alarm Service
+  // 10,XXX - Notification Service
   // common errors
 
   // 11,XXX - Question Service

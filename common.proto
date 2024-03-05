@@ -40,10 +40,10 @@ message ChipItem {
 }
 message Config {
   optional bool heart_lock = 1;
-  optional bool system_alarm = 2;
-  optional bool question_alarm = 3;
-  optional bool bluetooth_alarm = 4;
-  optional bool heart_alarm = 5;
+  optional bool system_noti = 2;
+  optional bool question_noti = 3;
+  optional bool bluetooth_noti = 4;
+  optional bool heart_noti = 5;
 }
 
 enum EUserType {
