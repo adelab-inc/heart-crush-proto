@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+option go_package = "heart-crush-server/proto";
+
+import "error.proto";
+
+service ReportService {
+  rpc CreateReport(CreateReportRequest) returns (CreateReportResponse) {}
+}
+
+enum EReportType {
+  EREPORT_UNSPECIFIED = 0;
+  EREPORT_CHEAT = 1;
+  EREPORT_VIOLENCE = 2;
+  EREPORT_SEXUAL_CRIME = 3;
+  EREPORT_BULLYING = 4;
+  EREPORT_ETC = 5;
+}
+
+enum ETargetType {
+  ETT_UNSPECIFIED = 0;
+  ETT_USER = 1;
+  ETT_MESSAGE = 2;
+}
+
+message CreateReportRequest {
+  EReportType report_type = 1;
+  ETargetType target_type = 2;
+  string target_id = 3;
+  string detail = 4;
+}
+message CreateReportResponse {
+  bool success = 1;
+  optional EError error = 2;
+}

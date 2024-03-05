@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+option go_package = "heart-crush-server/proto";
+
+import "error.proto";
+
+service InquiryService {
+  rpc CreateInquiry(CreateInquiryRequest) returns (CreateInquiryResponse) {}
+}
+
+enum EInquiryType {
+  EIT_UNSPECIFIED = 0;
+  EIT_SERVICE_MANUAL = 1;
+  EIT_SERVICE_ERROR = 2;
+  EIT_ACCOUNT_ERROR = 3;
+  EIT_PROPOSAL = 4;
+  EIT_ETC = 5;
+}
+
+enum ETargetType {
+  ETT_UNSPECIFIED = 0;
+  ETT_USER = 1;
+  ETT_MESSAGE = 2;
+}
+
+message CreateInquiryRequest {
+  EInquiryType inquiry_type = 1;
+  string title = 2;
+  optional string content = 3;
+  string reply_email = 4;
+  repeated bytes images = 5;
+  bool agreement = 6;
+}
+
+message CreateInquiryResponse {
+  bool success = 1;
+  optional EError error = 2;
+}
