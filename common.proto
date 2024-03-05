@@ -74,7 +74,7 @@ message User {
   optional google.protobuf.Timestamp updated_at = 17; // only EUT_USER, EUT_ANONYMOUS, EUT_CRUSH // only me, UnixTime
   optional School school = 18;                        // only EUT_USER
   string school_grade = 19;                           // only EUT_USER
-  EUserType user_type = 20;
+  EUserType type = 20;
   optional string referenced_uid = 21;                  // only EUT_ANONYMOUS // only me
   optional string target_uid = 22;                      // only EUT_CRUSH
   optional google.protobuf.Timestamp crush_ended_at = 23; // only EUT_CRUSH
