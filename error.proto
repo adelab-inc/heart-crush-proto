@@ -52,11 +52,18 @@ enum EError {
   // 2X,XXX - Health Check Service
   // common errors
 
-  // 3X,XXX - Authentication Service
-  // common errors
-
   // 4X,XXX - User Service
   // common errors
+
+  // StartSmsVerification
+  EE_FAILED_TO_START_SMS_VERIFICATION = 40800;
+  EE_EMPTY_PHONE_NUMBER = 40801;
+  EE_INVALID_PHONE_NUMBER = 40802;
+  EE_FAILED_TO_SEND_SMS_FROM_SENS = 40803;
+  EE_FAILED_TO_INSERT_CODE_FROM_MONGODB = 40804;
+
+
+  // CheckSmsVerification
 
   // 5X,XXX - Friend Service
   // common errors

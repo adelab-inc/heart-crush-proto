@@ -30,6 +30,9 @@ service UserService {
       returns (GetReceivedHeartResponse) {}
   rpc DeleteProfile(DeleteProfileRequest) returns (DeleteProfileResponse) {}
   rpc SearchUsers(SearchUsersRequest) returns (SearchUsersResponse) {}
+
+  rpc StartSmsVerification(StartSmsVerificationRequest) returns (StartSmsVerificationResponse) {}
+  rpc CheckSmsVerification(CheckSmsVerificationRequest) returns (CheckSmsVerificationResponse) {}
 }
 
 /*
@@ -200,6 +203,27 @@ message UnblockUsersRequest {
 }
 
 message UnblockUsersResponse {
+  bool success = 1;
+  optional EError error = 2;
+}
+
+message StartSmsVerificationRequest {
+  string phoneNumber = 1;
+}
+
+message StartSmsVerificationResponse {
+  bool success = 1;
+  optional bool is_locked = 2;
+  optional int32 locked_remained_tick = 3;
+  optional EError error = 4;
+}
+
+message CheckSmsVerificationRequest {
+  string phoneNumber = 1;
+  string code = 2;
+}
+
+message CheckSmsVerificationResponse {
   bool success = 1;
   optional EError error = 2;
 }
