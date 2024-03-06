@@ -46,39 +46,52 @@ message Config {
   optional bool heart_noti = 5;
 }
 
-enum EUserType {
-  EUT_UNSPECIFIED = 0;
-  EUT_USER = 1; // 일반 유저
-  EUT_ANONYMOUS = 2; // 익명 유저
-  EUT_CRUSH = 3; // 짝사랑 익명 유저
-  EUT_UNREGISTERED = 4; // 등록되지 않은 유저
-}
+//enum EUserType {
+//  EUT_UNSPECIFIED = 0;
+//  EUT_USER = 1; // 일반 유저
+//  EUT_ANONYMOUS = 2; // 익명 유저
+//  EUT_CRUSH = 3; // 짝사랑 익명 유저
+//  EUT_UNREGISTERED = 4; // 등록되지 않은 유저
+//}
 
 message User {
   string uid = 1;
-  string name = 2;
-  string description = 3;
-  EGender gender = 4;
+  Profile default_profile = 2; // only me
+  optional Profile anonymous_profile = 3; // only me
+  optional Profile crush_profile = 4; // only me
   repeated ChipItem chips = 5;
   optional string birth = 6;       // only EUT_USER // only me, 20030407
   optional string phone_number = 7; // only EUT_USER // only me, E.164
   optional string phone_number_hash = 8;
   optional string email = 9;       // only EUT_USER // only me
   optional Config config = 10;      // only EUT_USER // only me
-  string profile_img_url = 11;
-  string thumbnail_img_url = 12;
-  repeated User friends = 13;                   // only EUT_USER // only me
-  bool is_best_friend = 14;
-  optional bool is_initialized = 15;                  // only EUT_USER // only me
-  optional google.protobuf.Timestamp created_at = 16; // only EUT_USER, EUT_ANONYMOUS, EUT_CRUSH // only me
-  optional google.protobuf.Timestamp updated_at = 17; // only EUT_USER, EUT_ANONYMOUS, EUT_CRUSH // only me, UnixTime
-  optional School school = 18;                        // only EUT_USER
-  int32 school_grade = 19;                            // only EUT_USER, 몇학년인지, -1: 졸업생
-  EUserType type = 20;
-  optional string referenced_uid = 21;                  // only EUT_ANONYMOUS // only me
-  optional string target_uid = 22;                      // only EUT_CRUSH
-  optional google.protobuf.Timestamp crush_ended_at = 23; // only EUT_CRUSH
-  bool blocked = 24; // blocked by me
+  repeated string friends = 11;                    // only me
+  repeated string best_friends = 12;                  // only me
+  bool asked_to_update_profile = 13;                  // only EUT_USER // only me
+  optional google.protobuf.Timestamp created_at = 14; // only EUT_USER, EUT_ANONYMOUS, EUT_CRUSH // only me
+  optional google.protobuf.Timestamp updated_at = 15; // only EUT_USER, EUT_ANONYMOUS, EUT_CRUSH // only me, UnixTime
+  optional School school = 16;                        // only EUT_USER
+  int32 school_grade = 17;                            // only EUT_USER, 몇학년인지, -1: 졸업생
+  bool blocked = 18; // blocked by me
+}
+
+enum EProfileType {
+  EPT_UNSPECIFIED = 0;
+  EUT_DEFAULT = 1; // 일반 유저
+  EUT_ANONYMOUS = 2; // 익명 유저
+  EUT_CRUSH = 3; // 짝사랑 익명 유저
+}
+
+message Profile {
+  string id = 1;
+  EProfileType type = 2;
+  string name = 3;
+  string description = 4;
+  optional string profile_img_url = 5;
+  optional string thumbnail_img_url = 6;
+  optional string owner_uid = 7; // only me
+  optional google.protobuf.Timestamp crush_end_at = 20; // only me
+  optional string crush_uid = 21; // only me
 }
 
 
