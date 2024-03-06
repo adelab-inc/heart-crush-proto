@@ -60,19 +60,20 @@ message User {
   optional Profile anonymous_profile = 3; // only me
   optional Profile crush_profile = 4; // only me
   repeated ChipItem chips = 5;
-  optional string birth = 6;       // only EUT_USER // only me, 20030407
-  optional string phone_number = 7; // only EUT_USER // only me, E.164
-  optional string phone_number_hash = 8;
-  optional string email = 9;       // only EUT_USER // only me
-  optional Config config = 10;      // only EUT_USER // only me
-  repeated string friends = 11;                    // only me
-  repeated string best_friends = 12;                  // only me
-  bool asked_to_update_profile = 13;                  // only EUT_USER // only me
-  optional google.protobuf.Timestamp created_at = 14; // only EUT_USER, EUT_ANONYMOUS, EUT_CRUSH // only me
-  optional google.protobuf.Timestamp updated_at = 15; // only EUT_USER, EUT_ANONYMOUS, EUT_CRUSH // only me, UnixTime
-  optional School school = 16;                        // only EUT_USER
-  int32 school_grade = 17;                            // only EUT_USER, 몇학년인지, -1: 졸업생
-  bool blocked = 18; // blocked by me
+  EGender gender = 6;
+  optional string birth = 7;       // only EUT_USER // only me, 20030407
+  optional string phone_number = 8; // only EUT_USER // only me, E.164
+  optional string phone_number_hash = 9;
+  optional string email = 10;       // only EUT_USER // only me
+  optional Config config = 11;      // only EUT_USER // only me
+  repeated User friends = 12;                    // only me
+  repeated User best_friends = 13;                  // only me
+  bool asked_to_update_profile = 14;                  // only EUT_USER // only me
+  optional google.protobuf.Timestamp created_at = 15; // only EUT_USER, EUT_ANONYMOUS, EUT_CRUSH // only me
+  optional google.protobuf.Timestamp updated_at = 16; // only EUT_USER, EUT_ANONYMOUS, EUT_CRUSH // only me, UnixTime
+  optional School school = 17;                        // only EUT_USER
+  int32 school_grade = 18;                            // only EUT_USER, 몇학년인지, 0: 졸업생 (기본값)
+  bool blocked = 19; // blocked by me
 }
 
 enum EProfileType {
