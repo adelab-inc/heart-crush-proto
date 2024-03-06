@@ -7,44 +7,39 @@ import "error.proto";
 import "common.proto";
 import "google/protobuf/timestamp.proto";
 
-enum EUserStatus {
-  EUS_UNSPECIFIED = 0;
-  // 정상적인 유저
-  EUS_VALID = 1; // 정상적인 유저의 경우
+// enum EUserStatus {
+//   EUS_UNSPECIFIED = 0;
+//   // 정상적인 유저
+//   EUS_VALID = 1; // 정상적인 유저의 경우
 
-  // 기타 등등 1xx
-  EUS_INVALID = 100; // 가입되어있지 않은 유저의 경우
+//   // 기타 등등 1xx
+//   EUS_INVALID = 100; // 가입되어있지 않은 유저의 경우
 
-  // 시스템 관련 2xx
-  EUS_SYSTEM_MAINTENANCE = 200; // 시스템 점검 관련
-  EUS_NEED_UPDATE = 201;        // 업데이트가 필요한 유저의 경우
+//   // 시스템 관련 2xx
+//   EUS_SYSTEM_MAINTENANCE = 200; // 시스템 점검 관련
+//   EUS_NEED_UPDATE = 201;        // 업데이트가 필요한 유저의 경우
 
-  // 이용 제한 관련 3xx
-  EUS_BANNED = 300;    // 유저가 이용제한(임시 정지)된 경우
-  EUS_FORBBIDEN = 301; // 유저가 이용정지(영구 정지)된 경우
-}
+//   // 이용 제한 관련 3xx
+//   EUS_BANNED = 300;    // 유저가 이용제한(임시 정지)된 경우
+//   EUS_FORBBIDEN = 301; // 유저가 이용정지(영구 정지)된 경우
+// }
 
 
 service AuthService {
-  rpc CreateAuthCode(CreateAuthCodeRequest) returns (CreateAuthCodeResponse) {}
-  rpc ValidateAuthCode(ValidateAuthCodeRequest)
-      returns (ValidateAuthCodeResponse) {}
-  rpc SignUp(SignUpRequest) returns (SignUpResponse) {}
-  rpc LoginWithCode(LoginWithCodeRequest) returns (LoginResponse) {}
-  rpc LoginWithPassword(LoginWithPasswordRequest) returns (LoginResponse) {}
-  rpc LockUser(LockUserRequest) returns (LockUserResponse) {}
-  rpc EmailRegister(EmailRegisterRequest) returns (EmailRegisterResponse) {}
-  rpc CreateEmailAuthCode(CreateEmailAuthCodeRequest)
-      returns (CreateEmailAuthCodeResponse) {}
-  rpc ValidateEmailAuthCode(ValidateEmailAuthCodeRequest)
-      returns (ValidateEmailAuthCodeResponse) {}
-  rpc LockEmailUser(LockEmailUserRequest) returns (LockEmailUserResponse) {}
-  rpc UpdatePhoneNumber(UpdatePhoneNumberRequest)
-      returns (UpdatePhoneNumberResponse) {}
-  rpc CheckUserStatus(CheckUserStatusRequest)
-      returns (CheckUserStatusResponse) {}
-  rpc BanUser(BanUserRequest) returns (BanUserResponse) {}
-  rpc TestToken(TestTokenRequest) returns (TestTokenResponse) {}
+  // rpc SignUp(SignUpRequest) returns (SignUpResponse) {}
+  // rpc LoginWithCode(LoginWithCodeRequest) returns (LoginResponse) {}
+  // rpc LoginWithPassword(LoginWithPasswordRequest) returns (LoginResponse) {}
+  // rpc LockUser(LockUserRequest) returns (LockUserResponse) {}
+  // rpc EmailRegister(EmailRegisterRequest) returns (EmailRegisterResponse) {}
+  // rpc LockEmailUser(LockEmailUserRequest) returns (LockEmailUserResponse) {}
+  // rpc UpdatePhoneNumber(UpdatePhoneNumberRequest)
+  //     returns (UpdatePhoneNumberResponse) {}
+  // rpc CheckUserStatus(CheckUserStatusRequest)
+  //     returns (CheckUserStatusResponse) {}
+  // rpc BanUser(BanUserRequest) returns (BanUserResponse) {}
+  // rpc TestToken(TestTokenRequest) returns (TestTokenResponse) {}
+    // rpc CreateEmailCode(CreateEmailCodeRequest) returns (CreateEmailCodeResponse) {}
+  // rpc ValidateEmailCode(ValidateEmailCodeRequest) returns (ValidateEmailCodeResponse) {}
 }
 
 message AuthUser {
@@ -61,26 +56,6 @@ message Term {
   bool agree = 2;
   int64 created_at = 3; // UnixTime -> change to localtime (ex. kst)
   int64 updated_at = 4; // UnixTime
-}
-
-
-message CreateAuthCodeRequest {string phone = 1;}
-
-message CreateAuthCodeResponse {
-  bool success = 1;
-  optional bool is_locked = 2;
-  optional int32 locked_remained_tick = 3;
-  optional EError error = 4;
-}
-
-message ValidateAuthCodeRequest {
-  string phone = 1;
-  string code = 2;
-}
-
-message ValidateAuthCodeResponse {
-  bool success = 1;
-  optional EError error = 2;
 }
 
 message SignUpRequestUser {
@@ -138,27 +113,6 @@ message EmailRegisterResponse {
   optional EError error = 2;
 }
 
-message CreateEmailAuthCodeRequest {string email = 1;}
-
-message CreateEmailAuthCodeResponse {
-  bool success = 1;
-  optional bool is_locked = 2;            // user가 lock이 됐는지 확인
-  optional int32 locked_remained_tick = 3; // unit is second, 남은 시간
-  optional EError error = 4;
-}
-
-message ValidateEmailAuthCodeRequest {
-  string email = 1;
-  string code = 2;
-}
-
-message ValidateEmailAuthCodeResponse {
-  // ABNORMAL_APPROACH, UNEXPECTED_ERROR, AUTHENTICATE_FAILED, NO_ERROR
-  bool success = 1;
-  optional string token = 2;
-  optional EError error = 3;
-}
-
 message LockEmailUserRequest {
   string email = 1;
   int32 tick = 2;
@@ -208,9 +162,32 @@ message CheckUserStatusRequest {
   // string version = 2; // unimplement yet
 }
 
-message CheckUserStatusResponse {
-  bool success = 1;
-  optional EUserStatus user_status = 2;
-  optional BannedUser ban_user = 3;
-  optional EError error = 4;
-}
+// message CheckUserStatusResponse {
+//   bool success = 1;
+//   optional EUserStatus user_status = 2;
+//   optional BannedUser ban_user = 3;
+//   optional EError error = 4;
+// }
+
+
+// message CreateEmailCodeRequest {string email = 1;}
+
+// message CreateEmailCodeResponse {
+//   bool success = 1;
+//   optional bool is_locked = 2;            // user가 lock이 됐는지 확인
+//   optional int32 locked_remained_tick = 3; // unit is second, 남은 시간
+//   optional EError error = 4;
+// }
+
+// message ValidateEmailCodeRequest {
+//   string email = 1;
+//   string code = 2;
+// }
+
+// message ValidateEmailCodeResponse {
+//   // ABNORMAL_APPROACH, UNEXPECTED_ERROR, AUTHENTICATE_FAILED, NO_ERROR
+//   bool success = 1;
+//   optional string token = 2;
+//   optional EError error = 3;
+// }
+
