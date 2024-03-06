@@ -6,27 +6,10 @@ import "common.proto";
 import "error.proto";
 
 service SchoolService {
-  //  rpc GetAllSchool(GetAllSchoolRequest) returns (GetAllSchoolResponse) {}
-  //  rpc GetNearBySchools(GetNearBySchoolsRequest)
-  //      returns (GetNearBySchoolsResponse) {}
-  rpc SearchSchool(SearchSchoolRequest) returns (SearchSchoolResponse) {}
+  rpc SearchSchool(SearchSchoolRequest) returns (SearchSchoolResponse) {} // 학교 검색
+  rpc SchoolDetail(SchoolDetailRequest) returns (SchoolDetailResponse) {} // 학교 상세 정보
 }
 
-//message GetAllSchoolRequest {}
-//
-//message GetAllSchoolResponse {
-//  bool success = 1;
-//  repeated School schools = 2;
-//  optional EError error = 3;
-//}
-
-//message GetNearBySchoolsRequest {string school_code = 1;}
-
-//message GetNearBySchoolsResponse {
-//  bool success = 1;
-//  repeated School schools = 2;
-//  optional EError error = 3;
-//}
 message SearchSchoolRequest {string keyword = 1;}
 message SearchSchoolResponse {
   bool success = 1;
@@ -34,3 +17,9 @@ message SearchSchoolResponse {
   optional EError error = 3;
 }
 
+message SchoolDetailRequest {string school_code = 1;}
+message SchoolDetailResponse {
+  bool success = 1;
+  repeated School schools = 2;
+  optional EError error = 3;
+}
