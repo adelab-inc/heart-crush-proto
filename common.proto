@@ -105,3 +105,12 @@ message School {
   string address = 4;
   ESchoolType type = 5;
 }
+
+
+enum ESecurityLogType {
+  ESLT_UNSPECIFIED = 0;
+  ESLT_USER_CREATION = 1;
+  ESLT_USER_ACTION = 2;
+  ESLT_INVALID_PASSWORD = 3;
+  ESLT_INVALID_PHONE_NUMBER = 4;
+}
