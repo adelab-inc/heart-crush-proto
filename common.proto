@@ -78,9 +78,9 @@ message User {
 
 enum EProfileType {
   EPT_UNSPECIFIED = 0;
-  EUT_DEFAULT = 1; // 일반 유저
-  EUT_ANONYMOUS = 2; // 익명 유저
-  EUT_CRUSH = 3; // 짝사랑 익명 유저
+  EPT_DEFAULT = 1; // 일반 유저
+  EPT_ANONYMOUS = 2; // 익명 유저
+  EPT_CRUSH = 3; // 짝사랑 익명 유저
 }
 
 message Profile {
