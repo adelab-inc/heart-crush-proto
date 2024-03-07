@@ -9,10 +9,10 @@ service UserService {
 
   rpc StartSmsVerification (StartSmsVerificationRequest) returns (StartSmsVerificationResponse) {}
   rpc CheckSmsVerification (CheckSmsVerificationRequest) returns (CheckSmsVerificationResponse) {}
+  rpc Register (RegisterRequest) returns (RegisterResponse) {}
   rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse) {}
   rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse) {}
   rpc GetRandomNick(GetRandomNickRequest) returns (GetRandomNickResponse) {}
-  //  rpc GetUserByPhone(GetUserByPhoneRequest) returns (GetUserByPhoneResponse) {}
 
   //  차단
   rpc GetBlockedUsers(GetBlockedUsersRequest) returns (GetBlockedUsersResponse) {}
@@ -58,6 +58,18 @@ message CheckSmsVerificationResponse {
   bool need_to_register = 2; // 생년월일, 이름, 성별 기입 했는지 여부. DB 에서 uuid 로 조회시 없을 때 이 값을 true 로 줌
   optional EError error = 3;
   optional string custom_token = 4;
+}
+
+message RegisterRequest {
+  string name = 1;
+  EGender gender = 2;
+  string birth = 3;
+}
+
+message RegisterResponse {
+  bool success = 1;
+  optional User user = 2;
+  optional EError error = 3;
 }
 
 
