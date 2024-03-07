@@ -46,13 +46,14 @@ message Config {
   optional bool heart_noti = 5;
 }
 
-//enum EUserType {
-//  EUT_UNSPECIFIED = 0;
-//  EUT_USER = 1; // 일반 유저
-//  EUT_ANONYMOUS = 2; // 익명 유저
-//  EUT_CRUSH = 3; // 짝사랑 익명 유저
-//  EUT_UNREGISTERED = 4; // 등록되지 않은 유저
-//}
+
+enum EUserStatus {
+  EUS_UNSPECIFIED = 0;
+  // 정상적인 유저
+  EUS_VALID = 1; // 정상적인 유저의 경우
+  EUS_BANNED = 5;    // 유저가 이용제한(임시 정지)된 경우
+  EUS_FORBIDDEN = 6; // 유저가 이용정지(영구 정지)된 경우
+}
 
 message User {
   string uid = 1;
@@ -74,6 +75,7 @@ message User {
   optional School school = 17;                        // only EUT_USER
   int32 school_grade = 18;                            // only EUT_USER, 몇학년인지, 0: 졸업생 (기본값)
   bool blocked = 19; // blocked by me
+  EUserStatus status = 20;
 }
 
 enum EProfileType {
