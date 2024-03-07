@@ -75,7 +75,7 @@ message User {
   optional School school = 17;                        // only EUT_USER
   int32 school_grade = 18;                            // only EUT_USER, 몇학년인지, 0: 졸업생 (기본값)
   bool blocked = 19; // blocked by me
-  EUserStatus status = 20;
+  EUserStatus status = 20; // only EUT_USER // only me
 }
 
 enum EProfileType {
