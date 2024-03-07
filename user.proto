@@ -43,6 +43,8 @@ message StartSmsVerificationRequest {
 message StartSmsVerificationResponse {
   bool success = 1;
   optional EError error = 2;
+  optional bool is_locked = 3;
+  optional int32 locked_remained_tick = 4;
 }
 
 message CheckSmsVerificationRequest {
