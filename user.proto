@@ -64,6 +64,7 @@ message RegisterRequest {
   string name = 1;
   EGender gender = 2;
   string birth = 3;
+  string hashed_password = 4;
 }
 
 message RegisterResponse {
