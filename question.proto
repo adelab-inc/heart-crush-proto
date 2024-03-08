@@ -103,14 +103,12 @@ message CreateQuestionRequest {
   EQuestionCategory question_category = 4;
   Content content = 5;
 }
-
 message CreateQuestionResponse {
   bool success = 1;
   optional EError error = 2;
 }
 
 message DeleteQuestionRequest {string question_id = 1;}
-
 message DeleteQuestionResponse {
   bool success = 1;
   optional EError error = 2;
@@ -120,14 +118,12 @@ message UpdateReplyRequest {
   string question_id = 1;
   Option answer = 2;
 }
-
 message UpdateReplyResponse {
   bool success = 1;
   optional EError error = 2;
 }
 
 message UpdateQuestionReadRequest {string question_id = 1;}
-
 message UpdateQuestionReadResponse {
   bool success = 1;
   optional EError error = 2;
@@ -135,7 +131,6 @@ message UpdateQuestionReadResponse {
 
 // 사용자 / 익명 / 짝사랑 익명 중 선택 1
 message QuestionListRequest {string uid = 1;}
-
 message QuestionListResponse {
   bool success = 1;
   repeated QuestionCard sent_card = 2;
@@ -144,7 +139,6 @@ message QuestionListResponse {
 }
 
 message QuestionCategoryListRequest {}
-
 message QuestionCategoryListResponse {
   bool success = 1;
   repeated CategoryList data = 2;
@@ -156,7 +150,6 @@ message RandomQuestionRequest {
   EQuestionCategory question_category = 2;
   string target_uid = 3;
 }
-
 message RandomQuestionResponse {
   bool success = 1;
   optional Content content = 2;
@@ -164,7 +157,6 @@ message RandomQuestionResponse {
 }
 
 message QuestionTypeCountRequest {string target_uid = 1;}
-
 message QuestionTypeCountResponse {
   bool success = 1;
   repeated CountOfQuestionType count = 2;
