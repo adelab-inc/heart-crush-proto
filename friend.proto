@@ -35,7 +35,7 @@ service FriendService {
 //      returns (UnblockUsersResponse) {}
   rpc DeleteBestFriends(DeleteBestFriendsRequest)
       returns (DeleteBestFriendsResponse) {}
-  rpc AddBestsFriend(AddBestFriendsRequest)
+  rpc AddBestFriends(AddBestFriendsRequest)
       returns (AddBestFriendsResponse) {}
   rpc GetWhoCrushedMe(GetWhoCrushedMeRequest) returns (GetWhoCrushedMeResponse) {}
   rpc SendFriendRequest(SendFriendRequestRequest) returns (SendFriendRequestResponse);
