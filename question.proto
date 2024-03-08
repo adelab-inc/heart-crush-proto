@@ -93,7 +93,8 @@ message QuestionTypeWithTitle {
 
 message QuestionCategoryWithContent {
   EQuestionCategory question_category = 1;
-  Content content = 2;
+  string title = 2;
+  Content content = 3;
 }
 
 message CreateQuestionRequest {
