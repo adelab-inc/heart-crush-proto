@@ -6,14 +6,20 @@ import "google/protobuf/timestamp.proto";
 import "error.proto";
 
 service QuestionService {
-  rpc CreateQuestion(CreateQuestionRequest) returns (CreateQuestionResponse);
-  rpc GetQuestions(GetQuestionsRequest) returns (GetQuestionsResponse);
-  rpc UpdateReply(UpdateReplyRequest) returns (UpdateReplyResponse);
-  rpc UpdateQuestionRead(UpdateQuestionReadRequest) returns (UpdateQuestionReadResponse);
-  rpc DeleteQuestion(DeleteQuestionRequest) returns (DeleteQuestionResponse);
-  rpc GetRandomQuestion(GetRandomQuestionRequest) returns (GetRandomQuestionResponse);
-  rpc GetQuestionTypeCount(GetQuestionTypeCountRequest) returns (GetQuestionTypeCountResponse);
-  rpc QuestionCategoryList(QuestionCategoryListRequest) returns (QuestionCategoryListResponse);
+  rpc CreateQuestion(CreateQuestionRequest) returns (CreateQuestionResponse) {}
+  rpc DeleteQuestion(DeleteQuestionRequest) returns (DeleteQuestionResponse) {}
+  rpc UpdateReply(UpdateReplyRequest) returns (UpdateReplyResponse) {}
+  rpc UpdateQuestionRead(UpdateQuestionReadRequest) returns (UpdateQuestionReadResponse) {}
+
+  // 조회
+  rpc QuestionList(QuestionListRequest)
+      returns (QuestionListResponse) {}
+  rpc QuestionCategoryList(QuestionCategoryListRequest)
+      returns (QuestionCategoryListResponse){}
+  rpc RandomQuestion(RandomQuestionRequest)
+      returns (RandomQuestionResponse) {}
+  rpc QuestionTypeCount(QuestionTypeCountRequest)
+      returns (QuestionTypeCountResponse){}
 }
 
 enum EQuestionType {
@@ -97,78 +103,63 @@ message CreateQuestionRequest {
   EQuestionCategory question_category = 4;
   Content content = 5;
 }
-
 message CreateQuestionResponse {
   bool success = 1;
   optional EError error = 2;
 }
 
-message GetQuestionsRequest {
-  string uid = 1; // 사용자 / 익명 / 짝사랑 익명 중 선택 1
-}
-
-message GetQuestionsResponse {
+message DeleteQuestionRequest {string question_id = 1;}
+message DeleteQuestionResponse {
   bool success = 1;
-  repeated QuestionCard sent_card = 2;
-  repeated QuestionCard received_card = 3;
-  optional EError error = 4;
+  optional EError error = 2;
 }
 
 message UpdateReplyRequest {
   string question_id = 1;
   Option answer = 2;
 }
-
 message UpdateReplyResponse {
   bool success = 1;
   optional EError error = 2;
 }
 
-message UpdateQuestionReadRequest {
-  string question_id = 1;
-}
-
+message UpdateQuestionReadRequest {string question_id = 1;}
 message UpdateQuestionReadResponse {
   bool success = 1;
   optional EError error = 2;
 }
 
-message DeleteQuestionRequest {
-  string question_id = 1;
-}
-
-message DeleteQuestionResponse {
+// 사용자 / 익명 / 짝사랑 익명 중 선택 1
+message QuestionListRequest {string uid = 1;}
+message QuestionListResponse {
   bool success = 1;
-  optional EError error = 2;
+  repeated QuestionCard sent_card = 2;
+  repeated QuestionCard received_card = 3;
+  optional EError error = 4;
 }
 
-message GetRandomQuestionRequest {
-  EQuestionType question_type = 1;
-  EQuestionCategory question_category = 2;
-  string target_uid = 3;
-}
-
-message GetRandomQuestionResponse {
-  bool success = 1;
-  optional Content content = 2;
-  optional EError error = 3;
-}
-
-message GetQuestionTypeCountRequest {
-  string target_uid = 1;
-}
-
-message GetQuestionTypeCountResponse {
-  bool success = 1;
-  repeated CountOfQuestionType count = 2;
-  optional string error = 3;
-}
-
-message QuestionCategoryListRequest {
-}
-
+message QuestionCategoryListRequest {}
 message QuestionCategoryListResponse {
   bool success = 1;
   repeated CategoryList data = 2;
   optional EError error = 3;
 }
+
+message RandomQuestionRequest {
+  EQuestionType question_type = 1;
+  EQuestionCategory question_category = 2;
+  string target_uid = 3;
+}
+message RandomQuestionResponse {
+  bool success = 1;
+  optional Content content = 2;
+  optional EError error = 3;
+}
+
+message QuestionTypeCountRequest {string target_uid = 1;}
+message QuestionTypeCountResponse {
+  bool success = 1;
+  repeated CountOfQuestionType count = 2;
+  optional string error = 3;
+}
+
