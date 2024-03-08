@@ -57,7 +57,7 @@ enum EUserStatus {
 
 message User {
   string uid = 1;
-  Profile default_profile = 2; // only me
+  Profile default_profile = 2;
   optional Profile anonymous_profile = 3; // only me
   optional Profile crush_profile = 4; // only me
   repeated ChipItem chips = 5;
