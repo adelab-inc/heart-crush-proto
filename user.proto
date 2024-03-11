@@ -17,19 +17,9 @@ service UserService {
   rpc UpsertProfile(UpsertProfileRequest) returns (UpsertProfileResponse) {}
 
   //  차단
-  rpc GetBlockedUsers(GetBlockedUsersRequest) returns (GetBlockedUsersResponse) {}
   rpc BlockUsers(BlockUsersRequest) returns (BlockUsersResponse) {}
   rpc UnblockUsers(UnblockUsersRequest) returns (UnblockUsersResponse) {}
 
-  // * 익명 프로필 서비스
-  //  rpc CreateAnonymousProfile(CreateAnonymousProfileRequest)
-  //      returns (CreateAnonymousProfileResponse) {}
-  //  rpc CreateCrushProfile(CreateCrushProfileRequest)
-  //      returns (CreateCrushProfileResponse) {}
-  //  rpc GetAnonymousProfile(GetAnonymousProfileRequest)
-  //      returns (GetAnonymousProfileResponse) {}
-  //  rpc GetCrushProfile(GetCrushProfileRequest)
-  //      returns (GetCrushProfileResponse) {}
   rpc GetSentHeart(GetSentHeartRequest) returns (GetSentHeartResponse) {}
   rpc GetReceivedHeart(GetReceivedHeartRequest)
       returns (GetReceivedHeartResponse) {}
@@ -163,38 +153,6 @@ message GetUserByPhoneResponse {
 }
 
 // * 익명 프로필 서비스
-message CreateAnonymousProfileRequest {User user = 1;}
-message CreateAnonymousProfileResponse {
-  bool success = 1;
-  optional User profile = 2;
-  optional EError error = 3;
-}
-
-message CreateCrushProfileRequest {
-  User user = 1;
-  bool is_target_exist = 2;
-  optional string target_phone_number = 3;
-  optional string target_name = 4;
-}
-message CreateCrushProfileResponse {
-  bool success = 1;
-  optional User profile = 2;
-  optional EError error = 3;
-}
-
-message GetAnonymousProfileRequest {}
-message GetAnonymousProfileResponse {
-  bool success = 1;
-  optional User profile = 2;
-  optional EError error = 3;
-}
-
-message GetCrushProfileRequest {}
-message GetCrushProfileResponse {
-  bool success = 1;
-  optional User profile = 2;
-  optional EError error = 3;
-}
 
 message GetSentHeartRequest {}
 message GetSentHeartResponse {
@@ -231,23 +189,14 @@ message SearchUsersResponse {
   optional EError error = 3;
 }
 
-
-message GetBlockedUsersRequest {}
-
-message GetBlockedUsersResponse {
-  bool success = 1;
-  repeated User blocked_users = 2;
-  optional EError error = 3;
-}
-
-
 message BlockUsersRequest {
   repeated string uuids = 1;
 }
 
 message BlockUsersResponse {
   bool success = 1;
-  optional EError error = 2;
+  User user = 2;
+  optional EError error = 3;
 }
 
 message UnblockUsersRequest {
@@ -256,5 +205,6 @@ message UnblockUsersRequest {
 
 message UnblockUsersResponse {
   bool success = 1;
-  optional EError error = 2;
+  User user = 2;
+  optional EError error = 3;
 }
