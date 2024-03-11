@@ -118,6 +118,20 @@ enum EError {
   // GetReceivedCrushes
   EE_USER_GET_RECEIVED_CRUSHES_FAILED = 31300;
 
+  // CheckCrushResult
+  EE_USER_CHECK_CRUSH_RESULT_FAILED = 31400;
+
+  // GetCrushBumpCount
+  EE_USER_GET_CRUSH_BUMP_COUNT_FAILED = 31500;
+
+  // BumpBle
+  EE_USER_BUMP_BLE_FAILED = 31600;
+
+  // GetBleBumps
+  EE_USER_GET_BLE_BUMPS_FAILED = 31700;
+
+
+
 
 
 

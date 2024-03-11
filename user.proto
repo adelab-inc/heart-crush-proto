@@ -4,6 +4,7 @@ option go_package = "heart-crush-server/proto";
 
 import "common.proto";
 import "error.proto";
+import "google/protobuf/timestamp.proto";
 
 
 service UserService {
@@ -20,13 +21,19 @@ service UserService {
   rpc BlockUsers(BlockUsersRequest) returns (BlockUsersResponse) {}
   rpc UnblockUsers(UnblockUsersRequest) returns (UnblockUsersResponse) {}
 
-//  하트 보내기
+  //  하트 보내기
   rpc SetCrush(SetCrushRequest) returns (SetCrushResponse) {}
   rpc GetReceivedCrushes(GetReceivedCrushesRequest)
       returns (GetReceivedCrushesResponse) {}
+  rpc CheckCrushResult(CheckCrushResultRequest) returns (CheckCrushResultResponse) {}
+  rpc GetCrushBumpCount(GetCrushBumpCountRequest) returns (GetCrushBumpCountResponse) {} // 나를 좋아하는 사람과 만난 횟수
+
+  // ble crush
+  rpc BumpBle(BumpBleRequest) returns (BumpBleResponse) {} // ble 마주친 사람 기록
+  rpc GetBleBumps(GetBleBumpsRequest) returns (GetBleBumpsResponse) {} // ble 마주친 사람 조회
 
   rpc DeleteProfile(DeleteProfileRequest) returns (DeleteProfileResponse) {} // default profile 은 절대 지우면 안됨!
-  rpc SearchUsers(SearchUsersRequest) returns (SearchUsersResponse) {}
+  rpc SearchUsers(SearchUsersRequest) returns (SearchUsersResponse) {} // uuid, phone_number_hashes, school_code 로 검색
 }
 
 // Max 3 times per 5 minutes
@@ -169,6 +176,38 @@ message GetReceivedCrushesResponse {
   optional EError error = 3;
 }
 
+message GetCrushBumpCountRequest {}
+message GetCrushBumpCountResponse {
+  bool success = 1;
+  optional int32 count = 2;
+  optional EError error = 3;
+}
+
+message CheckCrushResultRequest {}
+message CheckCrushResultResponse {
+  bool success = 1;
+  optional User user = 2; // 있으면 매칭 됨, 없으면 안됨
+  optional EError error = 3;
+}
+
+message BumpBleRequest {
+  repeated string uuids = 1;
+}
+message BumpBleResponse {
+  bool success = 1;
+  optional EError error = 3;
+}
+
+message GetBleBumpsRequest {
+  optional google.protobuf.Timestamp start_time = 1;
+  optional google.protobuf.Timestamp end_time = 2;
+}
+message GetBleBumpsResponse {
+  bool success = 1;
+  repeated User users = 2;
+  optional EError error = 3;
+}
+
 message DeleteProfileRequest {
   string profile_id = 1;
 }
@@ -177,7 +216,6 @@ message DeleteProfileResponse {
   optional User user = 2;
   optional EError error = 3;
 }
-
 
 message SearchUsersRequest {
   repeated string uuids = 1;

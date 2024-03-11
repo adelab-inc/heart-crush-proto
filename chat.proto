@@ -13,7 +13,7 @@ enum EFileType {
 enum ERoomType {
   ERT_UNSPECIFIED = 0;
   //  me-
-  ERT_ME = 1;
+  //  ERT_ME = 1;
   //  pv-
   ERT_PRIVATE = 2;
   //  gr-
@@ -35,26 +35,19 @@ service ChatService {
   } // send notification to participants { "chat": ...Message }
   rpc GetMsgs(GetMsgsRequest) returns (GetMsgsResponse) {
   } // get messages from room
-//  rpc UpdateRead(UpdateReadRequest) returns (UpdateReadResponse) {
-//  } // update read_at, send notification to participants { "read": ...RoomRead }
+  //  rpc UpdateRead(UpdateReadRequest) returns (UpdateReadResponse) {
+  //  } // update read_at, send notification to participants { "read": ...RoomRead }
 }
 
 message Room {
   string id = 1; // lookup the rule above, parse ERoomType with this id
   repeated string participants = 2;
   google.protobuf.Timestamp created_at = 3;
-  optional google.protobuf.Timestamp updated_at =
-      4; // updated when new message is sent
+  optional google.protobuf.Timestamp updated_at = 4; // updated when new message is sent
   optional string title = 5;
   optional string recent_msg = 6; // ex: 사진을 보냈습니다
-//  repeated RoomRead reads = 7;
+  //  repeated RoomRead reads = 7;
 }
-
-//message RoomRead {
-//  string room_id = 1;
-//  string uuid = 2;
-//  google.protobuf.Timestamp read_at = 3; // server time
-//}
 
 message Message {
   string id = 1; // uuid v4
