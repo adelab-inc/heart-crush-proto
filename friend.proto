@@ -21,6 +21,7 @@ enum EFriendRequestResult {
   EFRR_ALREADY_FRIEND = 3; // 이미 친구인 경우
   EFRR_ALREADY_REQUESTED = 4; // 이미 요청을 보낸 경우
   EFRR_INVALID_REQUEST = 5; // 요청이 잘못된 경우 (ex. 나에게 요청을 보낸 경우)
+  EFRR_INVALID_USER = 6; // 상대방이 존재하지 않는 경우
 }
 
 
@@ -116,7 +117,6 @@ message UpdateFriendRequestStatusResponse {
 }
 
 message GetReceivedFriendRequestsRequest {
-  string to = 1; // uuid
 }
 
 message GetReceivedFriendRequestsResponse {
@@ -126,7 +126,6 @@ message GetReceivedFriendRequestsResponse {
 }
 
 message GetSentFriendRequestsRequest {
-  string from = 1;
 }
 
 message GetSentFriendRequestsResponse {
