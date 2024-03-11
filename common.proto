@@ -76,6 +76,7 @@ message User {
   int32 school_grade = 18;                            //  몇학년인지, 0: 졸업생 (기본값)
   bool blocked = 19; // only me, blocked by me
   EUserStatus status = 20;
+  string fcm_token = 21; // only me
 }
 
 enum EProfileType {
