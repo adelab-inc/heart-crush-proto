@@ -20,9 +20,10 @@ service UserService {
   rpc BlockUsers(BlockUsersRequest) returns (BlockUsersResponse) {}
   rpc UnblockUsers(UnblockUsersRequest) returns (UnblockUsersResponse) {}
 
-  rpc GetSentHeart(GetSentHeartRequest) returns (GetSentHeartResponse) {}
-  rpc GetReceivedHeart(GetReceivedHeartRequest)
-      returns (GetReceivedHeartResponse) {}
+  rpc GetSentHearts(GetSentHeartsRequest) returns (GetSentHeartsResponse) {}
+  rpc GetReceivedHearts(GetReceivedHeartsRequest)
+      returns (GetReceivedHeartsResponse) {}
+
   rpc DeleteProfile(DeleteProfileRequest) returns (DeleteProfileResponse) {} // default profile 은 절대 지우면 안됨!
   rpc SearchUsers(SearchUsersRequest) returns (SearchUsersResponse) {}
 }
@@ -105,20 +106,6 @@ message StudentsInGrade {
 }
 
 
-message GetStudentsResponse {
-  bool success = 1;
-  repeated User students = 2;
-  optional EError error = 3;
-}
-
-message GetUsersByUuidsRequest {repeated string uuids = 1;}
-
-message GetUsersByUuidsResponse {
-  bool success = 1;
-  repeated User users = 2;
-  optional EError error = 3;
-}
-
 message GetRandomNickRequest {}
 
 message GetRandomNickResponse {
@@ -142,27 +129,36 @@ message UpsertProfileResponse {
   optional EError error = 3;
 }
 
-message GetUserByPhoneRequest {
-  string phone = 1; // +8210...
+
+message BlockUsersRequest {
+  repeated string uuids = 1;
 }
 
-message GetUserByPhoneResponse {
+message BlockUsersResponse {
   bool success = 1;
-  optional User user = 2;
+  User user = 2;
   optional EError error = 3;
 }
 
-// * 익명 프로필 서비스
+message UnblockUsersRequest {
+  repeated string uuids = 2;
+}
 
-message GetSentHeartRequest {}
-message GetSentHeartResponse {
+message UnblockUsersResponse {
+  bool success = 1;
+  User user = 2;
+  optional EError error = 3;
+}
+
+message GetSentHeartsRequest {}
+message GetSentHeartsResponse {
   bool success = 1;
   User sent_heart = 2;
   optional EError error = 3;
 }
 
-message GetReceivedHeartRequest {}
-message GetReceivedHeartResponse {
+message GetReceivedHeartsRequest {}
+message GetReceivedHeartsResponse {
   bool success = 1;
   repeated User received_heart = 2;
   optional EError error = 3;
@@ -190,22 +186,3 @@ message SearchUsersResponse {
   optional EError error = 3;
 }
 
-message BlockUsersRequest {
-  repeated string uuids = 1;
-}
-
-message BlockUsersResponse {
-  bool success = 1;
-  User user = 2;
-  optional EError error = 3;
-}
-
-message UnblockUsersRequest {
-  repeated string uuids = 2;
-}
-
-message UnblockUsersResponse {
-  bool success = 1;
-  User user = 2;
-  optional EError error = 3;
-}
