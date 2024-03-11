@@ -40,7 +40,7 @@ service FriendService {
   rpc GetWhoCrushedMe(GetWhoCrushedMeRequest) returns (GetWhoCrushedMeResponse) {}
   rpc SendFriendRequest(SendFriendRequestRequest) returns (SendFriendRequestResponse);
   rpc UpdateFriendRequestStatus(UpdateFriendRequestStatusRequest) returns (UpdateFriendRequestStatusResponse); // ACCEPTED, REJECTED, CANCELED
-  rpc GetFriendRequests(GetFriendRequestsRequest) returns (GetFriendRequestsResponse); // 받은 친구 요청들
+  rpc GetReceivedFriendRequests(GetReceivedFriendRequestsRequest) returns (GetReceivedFriendRequestsResponse); // 받은 친구 요청들
   rpc GetSentFriendRequests(GetSentFriendRequestsRequest) returns (GetSentFriendRequestsResponse); // 보낸 친구 요청들
 }
 
@@ -115,11 +115,11 @@ message UpdateFriendRequestStatusResponse {
   optional EError error = 2;
 }
 
-message GetFriendRequestsRequest {
+message GetReceivedFriendRequestsRequest {
   string to = 1; // uuid
 }
 
-message GetFriendRequestsResponse {
+message GetReceivedFriendRequestsResponse {
   bool success = 1;
   repeated FriendRequest requests = 2;
   optional EError error = 3;
