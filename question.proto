@@ -8,7 +8,7 @@ import "error.proto";
 service QuestionService {
   rpc CreateQuestion(CreateQuestionRequest) returns (CreateQuestionResponse) {}
   rpc DeleteQuestion(DeleteQuestionRequest) returns (DeleteQuestionResponse) {}
-  rpc UpdateReply(UpdateReplyRequest) returns (UpdateReplyResponse) {}
+  rpc UpsertReply(UpsertReplyRequest) returns (UpsertReplyResponse) {}
   rpc UpdateQuestionRead(UpdateQuestionReadRequest) returns (UpdateQuestionReadResponse) {}
 
   // 조회
@@ -115,11 +115,11 @@ message DeleteQuestionResponse {
   optional EError error = 2;
 }
 
-message UpdateReplyRequest {
+message UpsertReplyRequest {
   string question_id = 1;
   Option answer = 2;
 }
-message UpdateReplyResponse {
+message UpsertReplyResponse {
   bool success = 1;
   optional EError error = 2;
 }
