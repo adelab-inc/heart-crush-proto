@@ -173,7 +173,8 @@ message DeleteProfileRequest {
 }
 message DeleteProfileResponse {
   bool success = 1;
-  optional EError error = 2;
+  optional User user = 2;
+  optional EError error = 3;
 }
 
 
