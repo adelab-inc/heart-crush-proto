@@ -85,20 +85,14 @@ profile을 업데이트하는 서비스 -> 기존의 정보와 바뀐 정보를 
 "boyThumbnail.png"과 "boy.png"를 보내주시면 됩니다.
 */
 message UpdateUserRequest {
-  optional string name = 1;
-  optional string description = 2;
-  optional string school_code = 3;
-
-  optional string school_name = 12; // 학교 풀네임 이동
-
-  repeated ChipItem chips = 4;
-  optional string profile_img_url = 5;
-  optional string thumbnail_img_url = 6;
-  optional string fcm_token = 7; // 서버에만 업데이트 함
-  optional string birth = 8;
-  optional EGender gender = 9;
-  optional bool is_initialized = 10;
-  optional Config config = 11;
+  optional School school = 1;
+  optional int32 school_grade = 2; // update only when != 0
+  repeated ChipItem chips = 3;
+  optional string fcm_token = 4; // 서버에만 업데이트 함
+  optional string birth = 5;
+  optional EGender gender = 6;
+  optional bool asked_to_update_profile = 7;
+  optional Config config = 8;
 }
 
 message UpdateUserResponse {

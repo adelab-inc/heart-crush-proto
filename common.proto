@@ -97,7 +97,6 @@ message Profile {
   optional string crush_uid = 21; // only me
 }
 
-
 message School {
   string code = 1;
   string name = 2;
