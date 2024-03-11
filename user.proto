@@ -4,7 +4,6 @@ option go_package = "heart-crush-server/proto";
 
 import "common.proto";
 import "error.proto";
-import "google/protobuf/timestamp.proto";
 
 
 service UserService {
