@@ -204,8 +204,13 @@ message GetBleBumpsRequest {
 }
 message GetBleBumpsResponse {
   bool success = 1;
-  repeated User users = 2;
+  repeated BleBump bumps = 2;
   optional EError error = 3;
+}
+message BleBump {
+  string id = 1;
+  google.protobuf.Timestamp created_at = 2;
+  User user = 3;
 }
 
 message DeleteProfileRequest {
