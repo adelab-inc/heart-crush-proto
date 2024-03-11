@@ -14,15 +14,16 @@ service UserService {
   rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse) {}
   rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse) {}
   rpc GetRandomNick(GetRandomNickRequest) returns (GetRandomNickResponse) {}
-  rpc UpsertProfile(UpsertProfileRequest) returns (UpsertProfileResponse) {}
+  rpc UpsertProfile(UpsertProfileRequest) returns (UpsertProfileResponse) {} // crush profile 은 업데이트 안됨. 삭제만 가능. 설정은 SetCrush 에서 가능
 
   //  차단
   rpc BlockUsers(BlockUsersRequest) returns (BlockUsersResponse) {}
   rpc UnblockUsers(UnblockUsersRequest) returns (UnblockUsersResponse) {}
 
-  rpc GetSentHearts(GetSentHeartsRequest) returns (GetSentHeartsResponse) {}
-  rpc GetReceivedHearts(GetReceivedHeartsRequest)
-      returns (GetReceivedHeartsResponse) {}
+//  하트 보내기
+  rpc SetCrush(SetCrushRequest) returns (SetCrushResponse) {}
+  rpc GetReceivedCrushes(GetReceivedCrushesRequest)
+      returns (GetReceivedCrushesResponse) {}
 
   rpc DeleteProfile(DeleteProfileRequest) returns (DeleteProfileResponse) {} // default profile 은 절대 지우면 안됨!
   rpc SearchUsers(SearchUsersRequest) returns (SearchUsersResponse) {}
@@ -120,7 +121,7 @@ message UpsertProfileRequest {
   string description = 3;
   optional string profile_img_url = 4;
   optional string thumbnail_img_url = 5;
-  optional string crush_uid = 6; // only when type == EPT_CRUSH
+  //  optional string crush_uid = 6; // only when type == EPT_CRUSH
 }
 
 message UpsertProfileResponse {
@@ -136,7 +137,7 @@ message BlockUsersRequest {
 
 message BlockUsersResponse {
   bool success = 1;
-  User user = 2;
+  optional User user = 2;
   optional EError error = 3;
 }
 
@@ -146,21 +147,25 @@ message UnblockUsersRequest {
 
 message UnblockUsersResponse {
   bool success = 1;
-  User user = 2;
+  optional User user = 2;
   optional EError error = 3;
 }
 
-message GetSentHeartsRequest {}
-message GetSentHeartsResponse {
+message SetCrushRequest {
+  string to = 1; // uuid
+  string name = 2; // length <= 10
+  string reason = 3; // length <= 100
+}
+message SetCrushResponse {
   bool success = 1;
-  User sent_heart = 2;
+  optional User user = 2;
   optional EError error = 3;
 }
 
-message GetReceivedHeartsRequest {}
-message GetReceivedHeartsResponse {
+message GetReceivedCrushesRequest {}
+message GetReceivedCrushesResponse {
   bool success = 1;
-  repeated User received_heart = 2;
+  repeated Profile profiles = 2;
   optional EError error = 3;
 }
 

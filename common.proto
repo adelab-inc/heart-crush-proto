@@ -93,9 +93,10 @@ message Profile {
   string description = 4;
   optional string profile_img_url = 5;
   optional string thumbnail_img_url = 6;
-  optional string owner_uid = 7; // only me
-  optional google.protobuf.Timestamp crush_end_at = 20; // only me
-  optional string crush_uid = 21; // only me
+  string owner_uid = 7; // only me
+  optional google.protobuf.Timestamp crush_end_at = 8; // only me
+  optional string crush_uid = 9; // only me, crushed user
+  optional string crush_reason = 10; // only me, crushed user
 }
 
 message School {
