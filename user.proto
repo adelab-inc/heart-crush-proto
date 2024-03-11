@@ -91,7 +91,7 @@ message UpdateUserRequest {
   optional string fcm_token = 4; // 서버에만 업데이트 함
   optional string birth = 5;
   optional EGender gender = 6;
-  optional bool asked_to_update_profile = 7;
+  optional bool asked_to_update_profile = 7; // update only when true
   optional Config config = 8;
 }
 
