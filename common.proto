@@ -93,7 +93,7 @@ message Profile {
   string description = 4;
   optional string profile_img_url = 5;
   optional string thumbnail_img_url = 6;
-  string owner_uid = 7; // only me
+  optional string owner_uid = 7; // only me, or crush 공개상태일 때
   optional google.protobuf.Timestamp crush_end_at = 8; // only me
   optional string crush_uid = 9; // only me, crushed user
   optional string crush_reason = 10; // only me, crushed user
