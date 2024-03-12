@@ -7,19 +7,23 @@ import "error.proto";
 
 service SchoolService {
   rpc SearchSchool(SearchSchoolRequest) returns (SearchSchoolResponse) {} // 학교 검색
-  rpc SchoolDetail(SchoolDetailRequest) returns (SchoolDetailResponse) {} // 학교 상세 정보
+//  rpc SchoolDetail(SchoolDetailRequest) returns (SchoolDetailResponse) {} // 학교 상세 정보
 }
 
-message SearchSchoolRequest {string keyword = 1;}
+message SearchSchoolRequest {
+  optional string title_contains = 1;
+  optional string address_contains = 2;
+  optional string school_code = 3;
+}
 message SearchSchoolResponse {
   bool success = 1;
   repeated School schools = 2;
   optional EError error = 3;
 }
 
-message SchoolDetailRequest {string school_code = 1;}
-message SchoolDetailResponse {
-  bool success = 1;
-  repeated School schools = 2;
-  optional EError error = 3;
-}
+//message SchoolDetailRequest {string school_code = 1;}
+//message SchoolDetailResponse {
+//  bool success = 1;
+//  repeated School schools = 2;
+//  optional EError error = 3;
+//}
