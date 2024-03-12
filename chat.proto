@@ -41,7 +41,7 @@ service ChatService {
 
 message Room {
   string id = 1; // lookup the rule above, parse ERoomType with this id
-  repeated string participants = 2;
+  repeated string participants = 2; // uuids
   google.protobuf.Timestamp created_at = 3;
   optional google.protobuf.Timestamp updated_at = 4; // updated when new message is sent
   optional string title = 5;

@@ -161,6 +161,6 @@ message QuestionTypeCountRequest {string target_uid = 1;}
 message QuestionTypeCountResponse {
   bool success = 1;
   repeated CountOfQuestionType count = 2;
-  optional string error = 3;
+  optional EError error = 3;
 }
 
