@@ -12,6 +12,8 @@ service UserService {
   rpc StartSmsVerification (StartSmsVerificationRequest) returns (StartSmsVerificationResponse) {}
   rpc CheckSmsVerification (CheckSmsVerificationRequest) returns (CheckSmsVerificationResponse) {}
   rpc Register (RegisterRequest) returns (RegisterResponse) {}
+  rpc SignInWithPassword (SignInWithPasswordRequest) returns (SignInWithPasswordResponse) {}
+
   rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse) {}
   rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse) {}
   rpc GetRandomNick(GetRandomNickRequest) returns (GetRandomNickResponse) {}
@@ -23,8 +25,7 @@ service UserService {
 
   //  하트 보내기
   rpc SetCrush(SetCrushRequest) returns (SetCrushResponse) {}
-  rpc GetReceivedCrushes(GetReceivedCrushesRequest)
-      returns (GetReceivedCrushesResponse) {}
+  rpc GetReceivedCrushes(GetReceivedCrushesRequest) returns (GetReceivedCrushesResponse) {}
   rpc CheckCrushResult(CheckCrushResultRequest) returns (CheckCrushResultResponse) {}
   rpc GetCrushBumpCount(GetCrushBumpCountRequest) returns (GetCrushBumpCountResponse) {} // 나를 좋아하는 사람과 만난 횟수
 
@@ -34,6 +35,9 @@ service UserService {
 
   rpc DeleteProfile(DeleteProfileRequest) returns (DeleteProfileResponse) {} // default profile 은 절대 지우면 안됨!
   rpc SearchUsers(SearchUsersRequest) returns (SearchUsersResponse) {} // uuid, phone_number_hashes, school_code 로 검색
+
+  // Security
+  rpc UpdateSecurity(UpdateSecurityRequest) returns (UpdateSecurityResponse) {} // Password, Salt 변경
 }
 
 // Max 3 times per 5 minutes
@@ -65,13 +69,24 @@ message RegisterRequest {
   string name = 1;
   EGender gender = 2;
   string birth = 3;
-  string hashed_password = 4;
+  string hashed_password = 4; // PASSWORD_HASH_SALT + password -> sha3-256
 }
 
 message RegisterResponse {
   bool success = 1;
   optional User user = 2;
   optional EError error = 3;
+}
+
+message SignInWithPasswordRequest {
+  string phone_number = 1;
+  string hashed_password = 2;
+}
+message SignInWithPasswordResponse {
+  bool success = 1;
+  bool need_to_register = 2; // 생년월일, 이름, 성별 기입 했는지 여부. DB 에서 uuid 로 조회시 없을 때 이 값을 true 로 줌
+  optional EError error = 3;
+  optional string custom_token = 4;
 }
 
 
@@ -165,7 +180,7 @@ message SetCrushRequest {
 }
 message SetCrushResponse {
   bool success = 1;
-  optional User user = 2;
+  optional User user = 2; // 내 정보
   optional EError error = 3;
 }
 
@@ -234,3 +249,11 @@ message SearchUsersResponse {
   optional EError error = 3;
 }
 
+message UpdateSecurityRequest {
+  optional string hashed_password = 1;
+  optional string salt = 2;
+}
+message UpdateSecurityResponse {
+  bool success = 1;
+  optional EError error = 3;
+}

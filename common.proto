@@ -90,7 +90,7 @@ message Profile {
   string id = 1;
   EProfileType type = 2;
   string name = 3;
-  string description = 4;
+  optional string description = 4;
   optional string profile_img_url = 5;
   optional string thumbnail_img_url = 6;
   optional string owner_uid = 7; // only me, or crush 공개상태일 때
