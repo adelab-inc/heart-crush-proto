@@ -57,10 +57,9 @@ message QuestionCard {
   string question_id = 1;
   EQuestionType question_type = 2;
   EQuestionCategory question_category = 3;
-  string target_user_id = 4; // 내가 sender면 -> receiver 정보 / 내가 receiver면 sender 정보
-  EQuestionStatus question_status = 5;
-  Content content = 6;
-  optional Option answer = 7; // 답장이 없는 경우 null
+  EQuestionStatus question_status = 4;
+  Content content = 5;
+  optional Option answer = 6; // 답장이 없는 경우 null
   google.protobuf.Timestamp created_at = 10;
   optional google.protobuf.Timestamp replied_at = 11; // 답장이 없는 경우 null
 }
