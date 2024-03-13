@@ -4,6 +4,8 @@ option go_package = "heart-crush-server/proto";
 
 import "google/protobuf/timestamp.proto";
 import "error.proto";
+import "common.proto";
+
 
 service QuestionService {
   rpc CreateQuestion(CreateQuestionRequest) returns (CreateQuestionResponse) {}
@@ -56,8 +58,10 @@ message QuestionCard {
   EQuestionType question_type = 2;
   EQuestionCategory question_category = 3;
   EQuestionStatus question_status = 4;
-  Content content = 5;
-  optional Option answer = 6; // 답장이 없는 경우 null
+  Profile from = 6; // 보낸 사람. db 에 저장시 profile id 만 저장
+  Profile to = 7; // 받는 사람. db 에 저장시 profile id 만 저장
+  Content content = 8;
+  optional Option answer = 9; // 답장이 없는 경우 null
   google.protobuf.Timestamp created_at = 10;
   optional google.protobuf.Timestamp replied_at = 11; // 답장이 없는 경우 null
 }
@@ -95,7 +99,7 @@ message QuestionCategoryWithContent {
 
 message CreateQuestionRequest {
   string sender_profile_id = 1; // 자신의 profile id
-  string receiver_uid = 2;
+  string receiver_profile_id = 2;
   EQuestionType question_type = 3;
   EQuestionCategory question_category = 4;
   Content content = 5;
@@ -144,7 +148,7 @@ message QuestionCategoryListResponse {
 message RandomQuestionRequest {
   EQuestionType question_type = 1;
   EQuestionCategory question_category = 2;
-  string target_uid = 3;
+  string target_profile_id = 3;
 }
 message RandomQuestionResponse {
   bool success = 1;
