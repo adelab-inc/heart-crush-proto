@@ -94,8 +94,8 @@ message QuestionCategoryWithContent {
 }
 
 message CreateQuestionRequest {
-  string sender_profile_id = 1; // 자신의 uid 혹은 자신의 익명 uid
-  string receiver_profile_id = 2;
+  string sender_profile_id = 1; // 자신의 profile id
+  string receiver_uid = 2;
   EQuestionType question_type = 3;
   EQuestionCategory question_category = 4;
   Content content = 5;
@@ -127,7 +127,7 @@ message UpdateQuestionReadResponse {
 }
 
 // 사용자 / 익명 / 짝사랑 익명 중 선택 1
-message QuestionListRequest {string profile_id = 1;}
+message QuestionListRequest {string uuid = 1;}
 message QuestionListResponse {
   bool success = 1;
   repeated QuestionCard sent_card = 2;
