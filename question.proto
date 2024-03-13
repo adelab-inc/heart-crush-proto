@@ -58,8 +58,8 @@ message QuestionCard {
   EQuestionType question_type = 2;
   EQuestionCategory question_category = 3;
   EQuestionStatus question_status = 4;
-  Profile from = 6; // 보낸 사람. db 에 저장시 profile id 만 저장
-  Profile to = 7; // 받는 사람. db 에 저장시 profile id 만 저장
+  Profile sender_profile = 6; // 보낸 사람 프로필. db 에 저장시 profile id 만 저장
+  Profile receiver_profile = 7; // 받는 사람 프로필. db 에 저장시 profile id 만 저장
   Content content = 8;
   optional Option answer = 9; // 답장이 없는 경우 null
   google.protobuf.Timestamp created_at = 10;

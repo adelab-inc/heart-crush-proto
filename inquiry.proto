@@ -24,6 +24,7 @@ message CreateInquiryRequest {
   string reply_email = 4;
   repeated bytes images = 5;
   bool agreement = 6;
+  optional string user_id_to_report = 7;
 }
 
 message CreateInquiryResponse {
