@@ -4,6 +4,7 @@ option go_package = "heart-crush-server/proto";
 
 import "google/protobuf/timestamp.proto";
 import "error.proto";
+import "common.proto";
 
 service QuestionService {
   rpc CreateQuestion(CreateQuestionRequest) returns (CreateQuestionResponse) {}
@@ -126,8 +127,7 @@ message UpdateQuestionReadResponse {
   optional EError error = 2;
 }
 
-// 사용자 / 익명 / 짝사랑 익명 중 선택 1
-message QuestionListRequest {string uuid = 1;}
+message QuestionListRequest {}
 message QuestionListResponse {
   bool success = 1;
   repeated QuestionCard sent_card = 2;
