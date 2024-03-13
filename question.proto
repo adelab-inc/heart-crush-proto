@@ -52,7 +52,7 @@ enum EQuestionStatus {
 }
 
 message QuestionCard {
-  string question_id = 1;
+  string id = 1;
   EQuestionType question_type = 2;
   EQuestionCategory question_category = 3;
   EQuestionStatus question_status = 4;
@@ -94,8 +94,8 @@ message QuestionCategoryWithContent {
 }
 
 message CreateQuestionRequest {
-  string sender_id = 1; // 자신의 uid 혹은 자신의 익명 uid
-  string receiver_id = 2;
+  string sender_profile_id = 1; // 자신의 uid 혹은 자신의 익명 uid
+  string receiver_profile_id = 2;
   EQuestionType question_type = 3;
   EQuestionCategory question_category = 4;
   Content content = 5;
@@ -120,14 +120,14 @@ message UpsertReplyResponse {
   optional EError error = 2;
 }
 
-message UpdateQuestionReadRequest {string question_id = 1;}
+message UpdateQuestionReadRequest {string id = 1;}
 message UpdateQuestionReadResponse {
   bool success = 1;
   optional EError error = 2;
 }
 
 // 사용자 / 익명 / 짝사랑 익명 중 선택 1
-message QuestionListRequest {string uid = 1;}
+message QuestionListRequest {string profile_id = 1;}
 message QuestionListResponse {
   bool success = 1;
   repeated QuestionCard sent_card = 2;
