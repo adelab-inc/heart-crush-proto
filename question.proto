@@ -4,7 +4,6 @@ option go_package = "heart-crush-server/proto";
 
 import "google/protobuf/timestamp.proto";
 import "error.proto";
-import "common.proto";
 
 service QuestionService {
   rpc CreateQuestion(CreateQuestionRequest) returns (CreateQuestionResponse) {}
