@@ -130,7 +130,9 @@ message UpdateQuestionReadResponse {
   optional EError error = 2;
 }
 
-message QuestionListRequest {}
+message QuestionListRequest {
+  EProfileType profile_type = 1;
+}
 message QuestionListResponse {
   bool success = 1;
   repeated QuestionCard sent_card = 2;
