@@ -25,6 +25,7 @@ service UserService {
 
   //  하트 보내기
   rpc SetCrush(SetCrushRequest) returns (SetCrushResponse) {}
+  rpc DeleteCrush(DeleteCrushRequest) returns (DeleteCrushResponse) {}
   rpc GetReceivedCrushes(GetReceivedCrushesRequest) returns (GetReceivedCrushesResponse) {}
   rpc CheckCrushResult(CheckCrushResultRequest) returns (CheckCrushResultResponse) {}
   rpc GetCrushBumps(GetCrushBumpsRequest) returns (GetCrushBumpsResponse) {} // 나를 좋아하는 사람과 만난 횟수
@@ -194,6 +195,14 @@ message SetCrushResponse {
   optional EError error = 3;
 }
 
+message DeleteCrushRequest {
+}
+message DeleteCrushResponse {
+  bool success = 1;
+  optional User user = 2; // 내 정보
+  optional EError error = 3;
+}
+
 message GetReceivedCrushesRequest {}
 message GetReceivedCrushesResponse {
   bool success = 1;
@@ -229,6 +238,7 @@ message BumpBleResponse {
 }
 
 message GetBleBumpsRequest {
+  //  bool except_friends = 1;
   optional google.protobuf.Timestamp start_time = 1;
   optional google.protobuf.Timestamp end_time = 2;
 }
