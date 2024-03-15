@@ -29,6 +29,7 @@ service UserService {
   rpc GetReceivedCrushes(GetReceivedCrushesRequest) returns (GetReceivedCrushesResponse) {}
   rpc CheckCrushResult(CheckCrushResultRequest) returns (CheckCrushResultResponse) {}
   rpc GetCrushBumps(GetCrushBumpsRequest) returns (GetCrushBumpsResponse) {} // 나를 좋아하는 사람과 만난 횟수
+  rpc GetReceivedCrushBumps(GetReceivedCrushBumpsRequest) returns (GetReceivedCrushBumpsResponse) {} // 나를 좋아하는 사람과 만난 횟수
 
   // ble crush
   rpc BumpBle(BumpBleRequest) returns (BumpBleResponse) {} // ble 마주친 사람 기록
@@ -206,7 +207,7 @@ message DeleteCrushResponse {
 message GetReceivedCrushesRequest {}
 message GetReceivedCrushesResponse {
   bool success = 1;
-  repeated CrushBump received_crush_bumps = 2;
+  repeated Profile profiles = 2;
   optional EError error = 3;
 }
 
@@ -219,6 +220,13 @@ message CrushBump {
 message GetCrushBumpsResponse {
   bool success = 1;
   repeated CrushBump crush_bumps = 2;
+  optional EError error = 3;
+}
+
+message GetReceivedCrushBumpsRequest {}
+message GetReceivedCrushBumpsResponse {
+  bool success = 1;
+  repeated CrushBump received_crush_bumps = 2;
   optional EError error = 3;
 }
 

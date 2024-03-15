@@ -8,10 +8,12 @@ import "error.proto";
 
 enum ENotificationType {
   ENT_UNSPECIFIED = 0;
-  ENT_BLUETOOTH = 1;
-  ENT_LIKE = 2;
-  ENT_SYSTEM = 3;
-  ENT_QUESTION = 4;
+  ENT_SYSTEM = 1;
+  //  ENT_BLUETOOTH = 2; // 서버측에서 알림 저장하거나 보낼필요 없음
+  ENT_HEART = 2;
+  ENT_QUESTION = 3;
+  ENT_FRIEND = 4; // accepted, requested: notification + data, rejected, canceled: only data
+  ENT_CHAT = 5;
 }
 
 service NotificationService {
@@ -38,7 +40,7 @@ message GetNotificationsResponse {
   optional EError error = 3;
 }
 
-message ReadNotificationsRequest { repeated string notificationIds = 1; }
+message ReadNotificationsRequest {repeated string notificationIds = 1;}
 message ReadNotificationsResponse {
   bool success = 1;
   optional EError error = 2;
