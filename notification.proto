@@ -16,7 +16,7 @@ enum ENotificationType {
 
 service NotificationService {
   rpc GetNotifications(GetNotificationsRequest) returns (GetNotificationsResponse) {}
-  rpc UpdateNotifications(UpdateNotificationsRequest) returns (UpdateNotificationsResponse) {}
+  rpc ReadNotifications(ReadNotificationsRequest) returns (ReadNotificationsResponse) {}
 }
 
 // * Entity
@@ -38,8 +38,8 @@ message GetNotificationsResponse {
   optional EError error = 3;
 }
 
-message UpdateNotificationsRequest { repeated Notification notifications = 1; }
-message UpdateNotificationsResponse {
+message ReadNotificationsRequest { repeated string notificationIds = 1; }
+message ReadNotificationsResponse {
   bool success = 1;
   optional EError error = 2;
 }

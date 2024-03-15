@@ -206,7 +206,7 @@ message DeleteCrushResponse {
 message GetReceivedCrushesRequest {}
 message GetReceivedCrushesResponse {
   bool success = 1;
-  repeated Profile profiles = 2;
+  repeated CrushBump received_crush_bumps = 2;
   optional EError error = 3;
 }
 
