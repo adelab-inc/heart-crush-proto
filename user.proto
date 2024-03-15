@@ -28,7 +28,7 @@ service UserService {
   rpc DeleteCrush(DeleteCrushRequest) returns (DeleteCrushResponse) {}
   rpc GetReceivedCrushes(GetReceivedCrushesRequest) returns (GetReceivedCrushesResponse) {}
   rpc CheckCrushResult(CheckCrushResultRequest) returns (CheckCrushResultResponse) {}
-  rpc GetCrushBumps(GetCrushBumpsRequest) returns (GetCrushBumpsResponse) {} // 나를 좋아하는 사람과 만난 횟수
+//  rpc GetCrushBumps(GetCrushBumpsRequest) returns (GetCrushBumpsResponse) {} // 나를 좋아하는 사람과 만난 횟수
   rpc GetReceivedCrushBumps(GetReceivedCrushBumpsRequest) returns (GetReceivedCrushBumpsResponse) {} // 나를 좋아하는 사람과 만난 횟수
 
   // ble crush
@@ -211,17 +211,17 @@ message GetReceivedCrushesResponse {
   optional EError error = 3;
 }
 
-message GetCrushBumpsRequest {}
+//message GetCrushBumpsRequest {}
 message CrushBump {
   string id = 1;
   google.protobuf.Timestamp created_at = 2;
   Profile crush_profile = 3;
 }
-message GetCrushBumpsResponse {
-  bool success = 1;
-  repeated CrushBump crush_bumps = 2;
-  optional EError error = 3;
-}
+//message GetCrushBumpsResponse {
+//  bool success = 1;
+//  repeated CrushBump crush_bumps = 2;
+//  optional EError error = 3;
+//}
 
 message GetReceivedCrushBumpsRequest {}
 message GetReceivedCrushBumpsResponse {
