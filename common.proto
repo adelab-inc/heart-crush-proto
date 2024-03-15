@@ -95,8 +95,9 @@ message Profile {
   optional string thumbnail_img_url = 6;
   optional string owner_uid = 7; // only me, or crush 공개 상태일 때
   optional google.protobuf.Timestamp crush_end_at = 8; // only me
-  optional string crush_uid = 9; // only me, crushed user
-  optional string crush_reason = 10; // only me, crushed user
+  optional google.protobuf.Timestamp created_at = 9; // only me, 짝사랑 프로필일 경우 짝사랑 시작일을 겸함
+  optional string crush_uid = 10; // only me, crushed user
+  optional string crush_reason = 11; // only me, crushed user
 }
 
 message School {
