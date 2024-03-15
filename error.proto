@@ -257,4 +257,9 @@ enum EError {
   EE_FAILED_TO_PB_MARSHAL = 110105;
   EE_FAILED_TO_WORK_IN_MONGO = 110106;
   // common errors
+
+  // 12,XXX - Report Service
+  EE_FAILED_TO_GET_USER_BY_UID = 120100;
+  EE_FAILED_TO_REGISTER_REPORT_IN_MONGO = 120101;
+  // common errors
 }
