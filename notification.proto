@@ -7,11 +7,11 @@ import "google/protobuf/timestamp.proto";
 import "error.proto";
 
 enum ENotificationType {
-  EAT_UNSPECIFIED = 0;
-  EAT_BLUETOOTH = 1;
-  EAT_LIKE = 2;
-  EAT_SYSTEM = 3;
-  EAT_QUESTION = 4;
+  ENT_UNSPECIFIED = 0;
+  ENT_BLUETOOTH = 1;
+  ENT_LIKE = 2;
+  ENT_SYSTEM = 3;
+  ENT_QUESTION = 4;
 }
 
 service NotificationService {
