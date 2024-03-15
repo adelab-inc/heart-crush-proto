@@ -30,10 +30,8 @@ service FriendService {
   rpc UpdateFriendRequestStatus(UpdateFriendRequestStatusRequest) returns (UpdateFriendRequestStatusResponse); // ACCEPTED, REJECTED, CANCELED
   rpc GetReceivedFriendRequests(GetReceivedFriendRequestsRequest) returns (GetReceivedFriendRequestsResponse); // 받은 친구 요청들
   rpc GetSentFriendRequests(GetSentFriendRequestsRequest) returns (GetSentFriendRequestsResponse); // 보낸 친구 요청들
-  rpc AddBestFriends(AddBestFriendsRequest)
-  returns (AddBestFriendsResponse) {}
-  rpc DeleteBestFriends(DeleteBestFriendsRequest)
-  returns (DeleteBestFriendsResponse) {}
+  rpc AddBestFriends(AddBestFriendsRequest) returns (AddBestFriendsResponse) {}
+  rpc DeleteBestFriends(DeleteBestFriendsRequest) returns (DeleteBestFriendsResponse) {}
   // 주기적으로(앱을 처음 키는 시점 정도로) 추천친구를 가져오는 서비스
   // 제공된 추천친구 uid들을 기반으로 친구정보를 가져오는 서비스
 //  rpc GetBlockedUsers(GetBlockedUsersRequest)
