@@ -28,7 +28,7 @@ service UserService {
   rpc DeleteCrush(DeleteCrushRequest) returns (DeleteCrushResponse) {}
   rpc GetReceivedCrushes(GetReceivedCrushesRequest) returns (GetReceivedCrushesResponse) {}
   rpc CheckCrushResult(CheckCrushResultRequest) returns (CheckCrushResultResponse) {}
-//  rpc GetCrushBumps(GetCrushBumpsRequest) returns (GetCrushBumpsResponse) {} // 나를 좋아하는 사람과 만난 횟수
+  //  rpc GetCrushBumps(GetCrushBumpsRequest) returns (GetCrushBumpsResponse) {} // 나를 좋아하는 사람과 만난 횟수
   rpc GetReceivedCrushBumps(GetReceivedCrushBumpsRequest) returns (GetReceivedCrushBumpsResponse) {} // 나를 좋아하는 사람과 만난 횟수
 
   // ble crush
@@ -186,9 +186,10 @@ message UnblockUsersResponse {
 }
 
 message SetCrushRequest {
-  string to = 1; // uuid
-  string name = 2; // length <= 10
-  string reason = 3; // length <= 100
+  optional string to = 1; // uuid
+  optional string to_phone_number = 2; // 가입 안된 사람에게 보낼 때
+  string name = 3; // length <= 10
+  string reason = 4; // length <= 100
 }
 message SetCrushResponse {
   bool success = 1;

@@ -49,10 +49,11 @@ message Config {
 
 enum EUserStatus {
   EUS_UNSPECIFIED = 0;
+  EUS_NOT_REGISTERED = 1;
   // 정상적인 유저
-  EUS_VALID = 1; // 정상적인 유저의 경우
-  EUS_BANNED = 5;    // 유저가 이용제한(임시 정지)된 경우
-  EUS_FORBIDDEN = 6; // 유저가 이용정지(영구 정지)된 경우
+  EUS_VALID = 2; // 정상적인 유저의 경우
+  EUS_BANNED = 3;    // 유저가 이용제한(임시 정지)된 경우
+  EUS_FORBIDDEN = 4; // 유저가 이용정지(영구 정지)된 경우
 }
 
 message User {
