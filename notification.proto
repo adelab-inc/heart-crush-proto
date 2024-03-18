@@ -13,13 +13,14 @@ enum ENotificationType {
   ENT_HEART = 2; // 상대가 나를 짝사랑 설정했을 시 (하트를 보냈을때)
   ENT_QUESTION = 3;
   ENT_FRIEND = 4; // accepted, requested: notification + data, rejected, canceled: only data
-  ENT_CHAT = 5;
+  ENT_CHAT = 5; //
 }
 
 service NotificationService {
   rpc GetNotifications(GetNotificationsRequest) returns (GetNotificationsResponse) {}
   rpc ReadNotifications(ReadNotificationsRequest) returns (ReadNotificationsResponse) {}
 }
+
 
 // * Entity
 message Notification {
@@ -28,7 +29,7 @@ message Notification {
   optional string title = 3;
   optional string body = 4;
   optional bool is_read = 5;
-  optional string data = 6;
+  optional string data = 6; // always send, chat: Message, friend: User, question: Question. heart 는 필요없음
   optional google.protobuf.Timestamp created_at = 7;
 }
 
