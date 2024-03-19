@@ -178,7 +178,8 @@ message BlockProfilesResponse {
 }
 
 message UnblockProfilesRequest {
-  repeated string uuids = 2;
+  repeated string uuids = 1;
+  EProfileType type = 2;
 }
 
 message UnblockProfilesResponse {
