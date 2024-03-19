@@ -91,14 +91,15 @@ message Profile {
   string id = 1;
   EProfileType type = 2;
   string name = 3;
-  optional string description = 4;
-  optional string profile_img_url = 5;
-  optional string thumbnail_img_url = 6;
-  optional string owner_uid = 7; // only me, or crush 공개 상태일 때
-  optional google.protobuf.Timestamp crush_end_at = 8; // only me
-  optional google.protobuf.Timestamp created_at = 9; // only me, 짝사랑 프로필일 경우 짝사랑 시작일을 겸함
-  optional string crush_uid = 10; // only me, crushed user
-  optional string crush_reason = 11; // only me, crushed user
+  EGender gender = 4; // 데이터베이스에는 저장되지 않지만 클라이언트로 넘겨줄때는 항상 포함 시켜야 함
+  optional string description = 5;
+  optional string profile_img_url = 6;
+  optional string thumbnail_img_url = 7;
+  optional string owner_uid = 8; // only me, or crush 공개 상태일 때
+  optional google.protobuf.Timestamp crush_end_at = 9; // only me
+  optional google.protobuf.Timestamp created_at = 10; // only me, 짝사랑 프로필일 경우 짝사랑 시작일을 겸함
+  optional string crush_uid = 11; // only me, crushed user
+  optional string crush_reason = 12; // only me, crushed user
 }
 
 message School {
