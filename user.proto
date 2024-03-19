@@ -20,8 +20,9 @@ service UserService {
   rpc UpsertProfile(UpsertProfileRequest) returns (UpsertProfileResponse) {} // crush profile 은 업데이트 안됨. 삭제만 가능. 설정은 SetCrush 에서 가능
 
   //  차단
-  rpc BlockUsers(BlockUsersRequest) returns (BlockUsersResponse) {}
-  rpc UnblockUsers(UnblockUsersRequest) returns (UnblockUsersResponse) {}
+  rpc BlockProfiles(BlockProfilesRequest) returns (BlockProfilesResponse) {}
+  rpc UnblockProfiles(UnblockProfilesRequest) returns (UnblockProfilesResponse) {}
+  rpc GetBlockedProfiles(GetBlockedProfilesRequest) returns (GetBlockedProfilesResponse) {}
 
   //  하트 보내기
   rpc SetCrush(SetCrushRequest) returns (SetCrushResponse) {}
@@ -165,23 +166,33 @@ message UpsertProfileResponse {
 }
 
 
-message BlockUsersRequest {
-  repeated string uuids = 1;
+message BlockProfilesRequest {
+  repeated string profile_ids = 1;
 }
 
-message BlockUsersResponse {
+message BlockProfilesResponse {
   bool success = 1;
-  optional User user = 2;
+  optional User user = 2; // 내 정보
   optional EError error = 3;
 }
 
-message UnblockUsersRequest {
+message UnblockProfilesRequest {
   repeated string uuids = 2;
 }
 
-message UnblockUsersResponse {
+message UnblockProfilesResponse {
   bool success = 1;
-  optional User user = 2;
+  optional User user = 2; // 내 정보
+  optional EError error = 3;
+}
+
+message GetBlockedProfilesRequest {
+  EProfileType type = 1;
+}
+
+message GetBlockedProfilesResponse {
+  bool success = 1;
+  repeated Profile profiles = 2;
   optional EError error = 3;
 }
 
