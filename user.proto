@@ -168,6 +168,7 @@ message UpsertProfileResponse {
 
 message BlockProfilesRequest {
   repeated string profile_ids = 1;
+  EProfileType type = 2;
 }
 
 message BlockProfilesResponse {
