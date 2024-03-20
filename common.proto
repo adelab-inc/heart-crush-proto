@@ -75,11 +75,16 @@ message User {
   optional google.protobuf.Timestamp updated_at = 16; // only me, UnixTime
   optional School school = 17;
   int32 school_grade = 18;                            //  몇학년인지, 0: 졸업생 (기본값)
-  repeated string blocked_users = 19; // uuid list, only me, 공개 프로필 차단 리스트 (공개 프로필을 차단하더라도 익명, 짝사랑은 차단 안됨)
-  repeated string anonymous_blocked_profiles = 20; // profile id list, only me
-  repeated string crush_blocked_profiles = 21; // profile id list, only me
+  repeated BlockedProfile blocked_profiles = 19; // only me, 공개 프로필 차단 리스트 (공개 프로필을 차단하더라도 익명, 짝사랑은 차단 안됨)
+  repeated BlockedProfile anonymous_blocked_profiles = 20; //  only me
+  repeated BlockedProfile crush_blocked_profiles = 21; // only me
   EUserStatus status = 22;
   string fcm_token = 23; // only me
+}
+
+message BlockedProfile {
+  string profile_id = 1;
+  google.protobuf.Timestamp blocked_at = 2;
 }
 
 enum EProfileType {
