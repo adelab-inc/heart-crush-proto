@@ -63,12 +63,12 @@ message CheckSmsVerificationRequest {
 // user null + custom_token null: only check failed
 // user null + custom_token not null: need to register
 // user not null + custom_token null: user is not in valid status
-// user not null + custom_token not null: success
+// user not null + custom_token not null: valid user sign in success
 message CheckSmsVerificationResponse {
   bool success = 1;
-  optional User user = 2; // need to register: when user is null
+  optional User user = 2;
   optional EError error = 3;
-  optional string custom_token = 4; // null if user is not valid
+  optional string custom_token = 4;
 }
 
 message UpdatePhoneNumberRequest {
