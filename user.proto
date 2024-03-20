@@ -64,7 +64,7 @@ message CheckSmsVerificationResponse {
   bool success = 1;
   optional User user = 2; // need to register: when user is null
   optional EError error = 3;
-  optional string custom_token = 4;
+  optional string custom_token = 4; // null if user is not valid
 }
 
 message UpdatePhoneNumberRequest {
