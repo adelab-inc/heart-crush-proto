@@ -10,10 +10,14 @@ enum ENotificationType {
   ENT_UNSPECIFIED = 0;
   ENT_SYSTEM = 1;
   //  ENT_BLUETOOTH = 2; // 서버측에서 알림 저장하거나 보낼필요 없음
-  ENT_HEART = 2; // 상대가 나를 짝사랑 설정했을 시 (하트를 보냈을때)
-  ENT_QUESTION = 3;
-  ENT_FRIEND = 4; // accepted, requested: notification + data, rejected, canceled: only data
-  ENT_CHAT = 5; //
+  ENT_HEART = 20; // 상대가 나를 짝사랑 설정했을 시 (하트를 보냈을때)
+  ENT_QUESTION_SENT = 30;
+  ENT_QUESTION_ANSWERED = 31;
+  ENT_FRIEND_REQUESTED = 40; // notification + data
+  ENT_FRIEND_ACCEPTED = 41;  // notification + data
+  ENT_FRIEND_REJECTED = 42; // only data
+  ENT_FRIEND_CANCELED = 43; // only data
+  ENT_CHAT = 50; //
 }
 
 service NotificationService {
@@ -29,7 +33,7 @@ message Notification {
   optional string title = 3;
   optional string body = 4;
   optional bool is_read = 5;
-  optional string data = 6; // always send, chat: Message, friend: User, question: Question. heart 는 필요없음
+  optional string data = 6; // always send, chat: Message, friend: FriendRequest, question: Question. heart 는 Profile
   optional google.protobuf.Timestamp created_at = 7;
 }
 
