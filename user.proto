@@ -60,6 +60,10 @@ message CheckSmsVerificationRequest {
 }
 
 // If success, create user with the phone number and return custom token
+// user null + custom_token null: only check failed
+// user null + custom_token not null: need to register
+// user not null + custom_token null: user is not in valid status
+// user not null + custom_token not null: success
 message CheckSmsVerificationResponse {
   bool success = 1;
   optional User user = 2; // need to register: when user is null
