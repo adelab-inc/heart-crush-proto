@@ -53,11 +53,13 @@ message StartSmsVerificationResponse {
   optional EError error = 2;
   optional bool is_locked = 3;
   optional int32 locked_remained_tick = 4;
+  optional string hash = 5; // for CheckSmsVerification
 }
 
 message CheckSmsVerificationRequest {
   string phone_number = 1;
   string verification_code = 2;
+  string hash = 3; // in StartSmsVerificationResponse
 }
 
 // If success, create user with the phone number and return custom token
