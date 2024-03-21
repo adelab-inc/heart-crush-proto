@@ -9,7 +9,6 @@ import "error.proto";
 enum ENotificationType {
   ENT_UNSPECIFIED = 0;
   ENT_SYSTEM = 1;
-  //  ENT_BLUETOOTH = 2; // 서버측에서 알림 저장하거나 보낼필요 없음
   ENT_HEART = 20; // 상대가 나를 짝사랑 설정했을 시 (하트를 보냈을때)
   ENT_HEART_MATCH_RESULT = 21; // match 결과 확인하라는 알림
   ENT_QUESTION_SENT = 30;
@@ -19,6 +18,7 @@ enum ENotificationType {
   ENT_FRIEND_REJECTED = 42; // only data
   ENT_FRIEND_CANCELED = 43; // only data
   ENT_CHAT = 50; //
+  ENT_BLE_BUMP = 60; // BLE Bump
 }
 
 service NotificationService {
