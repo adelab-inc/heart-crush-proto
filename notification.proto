@@ -22,7 +22,7 @@ enum ENotificationType {
 }
 
 service NotificationService {
-  rpc GetNotifications(GetNotificationsRequest) returns (GetNotificationsResponse) {} // 기본 25개 불러옴
+  rpc GetNotifications(GetNotificationsRequest) returns (GetNotificationsResponse) {} // 25개씩 불러옴
   rpc ReadNotifications(ReadNotificationsRequest) returns (ReadNotificationsResponse) {}
 }
 
