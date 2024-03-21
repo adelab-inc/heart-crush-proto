@@ -77,7 +77,9 @@ message CheckSmsVerificationResponse {
 message UpdatePhoneNumberRequest {
   string phone_number = 1;
   string verification_code = 2;
+  string hash = 3; // in StartSmsVerificationResponse
 }
+
 message UpdatePhoneNumberResponse {
   bool success = 1;
   optional User user = 2;
