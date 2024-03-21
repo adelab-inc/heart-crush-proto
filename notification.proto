@@ -39,7 +39,9 @@ message Notification {
 }
 
 // * Request & Response
-message GetNotificationsRequest {}
+message GetNotificationsRequest {
+  optional google.protobuf.Timestamp before = 1;
+}
 message GetNotificationsResponse {
   bool success = 1;
   repeated Notification notifications = 2;
