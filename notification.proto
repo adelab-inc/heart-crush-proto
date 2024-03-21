@@ -22,7 +22,7 @@ enum ENotificationType {
 }
 
 service NotificationService {
-  rpc GetNotifications(GetNotificationsRequest) returns (GetNotificationsResponse) {}
+  rpc GetNotifications(GetNotificationsRequest) returns (GetNotificationsResponse) {} // 기본 25개 불러옴
   rpc ReadNotifications(ReadNotificationsRequest) returns (ReadNotificationsResponse) {}
 }
 
@@ -40,8 +40,8 @@ message Notification {
 
 // * Request & Response
 message GetNotificationsRequest {
-  optional google.protobuf.Timestamp before = 1;
-  optional int32 limit = 2; // default: 25
+  bool has_more = 1;
+  optional google.protobuf.Timestamp before = 2;
 }
 message GetNotificationsResponse {
   bool success = 1;
