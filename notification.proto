@@ -41,6 +41,7 @@ message Notification {
 // * Request & Response
 message GetNotificationsRequest {
   optional google.protobuf.Timestamp before = 1;
+  optional int32 limit = 2; // default: 25
 }
 message GetNotificationsResponse {
   bool success = 1;
