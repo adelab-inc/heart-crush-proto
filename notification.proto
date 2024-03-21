@@ -34,7 +34,7 @@ message Notification {
   optional string title = 3;
   optional string body = 4;
   optional bool is_read = 5;
-  optional string data = 6; // always send, chat: Message, friend: FriendRequest, question: Question. heart 는 Profile
+  optional string data = 6; // always send, chat: Message, friend: FriendRequest, question: Question. heart: Profile, ENT_BLE_BUMP: BleBump
   optional google.protobuf.Timestamp created_at = 7;
 }
 
