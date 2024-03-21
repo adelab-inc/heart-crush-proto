@@ -32,15 +32,7 @@ service FriendService {
   rpc GetSentFriendRequests(GetSentFriendRequestsRequest) returns (GetSentFriendRequestsResponse); // 보낸 친구 요청들
   rpc AddBestFriends(AddBestFriendsRequest) returns (AddBestFriendsResponse) {}
   rpc DeleteBestFriends(DeleteBestFriendsRequest) returns (DeleteBestFriendsResponse) {}
-  // 주기적으로(앱을 처음 키는 시점 정도로) 추천친구를 가져오는 서비스
-  // 제공된 추천친구 uid들을 기반으로 친구정보를 가져오는 서비스
-//  rpc GetBlockedUsers(GetBlockedUsersRequest)
-//      returns (GetBlockedUsersResponse) {}
-//  rpc BlockUsers(BlockUsersRequest)
-//      returns (BlockUsersResponse) {}
-//  rpc UnblockUsers(UnblockUsersRequest)
-//      returns (UnblockUsersResponse) {}
-  // rpc GetWhoCrushedMe(GetWhoCrushedMeRequest) returns (GetWhoCrushedMeResponse) {}
+  rpc DeleteFriends(DeleteFriendsRequest) returns (DeleteFriendsResponse) {} // 한쪽만 삭제되는 경우는 없음. 양쪽 다 삭제 되어야 함
 }
 
 
@@ -108,7 +100,8 @@ message DeleteBestFriendsRequest {
 
 message DeleteBestFriendsResponse {
   bool success = 1;
-  optional EError error = 2;
+  optional User user = 2; // me
+  optional EError error = 3;
 }
 
 message CreateCrushRequest {
@@ -130,3 +123,11 @@ message GetWhoCrushedMeResponse {
   optional EError error = 3;
 }
 
+message DeleteFriendsRequest {
+  repeated string uuids = 1;
+}
+message DeleteFriendsResponse {
+  bool success = 1;
+  optional User user = 2; // me
+  optional EError error = 3;
+}
