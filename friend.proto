@@ -40,11 +40,7 @@ message FriendRequest {
   string id = 1;
   string from = 2; // uuid
   string to = 3; // uuid
-  EFriendRequestStatus status = 4;
-  optional google.protobuf.Timestamp requested_at = 5; // 내가 요청을 보낸 시간
-  optional google.protobuf.Timestamp accepted_at = 6; // 상대방이 요청을 수락한 경우
-  optional google.protobuf.Timestamp rejected_at = 7; // 상대방이 요청을 거절한 경우
-  optional google.protobuf.Timestamp canceled_at = 8; // 내가 요청을 취소한 경우
+  optional google.protobuf.Timestamp requested_at = 4; // 내가 요청을 보낸 시간
 }
 
 message SendFriendRequestRequest {
