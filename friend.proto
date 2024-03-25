@@ -7,11 +7,10 @@ import "common.proto";
 import "error.proto";
 
 enum EFriendRequestStatus {
-  EFRS_UNSPECIFIED = 0; // // db 저장 O
-  EFRS_REQUESTED = 1; // db 저장 O
-  EFRS_ACCEPTED = 2; // db 저장 X
-  EFRS_REJECTED = 3; // db 저장 X
-  EFRS_CANCELED = 4; // db 저장 X
+  EFRS_UNSPECIFIED = 0;
+  EFRS_ACCEPTED = 1;
+  EFRS_REJECTED = 2;
+  EFRS_CANCELED = 3;
 }
 
 enum EFriendRequestResult {
