@@ -44,8 +44,8 @@ message GetNotificationsRequest {
 }
 message GetNotificationsResponse {
   bool success = 1;
-  bool has_more = 2;
   repeated Notification notifications = 3;
+  optional bool has_more = 2;
   optional EError error = 4;
 }
 
