@@ -40,13 +40,13 @@ message Notification {
 
 // * Request & Response
 message GetNotificationsRequest {
-  bool has_more = 1;
-  optional google.protobuf.Timestamp before = 2;
+  optional google.protobuf.Timestamp before = 1;
 }
 message GetNotificationsResponse {
   bool success = 1;
-  repeated Notification notifications = 2;
-  optional EError error = 3;
+  bool has_more = 2;
+  repeated Notification notifications = 3;
+  optional EError error = 4;
 }
 
 message ReadNotificationsRequest {repeated string notificationIds = 1;}
